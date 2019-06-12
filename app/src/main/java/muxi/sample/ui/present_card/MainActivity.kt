@@ -1,12 +1,13 @@
-package muxi.sample.ui
+package muxi.sample.ui.present_card
 
+import android.content.ComponentName
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import muxi.payservices.data.MPSTransaction
-import muxi.payservices.data.MPSTransactionResult
-import muxi.payservices.service.MPSManager
 import muxi.sample.R
+import muxi.sample.data.MPSTransaction
+import muxi.sample.data.MPSTransactionResult
+import muxi.sample.service.MPSManager
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
@@ -41,14 +42,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnInit.setOnClickListener {
-            val answer = mpsManager!!.initialize(bluetothDevice,showMessage, cnpj)
-            toast(answer)
+            mpsManager!!.initialize(showMessage, cnpj)
         }
         btnTransact.setOnClickListener {
             mpsManager!!.makePaymentWithPinpad(mpsTransaction)
         }
         btnCancel.setOnClickListener {
-            mpsManager!!.cancelTransaction(mpsTransaction,cancelPaymentListener)
+            mpsManager!!.cancelTransaction(mpsTransaction)
         }
         btnDeconfigure.setOnClickListener {
             mpsManager!!.deconfigure(true)
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val bindService = mpsManager!!.bindService(applicationContext)
-        mpsManager!!.setMakePaymentListener(paymentListener)
+        mpsManager!!.setMpsManagerCallback(mpsManagerCallback)
 
     }
 
@@ -88,33 +88,25 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private val paymentListener = object : MPSManager.MakePaymentListener {
-        override fun onSuccess(mpsTransactionResult: MPSTransactionResult?) {
-            runOnUiThread {
-
-                toast(mpsTransactionResult!!.clientReceipt)
-            }
-        }
-        override fun onError(onError: String) {
-            runOnUiThread {
-
-                toast(onError)
-            }
-        }
-    }
-
-    private val cancelPaymentListener = object : MPSManager.CancelPaymentListener {
-        override fun onGenericCancelSuccess(mpsTransactionResult: MPSTransactionResult?) {
-            runOnUiThread {
-
-                toast(mpsTransactionResult!!.clientReceipt)
-            }
+    private val mpsManagerCallback = object : MPSManager.MPSManagerCallback {
+        override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
+            toast(mpsTransactionResult!!.clientReceipt)
         }
 
-        override fun onGenericCancelError(error: String?) {
-            runOnUiThread {
-                toast(error!!)
-            }
+        override fun onDeconfigureAnswer(mpsTransactionResult: MPSTransactionResult?) {
+            toast(mpsTransactionResult!!.transactionStatus.name)
+        }
+
+        override fun onInitAnswer(mpsTransactionResult: MPSTransactionResult?) {
+            toast(mpsTransactionResult!!.transactionStatus.name)
+        }
+
+        override fun onTransactionAnswer(mpsTransactionResult: MPSTransactionResult?) {
+            toast(mpsTransactionResult!!.clientReceipt)
+        }
+
+        override fun onServiceDisconnected(componentName: ComponentName?) {
+            toast(componentName.toString())
         }
 
     }
