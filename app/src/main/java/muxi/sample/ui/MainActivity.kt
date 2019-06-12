@@ -1,12 +1,12 @@
-package muxi.sample
+package muxi.sample.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.payservices.data.MPSTransaction
 import muxi.payservices.data.MPSTransactionResult
 import muxi.payservices.service.MPSManager
+import muxi.sample.R
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val bluetothDevice = "B2:34:RE:43:RE"
     /**
      * TODO: change this variable to decide if messages will be shown in pinpad or not
+     * For example: "Remove card or insert card" messages
      */
 
     private val showMessage = true
