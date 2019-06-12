@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         btnDeconfigure.setOnClickListener {
             mpsManager!!.deconfigure(true)
         }
+        btnHistory.setOnClickListener {
+            toast(getString(R.string.built_screen))
+        }
 
 
     }
