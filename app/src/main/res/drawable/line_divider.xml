@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress XmlHighlighting, XmlHighlighting, XmlUnboundNsPrefix, XmlUnboundNsPrefix -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/adpter_line_1_divider" />
+            <size
+                    android:width="1dp"
+                    android:height="1dp" />
+        </shape>
+    </item>
+
+</layer-list>
