@@ -4,4 +4,9 @@
     <string name="transact">Transact</string>
     <string name="cancel">Cancel</string>
     <string name="deconfigure">Deconfigure</string>
+    <string name="built_screen">This screen is being built. Stay tuned</string>
+    <string name="something_wrong">Something went wrong</string>
+    <string name="present_card">Present card</string>
+    <string name="ecommerce">Ecommerce</string>
+    <string name="history">History</string>
 </resources>

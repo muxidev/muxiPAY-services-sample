@@ -1,20 +1,22 @@
 package muxi.sample.ui.present_card
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_adapter.view.*
+import muxi.sample.Constants.ECOMMERCE_ID
+import muxi.sample.Constants.PRESENT_CARD_ID
+import muxi.sample.Constants.TYPES_SIZE
 import muxi.sample.R
 
 class ItemAdapter(private val context: Context,
-                  private val itemAdapterOnClickHandler: ItemAdapterOnClickHandler
+                  itemAdapterOnClickHandler: ItemAdapterOnClickHandler
 )
     : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-    val mClickHandler: ItemAdapterOnClickHandler = itemAdapterOnClickHandler
+    private val mClickHandler: ItemAdapterOnClickHandler = itemAdapterOnClickHandler
 
 
     interface ItemAdapterOnClickHandler{
@@ -26,7 +28,7 @@ class ItemAdapter(private val context: Context,
         return ViewHolder(view)
     }
     override fun getItemCount(): Int {
-        return 2
+        return TYPES_SIZE
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -36,19 +38,16 @@ class ItemAdapter(private val context: Context,
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
-        val ecommerce_btn = itemView.btn_item
+        private val ecommerceBtn = itemView.btn_item!!
 
         fun bindView(position:Int, mClickHandler: ItemAdapterOnClickHandler){
-            val text: String
-            if(position == 0){
-                text = "Present card"
-            }else{
-                text = "Ecommerce"
+            val text: String = when (position) {
+                PRESENT_CARD_ID -> itemView.context.getString(R.string.present_card)
+                ECOMMERCE_ID -> itemView.context.getString(R.string.ecommerce)
+                else -> itemView.context.getString(R.string.something_wrong)
             }
-            ecommerce_btn.setText(text)
-            ecommerce_btn.setOnClickListener {
-                Log.d("ItemAdapter","Onclick 2")
-
+            ecommerceBtn.text = text
+            ecommerceBtn.setOnClickListener {
                 mClickHandler.onClick(position)
 
             }
