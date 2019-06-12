@@ -1,4 +1,4 @@
-package muxi.sample.ui
+package muxi.sample.ui.present_card
 
 import android.content.ComponentName
 import android.os.Bundle

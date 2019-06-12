@@ -7,14 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.activity_choosetype.*
 import muxi.sample.R
+import muxi.sample.ui.ecommerce.EcommerceActivity
+import muxi.sample.ui.present_card.ItemAdapter
+import muxi.sample.ui.present_card.MainActivity
+import muxi.sample.ui.present_card.SimpleDividerItemDecoration
 
 class ChooseTypeActivity : AppCompatActivity(), ItemAdapter.ItemAdapterOnClickHandler {
 
     override fun onClick(type: Int) {
         if(type == 0 ){
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }else{
-            startActivity(Intent(this,EcommerceActivity::class.java))
+            startActivity(Intent(this, EcommerceActivity::class.java))
         }
     }
 
@@ -24,7 +28,7 @@ class ChooseTypeActivity : AppCompatActivity(), ItemAdapter.ItemAdapterOnClickHa
         setContentView(R.layout.activity_choosetype)
 
         val recyclerView = id_rv
-        recyclerView.adapter = ItemAdapter(this,this)
+        recyclerView.adapter = ItemAdapter(this, this)
         val layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.HORIZONTAL)
         recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(SimpleDividerItemDecoration(this))

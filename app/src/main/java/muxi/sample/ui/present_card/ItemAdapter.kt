@@ -1,4 +1,4 @@
-package muxi.sample.ui
+package muxi.sample.ui.present_card
 
 import android.content.Context
 import android.util.Log
@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.item_adapter.view.*
 import muxi.sample.R
 
 class ItemAdapter(private val context: Context,
-                  private val itemAdapterOnClickHandler: ItemAdapterOnClickHandler)
+                  private val itemAdapterOnClickHandler: ItemAdapterOnClickHandler
+)
     : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     val mClickHandler: ItemAdapterOnClickHandler = itemAdapterOnClickHandler
@@ -35,7 +36,7 @@ class ItemAdapter(private val context: Context,
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
-        val ecommerce_btn = itemView.ecommerce_btn
+        val ecommerce_btn = itemView.btn_item
 
         fun bindView(position:Int, mClickHandler: ItemAdapterOnClickHandler){
             val text: String

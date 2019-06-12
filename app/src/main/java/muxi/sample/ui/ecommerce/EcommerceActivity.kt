@@ -1,4 +1,4 @@
-package muxi.sample.ui
+package muxi.sample.ui.ecommerce
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
