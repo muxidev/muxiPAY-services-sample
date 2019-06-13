@@ -2,7 +2,9 @@ package muxi.sample.ui.dialog
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
+import kotlinx.android.synthetic.main.dialog_answer.view.*
 import muxi.sample.R
 
 class DialogHelper {
@@ -18,7 +20,7 @@ class DialogHelper {
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_loading,
             null,false)
-        alertDialog = AlertDialog.Builder(context)
+            alertDialog = AlertDialog.Builder(context)
             .setView(view)
             .show()
     }
@@ -26,4 +28,38 @@ class DialogHelper {
     fun hideLoadingDialog() {
         alertDialog!!.hide()
     }
+
+    fun showInitDialog(context: Context, title:String, body:String){
+
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_answer,
+            null,false)
+        view.tv_init.setText(body)
+        alertDialog = AlertDialog.Builder(context)
+            .setTitle(title)
+            .setView(view)
+            .setPositiveButton("OK", DialogInterface.OnClickListener{
+                alertDialog, id->alertDialog.cancel()
+            })
+            .show()
+    }
+
+    fun showTransactionDialog(context: Context, title:String, body:String){
+
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_answer,
+            null,false)
+        view.tv_init.setText(body)
+        alertDialog = AlertDialog.Builder(context)
+            .setTitle(title)
+            .setView(view)
+            .setPositiveButton("OK", DialogInterface.OnClickListener{
+                    alertDialog, id->alertDialog.cancel()
+            } )
+            .setNegativeButton("COMPROVANTE", DialogInterface.OnClickListener{
+                    alertDialog, id->alertDialog.cancel()
+
+            })
+            .show()
+    }
+
+
 }

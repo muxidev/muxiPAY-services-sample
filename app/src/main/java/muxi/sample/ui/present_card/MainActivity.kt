@@ -1,10 +1,7 @@
 package muxi.sample.ui.present_card
 
 import android.content.ComponentName
-import android.opengl.Visibility
-import android.os.AsyncTask
 import android.os.Bundle
-import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.sample.Constants
@@ -108,27 +105,59 @@ class MainActivity : AppCompatActivity() {
         override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
             this@MainActivity.runOnUiThread{
                 dialogHelper.hideLoadingDialog()
+                var body = ""
+                var toastAnswer = ""
                 //TODO add treatment to !! , when cannot have null branch
-                when(mpsTransactionResult!!.transactionStatus){
-                    MPSTransactionResult.TransactionStatus.SUCCESS ->
-                        toast(mpsTransactionResult.clientReceipt)
-                    MPSTransactionResult.TransactionStatus.ERROR->
-                        toast(mpsTransactionResult.descriptionError)
+                when(mpsTransactionResult!!.transactionStatus) {
+                    MPSTransactionResult.TransactionStatus.SUCCESS -> {
+                        body = resources.getString(R.string.cancelSuccess)
+                        toastAnswer = mpsTransactionResult.clientReceipt
+                    }
+                    MPSTransactionResult.TransactionStatus.ERROR -> {
+                        body = resources.getString(R.string.cancelError)
+                        toastAnswer = mpsTransactionResult.descriptionError
+                    }
                 }
+                dialogHelper.showTransactionDialog(this@MainActivity,
+                    mpsTransactionResult.transactionStatus.name,
+                    body
+                )
+                toast(toastAnswer)
             }
+
         }
 
         override fun onDeconfigureAnswer(mpsTransactionResult: MPSTransactionResult?) {
-            this@MainActivity.runOnUiThread{
+            this@MainActivity.runOnUiThread {
                 dialogHelper.hideLoadingDialog()
-                toast(mpsTransactionResult!!.transactionStatus.name)
+                var body = ""
+                when(mpsTransactionResult!!.transactionStatus.name){
+                    MPSTransactionResult.TransactionStatus.SUCCESS.name -> body = resources.getString(R.string.deconfigureSuccess)
+                    MPSTransactionResult.TransactionStatus.ERROR.name->body = resources.getString(R.string.deconfigureError)
+                }
+                dialogHelper.showInitDialog(this@MainActivity,
+                    mpsTransactionResult.transactionStatus.name,
+                    body
+                )
+                toast(mpsTransactionResult.transactionStatus.name)
+
             }
         }
 
         override fun onInitAnswer(mpsTransactionResult: MPSTransactionResult?) {
             this@MainActivity.runOnUiThread {
+
                 dialogHelper.hideLoadingDialog()
-                toast(mpsTransactionResult!!.transactionStatus.name)
+                var body = ""
+                when(mpsTransactionResult!!.transactionStatus.name){
+                    MPSTransactionResult.TransactionStatus.SUCCESS.name -> body = resources.getString(R.string.initSuccess)
+                    MPSTransactionResult.TransactionStatus.ERROR.name->body = resources.getString(R.string.initError)
+                }
+                dialogHelper.showInitDialog(this@MainActivity,
+                    mpsTransactionResult.transactionStatus.name,
+                    body
+                )
+                toast(mpsTransactionResult.transactionStatus.name)
 
             }
         }
@@ -136,12 +165,23 @@ class MainActivity : AppCompatActivity() {
         override fun onTransactionAnswer(mpsTransactionResult: MPSTransactionResult?) {
             this@MainActivity.runOnUiThread{
                 dialogHelper.hideLoadingDialog()
-                when(mpsTransactionResult!!.transactionStatus){
-                    MPSTransactionResult.TransactionStatus.SUCCESS ->
-                        toast(mpsTransactionResult.clientReceipt)
-                    MPSTransactionResult.TransactionStatus.ERROR->
-                        toast(mpsTransactionResult.descriptionError)
+                var body = ""
+                var toastAnswer = ""
+                when(mpsTransactionResult!!.transactionStatus) {
+                    MPSTransactionResult.TransactionStatus.SUCCESS -> {
+                        body = resources.getString(R.string.transactionSuccess)
+                        toastAnswer = mpsTransactionResult.clientReceipt
+                    }
+                    MPSTransactionResult.TransactionStatus.ERROR -> {
+                        body = resources.getString(R.string.transactionError)
+                        toastAnswer = mpsTransactionResult.descriptionError
+                    }
                 }
+                dialogHelper.showTransactionDialog(this@MainActivity,
+                    mpsTransactionResult.transactionStatus.name,
+                    body
+                )
+                toast(toastAnswer)
             }
         }
 
