@@ -17,4 +17,5 @@
     <string name="deconfigureError">Error while deconfiguring</string>
     <string name="cancelSuccess">PAYMENT CANCELED</string>
     <string name="cancelError">Error while canceling</string>
+    <string name="waiting_pinpad">Waiting pinpad</string>
 </resources>

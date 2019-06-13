@@ -2,6 +2,7 @@ package muxi.sample.ui.present_card
 
 import android.content.ComponentName
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.sample.Constants
@@ -49,19 +50,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnInit.setOnClickListener {
-            dialogHelper.showLoadingDialog(this)
+            dialogHelper.showLoadingDialog(this, View.GONE)
             InitTask(mpsManager!!,showMessage,cnpj).execute()
         }
         btnTransact.setOnClickListener {
-            dialogHelper.showLoadingDialog(this)
+            dialogHelper.showLoadingDialog(this, View.VISIBLE)
             TransactionTask(mpsManager!!,mpsTransaction!!,Constants.TransactionState.payment).execute()
         }
         btnCancel.setOnClickListener {
-            dialogHelper.showLoadingDialog(this)
+            dialogHelper.showLoadingDialog(this, View.VISIBLE)
             TransactionTask(mpsManager!!,mpsTransaction!!,Constants.TransactionState.cancel).execute()
         }
         btnDeconfigure.setOnClickListener {
-            dialogHelper.showLoadingDialog(this)
+            dialogHelper.showLoadingDialog(this, View.GONE)
             DeconfigureTask(mpsManager!!,ignorePendingTransaction).execute()
         }
         btnHistory.setOnClickListener {

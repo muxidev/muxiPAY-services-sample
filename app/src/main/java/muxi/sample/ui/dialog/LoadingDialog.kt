@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
 import kotlinx.android.synthetic.main.dialog_answer.view.*
+import kotlinx.android.synthetic.main.dialog_loading.view.*
 import muxi.sample.R
 
 class DialogHelper {
@@ -16,11 +17,11 @@ class DialogHelper {
         }
     }
 
-    fun showLoadingDialog(context: Context) {
-
+    fun showLoadingDialog(context: Context, isVisible: Int ) {
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_loading,
             null,false)
-            alertDialog = AlertDialog.Builder(context)
+        view.tv_waiting_pp.visibility = isVisible
+        alertDialog = AlertDialog.Builder(context)
             .setView(view)
             .show()
     }
