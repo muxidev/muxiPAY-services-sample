@@ -6,4 +6,9 @@ object Constants {
     const val ECOMMERCE_ID = 1
 
     const val TYPES_SIZE = 2
+
+    enum class TransactionState {
+        payment,
+        cancel
+    }
 }
