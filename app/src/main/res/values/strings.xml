@@ -18,4 +18,6 @@
     <string name="cancelSuccess">PAYMENT CANCELED</string>
     <string name="cancelError">Error while canceling</string>
     <string name="waiting_pinpad">Waiting pinpad</string>
+    <string name="ok">OK</string>
+    <string name="receipt">COMPROVANTE</string>
 </resources>

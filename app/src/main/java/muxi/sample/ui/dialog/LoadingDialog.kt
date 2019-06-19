@@ -38,9 +38,8 @@ class DialogHelper {
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)
             .setView(view)
-            .setPositiveButton("OK", DialogInterface.OnClickListener{
-                alertDialog, id->alertDialog.cancel()
-            })
+            .setPositiveButton(context.getString(R.string.ok)) { alertDialog, _ ->alertDialog.cancel()
+            }
             .show()
     }
 
@@ -52,13 +51,11 @@ class DialogHelper {
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)
             .setView(view)
-            .setPositiveButton("OK", DialogInterface.OnClickListener{
-                    alertDialog, id->alertDialog.cancel()
-            } )
-            .setNegativeButton("COMPROVANTE", DialogInterface.OnClickListener{
-                    alertDialog, id->alertDialog.cancel()
+            .setPositiveButton(context.getString(R.string.ok)) { alertDialog, _ ->alertDialog.cancel()
+            }
+            .setNegativeButton(context.getString(R.string.receipt)) { alertDialog, _ ->alertDialog.cancel()
 
-            })
+            }
             .show()
     }
 
