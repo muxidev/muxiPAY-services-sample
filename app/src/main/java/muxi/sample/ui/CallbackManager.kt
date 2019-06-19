@@ -13,6 +13,7 @@ import muxi.sample.R
 
 class CallbackManager(context: Context, dialogHelper: DialogHelper) {
 
+    private val TAG = CallbackManager::class.java.simpleName
 
     companion object {
         fun newInstance(context: Context, dialogHelper: DialogHelper): CallbackManager {
@@ -48,20 +49,21 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
         }
 
         override fun onDeconfigureAnswer(mpsTransactionResult: MPSTransactionResult?) {
-/*            this@PaymentActivity.runOnUiThread {
+            Handler(Looper.getMainLooper()).post{
+
                 dialogHelper.hideLoadingDialog()
                 var body = ""
                 when(mpsTransactionResult!!.transactionStatus.name){
-                    MPSTransactionResult.TransactionStatus.SUCCESS.name -> body = resources.getString(R.string.deconfigureSuccess)
-                    MPSTransactionResult.TransactionStatus.ERROR.name->body = resources.getString(R.string.deconfigureError)
+                    MPSTransactionResult.TransactionStatus.SUCCESS.name -> body = context.resources.getString(R.string.deconfigureSuccess)
+                    MPSTransactionResult.TransactionStatus.ERROR.name->body = context.resources.getString(R.string.deconfigureError)
                 }
-                dialogHelper.showInitDialog(this@PaymentActivity,
+                dialogHelper.showInitDialog(context,
                     mpsTransactionResult.transactionStatus.name,
                     body
                 )
-                toast(mpsTransactionResult.transactionStatus.name)
+                Log.d(TAG,mpsTransactionResult.transactionStatus.name)
 
-            }*/
+            }
         }
 
         override fun onInitAnswer(mpsTransactionResult: MPSTransactionResult?) {
@@ -76,37 +78,39 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
                     mpsTransactionResult.transactionStatus.name,
                     body
                 )
-                Log.d("TAG",mpsTransactionResult.transactionStatus.name)
+                Log.d(TAG,mpsTransactionResult.transactionStatus.name)
 
 
             }
         }
 
         override fun onTransactionAnswer(mpsTransactionResult: MPSTransactionResult?) {
-            /*this@PaymentActivity.runOnUiThread{
+            Handler(Looper.getMainLooper()).post {
                 dialogHelper.hideLoadingDialog()
                 var body = ""
                 var toastAnswer = ""
-                when(mpsTransactionResult!!.transactionStatus) {
+                when (mpsTransactionResult!!.transactionStatus) {
                     MPSTransactionResult.TransactionStatus.SUCCESS -> {
-                        body = resources.getString(R.string.transactionSuccess)
+                        body = context.resources.getString(R.string.transactionSuccess)
                         toastAnswer = mpsTransactionResult.clientReceipt
                     }
                     MPSTransactionResult.TransactionStatus.ERROR -> {
-                        body = resources.getString(R.string.transactionError)
+                        body = context.resources.getString(R.string.transactionError)
                         toastAnswer = mpsTransactionResult.descriptionError
                     }
                 }
-                dialogHelper.showTransactionDialog(this@PaymentActivity,
+                dialogHelper.showTransactionDialog(
+                    context,
                     mpsTransactionResult.transactionStatus.name,
                     body
                 )
-                toast(toastAnswer)
-            }*/
+                Log.d(TAG, toastAnswer)
+            }
         }
 
+
         override fun onServiceDisconnected(componentName: ComponentName?) {
-            //toast(componentName.toString())
+            Log.d(TAG,componentName.toString())
         }
 
     }
