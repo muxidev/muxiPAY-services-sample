@@ -94,7 +94,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                 if(s.toString() != currentValue){
                     et_value.removeTextChangedListener(this)
 
-                    var cleanString: String = s.toString().replace("[$,.]", "")
+                    var cleanString: String = s.toString().replace(Regex("[R$,.]"), "")
                     Log.d(TAG, "cleasnString:$cleanString")
 
                     var parsed: Double = parseDouble(cleanString)
@@ -103,7 +103,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                     var formatted: String = NumberFormat.getCurrencyInstance().format((parsed/100))
                     Log.d(TAG, "formatted:$formatted")
 
-                    currentValue = formatted
+                    currentValue = cleanString
                     et_value.setText(formatted)
                     et_value.setSelection(formatted.length)
                     et_value.addTextChangedListener(this)
