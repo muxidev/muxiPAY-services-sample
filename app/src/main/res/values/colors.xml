@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="adpter_line_1_divider">#585858</color>
+    <color name="color_base">#2699fb</color>
+    <color name="color_text_pressed">#FFF</color>
+    <color name="color_btn_unpressed">#f1f9ff</color>
 </resources>
