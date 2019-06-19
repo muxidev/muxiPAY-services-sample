@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <EditText android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_marginStart="16dp"
+              android:layout_marginEnd="16dp"
+              android:paddingStart="15dp"
+              android:id="@+id/et_value"
+              android:layout_gravity="center"
+              android:layout_marginTop="50dp"
+              android:inputType="number"
+              android:textSize="16sp"
+              android:textColor="@color/color_base"
+              android:textColorHint="@color/color_base"
+              android:background="@drawable/border_input"
+              android:hint="R$0,00"/>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="35dp"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:background="@drawable/border_input">
+
+        <Spinner android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:backgroundTint="@color/color_base"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginEnd="15dp"
+                 android:id="@+id/spinner"/>
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_marginTop="25dp">
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="PAYMENT TYPE"
+                      android:textSize="12sp"
+                      android:textStyle="bold"
+                      android:layout_marginStart="16dp"
+                      android:textColor="@color/color_base"
+            />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_horizontal"
+                          android:layout_weight="1"
+                          android:orientation="vertical">
+
+                <Button android:id="@+id/btn_credit"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="@color/color_base"
+                                android:backgroundTint="@color/color_btn_unpressed"
+                              android:text="CREDIT"
+                              />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_horizontal"
+                          android:layout_weight="1"
+                          android:orientation="vertical">
+
+                <Button android:id="@+id/btn_debit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/color_btn_unpressed"
+                        android:textColor="@color/color_base"
+                        android:text="DEBIT"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_horizontal"
+                          android:layout_weight="1"
+                          android:orientation="vertical">
+
+                <Button android:id="@+id/btn_voucher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/color_btn_unpressed"
+                        android:textColor="@color/color_base"
+                        android:text="VOUCHER"
+                        />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button android:layout_width="match_parent" android:layout_height="50dp"
+            android:id="@+id/btn_pay"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_base"
+            android:textColor="@color/color_text_pressed"
+            android:layout_gravity="center" android:text="PAY"/>
+
+</LinearLayout>
