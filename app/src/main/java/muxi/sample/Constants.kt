@@ -11,4 +11,7 @@ object Constants {
         payment,
         cancel
     }
+    enum class TypePayment {
+        CREDIT,DEBIT,VOUCHER
+    }
 }
