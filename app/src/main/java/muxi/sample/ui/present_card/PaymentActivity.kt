@@ -34,6 +34,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     private var mpsManager: MPSManager? = null
     val dialogHelper = DialogHelper.newInstance()
 
+    var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT
 
     val type = MPSTransaction.TransactionType.CREDIT
     var installments = 1
@@ -63,15 +64,15 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         }
 
         btn_credit!!.setOnClickListener{
-            buttonEffect(btn_credit, Constants.TypePayment.CREDIT,btn_debit,btn_voucher)
+            buttonEffect(btn_credit, MPSTransaction.TransactionType.CREDIT,btn_debit,btn_voucher)
         }
 
         btn_debit!!.setOnClickListener{
-            buttonEffect(btn_debit, Constants.TypePayment.DEBIT,btn_credit,btn_voucher)
+            buttonEffect(btn_debit, MPSTransaction.TransactionType.DEBIT,btn_credit,btn_voucher)
         }
 
         btn_voucher!!.setOnClickListener {
-            buttonEffect(btn_voucher, Constants.TypePayment.VOUCHER,btn_credit,btn_debit)
+            buttonEffect(btn_voucher, MPSTransaction.TransactionType.VOUCHER,btn_credit,btn_debit)
         }
 
         et_value.addTextChangedListener(object: TextWatcher {
@@ -134,11 +135,12 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         transaction.amount = value
         transaction.currency = MPSTransaction.CurrencyType.BRL
         transaction.type = type
+        transaction.installments = installments
 
         return transaction
 
     }
-    private fun buttonEffect(buttonPressed: Button, type: Constants.TypePayment, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
+    private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionType, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
 
         buttonPressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_base)
         buttonPressed.setTextColor(ContextCompat.getColor(this,R.color.color_text_pressed))
@@ -149,8 +151,8 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         buttonUnpressedTwo.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_btn_unpressed)
         buttonUnpressedTwo.setTextColor(ContextCompat.getColor(this,R.color.color_base))
 
-        paymentType = type.name
-        Log.d(TAG, "Type Payment: $paymentType")
+        Log.d(TAG, "Type Payment: ${type.name}")
+        transactionType = type
     }
 
 
