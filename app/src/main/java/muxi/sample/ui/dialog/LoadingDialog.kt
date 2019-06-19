@@ -17,10 +17,10 @@ class DialogHelper {
         }
     }
 
-    fun showLoadingDialog(context: Context, isVisible: Int ) {
+    fun showLoadingDialog(context: Context, isWaitingPinpadIsVisible: Int ) {
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_loading,
             null,false)
-        view.tv_waiting_pp.visibility = isVisible
+        view.tv_waiting_pp.visibility = isWaitingPinpadIsVisible
         alertDialog = AlertDialog.Builder(context)
             .setView(view)
             .show()
