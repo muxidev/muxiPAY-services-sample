@@ -42,7 +42,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT
 
     val type = MPSTransaction.TransactionType.CREDIT
-    var installments = 1
+    var installments = 0
     var list_of_items = arrayOf("installments","1","2","3","4","5","6",
         "7","8","9","10","11","12")
     private var paymentType = ""
@@ -65,7 +65,9 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         btn_pay!!.setOnClickListener {
             mpsManager?.currentBluetoothDevice = bluetothDevice
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
-            TransactionTask(mpsManager!!,mpsTransaction!!, Constants.TransactionState.payment).execute()
+            TransactionTask(mpsManager!!,mountTransaction(
+                currentValue, transactionType,installments
+            )!!, Constants.TransactionState.payment).execute()
         }
 
         btn_credit!!.setOnClickListener{
