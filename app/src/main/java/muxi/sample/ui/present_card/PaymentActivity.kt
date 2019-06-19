@@ -110,7 +110,9 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Log.d(TAG, "onItemSelected $id position $position")
+        if(position>0){
+            installments = position
+        }
     }
 
     override fun onStart() {
