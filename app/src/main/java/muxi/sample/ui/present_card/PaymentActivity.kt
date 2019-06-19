@@ -31,6 +31,11 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
     private val TAG = PaymentActivity::class.java.simpleName
 
+    /**
+     * TODO: change this variable to use MAC address from your pinpad
+     */
+    private val bluetothDevice = "28:ED:E0:5A:EA:D9"
+
     private var mpsManager: MPSManager? = null
     val dialogHelper = DialogHelper.newInstance()
 
@@ -49,7 +54,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
         spinner!!.onItemSelectedListener = this
 
-        val mpsTransaction =  mountTransaction("1000",type,installments)
+        mpsManager?.currentBluetoothDevice = bluetothDevice
 
         val aa = ArrayAdapter(this, R.layout.simple_spinner_item, list_of_items)
 
@@ -58,7 +63,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         spinner!!.adapter = aa
 
         btn_pay!!.setOnClickListener {
-            DialogHelper.newInstance().showLoadingDialog(this,View.VISIBLE)
+            mpsManager?.currentBluetoothDevice = bluetothDevice
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
             TransactionTask(mpsManager!!,mpsTransaction!!, Constants.TransactionState.payment).execute()
         }
@@ -122,7 +127,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         if(mpsManager == null)
             mpsManager = MPSManager.getInstance(this.applicationContext)
 
-        val bindService = mpsManager!!.bindService(applicationContext)
+        mpsManager!!.bindService(applicationContext)
 
         val callbackManager = CallbackManager.newInstance(this, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)

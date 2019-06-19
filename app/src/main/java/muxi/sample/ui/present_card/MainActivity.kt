@@ -19,10 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
 
-    /**
-     * TODO: change this variable to use MAC address from your pinpad
-     */
-    private val bluetothDevice = "10:D0:7A:31:27:7C"
+
     /**
      * TODO: change this variable to decide if messages will be shown in pinpad or not
      * For example: "Remove card or insert card" messages
@@ -67,9 +64,9 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if(mpsManager == null)
-            mpsManager = MPSManager.getInstance(this.applicationContext)
+            mpsManager = MPSManager.getInstance(this)
 
-        mpsManager!!.bindService(applicationContext)
+        mpsManager!!.bindService(this)
         mpsManager!!.setMpsManagerCallback(CallbackManager.newInstance(this, dialogHelper).mpsManagerCallback)
     }
 
