@@ -7,6 +7,8 @@ object Constants {
 
     const val TYPES_SIZE = 2
 
+    const val RECEIPT_PARAM = "RECEIPT_PARAM"
+
     enum class TransactionState {
         payment,
         cancel
