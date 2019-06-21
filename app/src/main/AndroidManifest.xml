@@ -22,6 +22,7 @@
         <activity android:name=".ui.ecommerce.EcommerceActivity"/>
         <activity android:name=".ui.present_card.PaymentActivity"/>
         <activity android:name=".ui.present_card.ReceiptActivity"/>
+        <activity android:name=".ui.present_card.CancelActivity"/>
     </application>
 
 </manifest>

@@ -53,7 +53,8 @@ class DialogHelper {
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_answer,
             null,false)
-        view.tv_init.setText(body)
+        view.tv_init.setTextColor(context.resources.getColor(R.color.color_base))
+        view.tv_init.text = body
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)
             .setView(view)
