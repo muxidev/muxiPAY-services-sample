@@ -8,7 +8,6 @@
               android:layout_height="50dp"
               android:layout_marginStart="16dp"
               android:layout_marginEnd="16dp"
-              android:paddingStart="15dp"
               android:id="@+id/et_value"
               android:layout_gravity="center"
               android:layout_marginTop="50dp"
@@ -17,7 +16,7 @@
               android:textColor="@color/color_base"
               android:textColorHint="@color/color_base"
               android:background="@drawable/border_input"
-              android:hint="R$0,00"/>
+              android:hint="@string/default_value"/>
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
                   android:orientation="horizontal"
@@ -45,7 +44,7 @@
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="PAYMENT TYPE"
+                      android:text="@string/payment_type"
                       android:textSize="12sp"
                       android:textStyle="bold"
                       android:layout_marginStart="16dp"
@@ -67,7 +66,7 @@
                               android:layout_height="wrap_content"
                               android:textColor="@color/color_base"
                                 android:backgroundTint="@color/color_btn_unpressed"
-                              android:text="CREDIT"
+                              android:text="@string/credit"
                               />
             </LinearLayout>
 
@@ -82,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/color_btn_unpressed"
                         android:textColor="@color/color_base"
-                        android:text="DEBIT"/>
+                        android:text="@string/debit"/>
             </LinearLayout>
 
             <LinearLayout android:layout_width="0dp"
@@ -96,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/color_btn_unpressed"
                         android:textColor="@color/color_base"
-                        android:text="VOUCHER"
+                        android:text="@string/voucher"
                         />
             </LinearLayout>
 
@@ -112,6 +111,7 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/color_base"
             android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center" android:text="PAY"/>
+            android:layout_gravity="center"
+            android:text="@string/pay"/>
 
 </LinearLayout>

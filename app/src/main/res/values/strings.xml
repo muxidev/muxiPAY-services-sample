@@ -20,4 +20,10 @@
     <string name="waiting_pinpad">Waiting pinpad</string>
     <string name="ok">OK</string>
     <string name="receipt">COMPROVANTE</string>
+    <string name="default_value">R$0,00</string>
+    <string name="payment_type">PAYMENT TYPE</string>
+    <string name="credit">CREDIT</string>
+    <string name="debit">DEBIT</string>
+    <string name="voucher">VOUCHER</string>
+    <string name="pay">PAY</string>
 </resources>
