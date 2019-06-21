@@ -27,23 +27,22 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
             Handler(Looper.getMainLooper()).post {
                 dialogHelper.hideLoadingDialog()
                 var body = ""
-                var toastAnswer = ""
+                var result = ""
                 //TODO add treatment to !! , when cannot have null branch
                 when(mpsTransactionResult!!.transactionStatus) {
                     MPSTransactionResult.TransactionStatus.SUCCESS -> {
                         body = context.resources.getString(R.string.cancelSuccess)
-                        toastAnswer = mpsTransactionResult.clientReceipt
+                        result = mpsTransactionResult.clientReceipt
                     }
                     MPSTransactionResult.TransactionStatus.ERROR -> {
                         body = context.resources.getString(muxi.sample.R.string.cancelError)
-                        toastAnswer = mpsTransactionResult.descriptionError
+                        result = mpsTransactionResult.descriptionError
                     }
                 }
                 dialogHelper.showTransactionDialog(context,
                     mpsTransactionResult.transactionStatus.name,
-                    body
+                    body,result
                 )
-                Log.d("CallbackManager", toastAnswer)
             }
 
         }
@@ -89,22 +88,22 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
                 dialogHelper.hideLoadingDialog()
                 var body = ""
                 var toastAnswer = ""
+                var receipt = ""
                 when (mpsTransactionResult!!.transactionStatus) {
                     MPSTransactionResult.TransactionStatus.SUCCESS -> {
                         body = context.resources.getString(R.string.transactionSuccess)
-                        toastAnswer = mpsTransactionResult.clientReceipt
+                        receipt = mpsTransactionResult.clientReceipt
                     }
                     MPSTransactionResult.TransactionStatus.ERROR -> {
                         body = context.resources.getString(R.string.transactionError)
-                        toastAnswer = mpsTransactionResult.descriptionError
+                        receipt = mpsTransactionResult.descriptionError
                     }
                 }
                 dialogHelper.showTransactionDialog(
                     context,
                     mpsTransactionResult.transactionStatus.name,
-                    body
+                    body,receipt
                 )
-                Log.d(TAG, toastAnswer)
             }
         }
 
