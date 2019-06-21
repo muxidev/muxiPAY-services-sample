@@ -7,41 +7,60 @@
         android:orientation="vertical"
         tools:context=".ui.present_card.MainActivity">
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <Button android:layout_width="match_parent" android:layout_height="50dp"
             android:id="@+id/btnInit"
             android:text="@string/initialize"
-            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_base"
+            android:textColor="@color/color_text_pressed"
+            android:layout_gravity="center"/>
 
-    />
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <Button android:layout_width="match_parent" android:layout_height="50dp"
             android:id="@+id/btnTransact"
             android:text="@string/transact"
-            android:layout_gravity="center"
-    />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_base"
+            android:textColor="@color/color_text_pressed"
+            android:layout_gravity="center"/>
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+    <Button android:layout_width="match_parent" android:layout_height="50dp"
             android:id="@+id/btnCancel"
             android:text="@string/cancel"
-            android:layout_gravity="center"
-    />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_base"
+            android:textColor="@color/color_text_pressed"
+            android:layout_gravity="center"/>
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+    <Button android:layout_width="match_parent" android:layout_height="50dp"
             android:id="@+id/btnDeconfigure"
             android:text="@string/deconfigure"
-            android:layout_gravity="center"
-    />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_base"
+            android:textColor="@color/color_text_pressed"
+            android:layout_gravity="center"/>
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+    <Button android:layout_width="match_parent" android:layout_height="50dp"
             android:id="@+id/btnHistory"
             android:text="@string/history"
-            android:layout_gravity="center"
-    />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_base"
+            android:textColor="@color/color_text_pressed"
+            android:layout_gravity="center"/>
+
 
 
 </LinearLayout>
