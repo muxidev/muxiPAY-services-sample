@@ -12,7 +12,9 @@
         <activity android:name=".ui.present_card.MainActivity">
 
         </activity>
-        <activity android:name=".ui.ChooseTypeActivity">
+        <activity android:name=".ui.ChooseTypeActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

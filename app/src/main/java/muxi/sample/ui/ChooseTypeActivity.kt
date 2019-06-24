@@ -34,6 +34,5 @@ class ChooseTypeActivity : AppCompatActivity(), ItemAdapter.ItemAdapterOnClickHa
         recyclerView.adapter = ItemAdapter(this, this)
         val layoutManager = StaggeredGridLayoutManager(TYPES_SIZE,StaggeredGridLayoutManager.HORIZONTAL)
         recyclerView.layoutManager = layoutManager
-        recyclerView.addItemDecoration(SimpleDividerItemDecoration(this))
     }
 }
