@@ -4,5 +4,50 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <androidx.cardview.widget.CardView android:layout_width="match_parent"
+                                       android:layout_height="340dp">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                           android:src="@android:drawable/picture_frame"/>
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="LAST"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="SUBHEAD"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="190dp">
+
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="DATA"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Valor"/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:id="@+id/btn_cancelLast"
+            android:text="@string/cancel"/>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <Button android:layout_width="match_parent" android:layout_height="50dp"
+            android:id="@+id/btnOther"
+            android:text="@string/other"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_base"
+            android:textColor="@color/color_text_pressed"
+            android:layout_gravity="center"/>
 
 </LinearLayout>

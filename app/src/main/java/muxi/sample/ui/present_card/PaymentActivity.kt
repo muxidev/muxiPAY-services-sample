@@ -17,13 +17,12 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_payment.*
 import muxi.sample.Constants
 import muxi.sample.R
+import muxi.sample.TransactionHelper
 import muxi.sample.data.MPSTransaction
-import muxi.sample.data.MPSTransactionResult
 import muxi.sample.service.MPSManager
 import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
-import org.jetbrains.anko.toast
 import java.lang.Double.parseDouble
 import java.text.NumberFormat
 
@@ -65,8 +64,8 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         btn_pay!!.setOnClickListener {
             mpsManager?.currentBluetoothDevice = bluetothDevice
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
-            TransactionTask(mpsManager!!,mountTransaction(
-                currentValue, transactionType,installments
+            TransactionTask(mpsManager!!,TransactionHelper.newInstance().mountTransaction(
+                currentValue, transactionType,"","",installments
             )!!, Constants.TransactionState.payment).execute()
         }
 
@@ -136,17 +135,6 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
     }
 
-    private fun mountTransaction(value: String, type: MPSTransaction.TransactionType,
-                                 installments: Int): MPSTransaction? {
-        val transaction = MPSTransaction()
-        transaction.amount = value
-        transaction.currency = MPSTransaction.CurrencyType.BRL
-        transaction.type = type
-        transaction.installments = installments
-
-        return transaction
-
-    }
     private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionType, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
 
         buttonPressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_base)
