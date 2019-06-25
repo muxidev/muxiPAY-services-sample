@@ -1,5 +1,6 @@
 package muxi.sample.ui.present_card
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,9 @@ class ReceiptActivity: AppCompatActivity() {
 
         tv_receipt.text = receiptText
 
+        btnDone.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+        }
     }
 
 
