@@ -28,11 +28,13 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
                 dialogHelper.hideLoadingDialog()
                 var body = ""
                 var result = ""
+                var showReceipt = false
                 //TODO add treatment to !! , when cannot have null branch
                 when(mpsTransactionResult!!.transactionStatus) {
                     MPSTransactionResult.TransactionStatus.SUCCESS -> {
                         body = context.resources.getString(R.string.cancelSuccess)
                         result = mpsTransactionResult.clientReceipt
+                        showReceipt = true
                     }
                     MPSTransactionResult.TransactionStatus.ERROR -> {
                         body = context.resources.getString(muxi.sample.R.string.cancelError)
@@ -41,7 +43,7 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
                 }
                 dialogHelper.showTransactionDialog(context,
                     mpsTransactionResult.transactionStatus.name,
-                    body,result
+                    body,result,showReceipt
                 )
             }
 
@@ -51,13 +53,19 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
             Handler(Looper.getMainLooper()).post{
 
                 dialogHelper.hideLoadingDialog()
+                var title = ""
                 var body = ""
                 when(mpsTransactionResult!!.transactionStatus.name){
-                    MPSTransactionResult.TransactionStatus.SUCCESS.name -> body = context.resources.getString(R.string.deconfigureSuccess)
-                    MPSTransactionResult.TransactionStatus.ERROR.name->body = context.resources.getString(R.string.deconfigureError)
+                    MPSTransactionResult.TransactionStatus.SUCCESS.name ->{
+                        title = context.resources.getString(R.string.deconfigureSuccess)
+                    }
+                    MPSTransactionResult.TransactionStatus.ERROR.name->{
+                        title = context.resources.getString(R.string.deconfigureError)
+                        body = mpsTransactionResult.descriptionError
+                    }
                 }
                 dialogHelper.showInitDialog(context,
-                    mpsTransactionResult.transactionStatus.name,
+                    title,
                     body
                 )
                 Log.d(TAG,mpsTransactionResult.transactionStatus.name)
@@ -68,13 +76,19 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
         override fun onInitAnswer(mpsTransactionResult: MPSTransactionResult?) {
             Handler(Looper.getMainLooper()).post {
                 dialogHelper.hideLoadingDialog()
+                var title = ""
                 var body = ""
                 when(mpsTransactionResult!!.transactionStatus.name){
-                    MPSTransactionResult.TransactionStatus.SUCCESS.name -> body = context.resources.getString(R.string.initSuccess)
-                    MPSTransactionResult.TransactionStatus.ERROR.name->body = context.resources.getString(R.string.initError)
+                    MPSTransactionResult.TransactionStatus.SUCCESS.name -> {
+                        title = context.resources.getString(R.string.initSuccess)
+                    }
+                    MPSTransactionResult.TransactionStatus.ERROR.name->{
+                        title = context.resources.getString(R.string.initError)
+                        body = mpsTransactionResult.descriptionError
+                    }
                 }
                 dialogHelper.showInitDialog(context,
-                    mpsTransactionResult.transactionStatus.name,
+                    title,
                     body
                 )
                 Log.d(TAG,mpsTransactionResult.transactionStatus.name)
@@ -86,23 +100,25 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
         override fun onTransactionAnswer(mpsTransactionResult: MPSTransactionResult?) {
             Handler(Looper.getMainLooper()).post {
                 dialogHelper.hideLoadingDialog()
-                var body = ""
-                var toastAnswer = ""
+                var title = ""
                 var receipt = ""
+                var body = ""
+                var showReceipt = false
                 when (mpsTransactionResult!!.transactionStatus) {
                     MPSTransactionResult.TransactionStatus.SUCCESS -> {
-                        body = context.resources.getString(R.string.transactionSuccess)
+                        title = context.resources.getString(R.string.transactionSuccess)
                         receipt = mpsTransactionResult.clientReceipt
+                        showReceipt = true
                     }
                     MPSTransactionResult.TransactionStatus.ERROR -> {
-                        body = context.resources.getString(R.string.transactionError)
-                        receipt = mpsTransactionResult.descriptionError
+                        title = context.resources.getString(R.string.transactionError)
+                        body = mpsTransactionResult.descriptionError
                     }
                 }
                 dialogHelper.showTransactionDialog(
                     context,
-                    mpsTransactionResult.transactionStatus.name,
-                    body,receipt
+                    title,
+                    body,receipt, showReceipt
                 )
             }
         }
