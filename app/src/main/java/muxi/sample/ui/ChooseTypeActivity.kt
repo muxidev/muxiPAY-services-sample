@@ -12,7 +12,6 @@ import muxi.sample.R
 import muxi.sample.ui.ecommerce.EcommerceActivity
 import muxi.sample.ui.present_card.ItemAdapter
 import muxi.sample.ui.present_card.MainActivity
-import muxi.sample.ui.present_card.SimpleDividerItemDecoration
 import org.jetbrains.anko.toast
 
 class ChooseTypeActivity : AppCompatActivity(), ItemAdapter.ItemAdapterOnClickHandler {
