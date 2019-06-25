@@ -47,8 +47,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, PaymentActivity::class.java))
         }
         btnCancel.setOnClickListener {
-          //  dialogHelper.showLoadingDialog(this, View.VISIBLE)
-           // TransactionTask(mpsManager!!,mpsTransaction!!,Constants.TransactionState.cancel).execute()
+            startActivity(Intent(this, CancelActivity::class.java))
         }
         btnDeconfigure.setOnClickListener {
             dialogHelper.showLoadingDialog(this, View.GONE)

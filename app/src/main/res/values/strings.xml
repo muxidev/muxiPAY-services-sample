@@ -26,4 +26,7 @@
     <string name="debit">DEBIT</string>
     <string name="voucher">VOUCHER</string>
     <string name="pay">PAY</string>
+    <string name="other">OTHER</string>
+    <string name="doc">DOC</string>
+    <string name="autcode">Authorization code</string>
 </resources>

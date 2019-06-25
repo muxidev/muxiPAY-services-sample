@@ -38,7 +38,9 @@ class ItemAdapter(private val context: Context,
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
-        private val ecommerceBtn = itemView.btn_item!!
+        private val tvAdapter = itemView.tv_item_adapter!!
+
+        private val llPresentCard = itemView.ll_item_adapter!!
 
         fun bindView(position:Int, mClickHandler: ItemAdapterOnClickHandler){
             val text: String = when (position) {
@@ -46,11 +48,11 @@ class ItemAdapter(private val context: Context,
                 ECOMMERCE_ID -> itemView.context.getString(R.string.ecommerce)
                 else -> itemView.context.getString(R.string.something_wrong)
             }
-            ecommerceBtn.text = text
-            ecommerceBtn.setOnClickListener {
+            tvAdapter.text = text
+            llPresentCard.setOnClickListener{
                 mClickHandler.onClick(position)
-
             }
+
         }
     }
 }

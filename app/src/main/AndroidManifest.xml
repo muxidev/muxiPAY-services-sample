@@ -12,7 +12,9 @@
         <activity android:name=".ui.present_card.MainActivity">
 
         </activity>
-        <activity android:name=".ui.ChooseTypeActivity">
+        <activity android:name=".ui.ChooseTypeActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,6 +24,8 @@
         <activity android:name=".ui.ecommerce.EcommerceActivity"/>
         <activity android:name=".ui.present_card.PaymentActivity"/>
         <activity android:name=".ui.present_card.ReceiptActivity"/>
+        <activity android:name=".ui.present_card.CancelActivity"/>
+        <activity android:name=".ui.present_card.CancelOtherActivity"/>
     </application>
 
 </manifest>
