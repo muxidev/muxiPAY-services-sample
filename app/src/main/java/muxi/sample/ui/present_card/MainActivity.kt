@@ -2,6 +2,7 @@ package muxi.sample.ui.present_card
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar!!.title = getString(R.string.present_card_toolbar_title)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         btnInit.setOnClickListener {
             dialogHelper.showLoadingDialog(this, View.GONE)
             InitTask(mpsManager!!,showMessage,cnpj).execute()
@@ -58,6 +62,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {

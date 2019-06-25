@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
@@ -50,6 +51,10 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
+
+
+        supportActionBar!!.title = getString(R.string.payment_toolbar_title)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         spinner!!.onItemSelectedListener = this
 
@@ -112,6 +117,15 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         })
 
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

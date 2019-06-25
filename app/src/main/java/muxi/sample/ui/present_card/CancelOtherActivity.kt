@@ -2,6 +2,7 @@ package muxi.sample.ui.present_card
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,9 @@ class CancelOtherActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel_other)
 
+
+        supportActionBar!!.title = getString(R.string.cancel_toolbar_title)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         btn_creditOther!!.setOnClickListener{
             buttonEffect(btn_creditOther, MPSTransaction.TransactionType.CREDIT,btn_debitOther,btn_voucherOther)
@@ -77,4 +81,13 @@ class CancelOtherActivity:AppCompatActivity() {
         val callbackManager = CallbackManager.newInstance(this, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

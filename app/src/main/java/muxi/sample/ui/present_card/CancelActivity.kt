@@ -2,6 +2,7 @@ package muxi.sample.ui.present_card
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_cancel.*
@@ -23,6 +24,11 @@ class CancelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel)
+
+
+        supportActionBar!!.title = getString(R.string.cancel_toolbar_title)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         btn_cancelLast.setOnClickListener {
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
 
@@ -44,4 +50,13 @@ class CancelActivity : AppCompatActivity() {
         val callbackManager = CallbackManager.newInstance(this, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

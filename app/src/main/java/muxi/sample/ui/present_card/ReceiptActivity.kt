@@ -1,6 +1,7 @@
 package muxi.sample.ui.present_card
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_receipt.*
 import muxi.sample.Constants.RECEIPT_PARAM
@@ -13,6 +14,21 @@ class ReceiptActivity: AppCompatActivity() {
         setContentView(R.layout.activity_receipt)
         val receiptText: String = intent.getStringExtra(RECEIPT_PARAM)
 
+
+        supportActionBar!!.title = getString(R.string.receipt_toolbar_title)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         tv_receipt.text = receiptText
+
     }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
