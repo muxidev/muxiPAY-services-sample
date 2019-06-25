@@ -29,4 +29,9 @@
     <string name="other">OTHER</string>
     <string name="doc">DOC</string>
     <string name="autcode">Authorization code</string>
+    <string name="done">Done</string>
+    <string name="cancel_toolbar_title">Payment Cancellation</string>
+    <string name="present_card_toolbar_title">Present card</string>
+    <string name="payment_toolbar_title">Payment</string>
+    <string name="receipt_toolbar_title">Receipt</string>
 </resources>
