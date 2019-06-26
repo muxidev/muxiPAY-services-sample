@@ -19,7 +19,7 @@ class CancelActivity : AppCompatActivity() {
 
     private var mpsManager: MPSManager? = null
 
-    val dialogHelper = DialogHelper.newInstance()
+    val dialogHelper = DialogHelper.getInstance()
 
     val transactionHelper = TransactionHelper.getInstance()
 

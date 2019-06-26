@@ -17,8 +17,11 @@ class DialogHelper {
 
     var alertDialog: AlertDialog? = null
     companion object {
-        fun newInstance():DialogHelper{
-            return DialogHelper()
+        private var instance: DialogHelper? = null
+        fun getInstance():DialogHelper{
+            if(instance == null)
+                instance = DialogHelper()
+            return instance!!
         }
     }
 

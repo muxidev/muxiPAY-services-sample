@@ -34,7 +34,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     private val bluetothDevice = "28:ED:E0:5A:EA:D9"
 
     private var mpsManager: MPSManager? = null
-    val dialogHelper = DialogHelper.newInstance()
+    val dialogHelper = DialogHelper.getInstance()
     val transactionHelper = TransactionHelper.getInstance()
 
     var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT

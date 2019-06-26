@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     private val ignorePendingTransaction = true
     private val cnpj = "1234"
 
-    val dialogHelper = DialogHelper.newInstance()
+    val dialogHelper = DialogHelper.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

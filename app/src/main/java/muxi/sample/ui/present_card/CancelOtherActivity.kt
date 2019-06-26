@@ -22,7 +22,7 @@ class CancelOtherActivity:AppCompatActivity() {
 
     var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT
 
-    val dialogHelper = DialogHelper.newInstance()
+    val dialogHelper = DialogHelper.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
