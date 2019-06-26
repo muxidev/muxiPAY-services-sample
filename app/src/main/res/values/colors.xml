@@ -8,4 +8,6 @@
     <color name="color_text_pressed">#FFF</color>
     <color name="color_btn_unpressed">#f1f9ff</color>
     <color name="color_pb">#707070</color>
+    <color name="adapter_color_bg">#afafaf</color>
+    <color name="inner_adapter_color">#424242</color>
 </resources>
