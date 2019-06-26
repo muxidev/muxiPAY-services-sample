@@ -77,7 +77,7 @@ class CancelOtherActivity:AppCompatActivity() {
         if(mpsManager == null)
             mpsManager = MPSManager.getInstance(this.applicationContext)
 
-        val callbackManager = CallbackManager.newInstance(this, dialogHelper)
+        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
     }
 

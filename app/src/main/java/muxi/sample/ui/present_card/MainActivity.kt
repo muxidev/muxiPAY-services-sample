@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             mpsManager = MPSManager.getInstance(this)
 
         mpsManager!!.bindService(this)
-        mpsManager!!.setMpsManagerCallback(CallbackManager.newInstance(this, dialogHelper).mpsManagerCallback)
+        mpsManager!!.setMpsManagerCallback(CallbackManager.getInstance(this, dialogHelper).mpsManagerCallback)
     }
 
     override fun onDestroy() {

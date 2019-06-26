@@ -19,8 +19,11 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
     private val TAG = CallbackManager::class.java.simpleName
 
     companion object {
-        fun newInstance(context: Context, dialogHelper: DialogHelper): CallbackManager {
-            return CallbackManager(context, dialogHelper)
+        private var instance: CallbackManager? = null
+        fun getInstance(context: Context, dialogHelper: DialogHelper): CallbackManager {
+            if(instance == null)
+                instance = CallbackManager(context,dialogHelper)
+            return instance!!
         }
     }
 

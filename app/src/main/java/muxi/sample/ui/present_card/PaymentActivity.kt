@@ -148,7 +148,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
         mpsManager!!.bindService(applicationContext)
 
-        val callbackManager = CallbackManager.newInstance(this, dialogHelper)
+        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
 
     }
