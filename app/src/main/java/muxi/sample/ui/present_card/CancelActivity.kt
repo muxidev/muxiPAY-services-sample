@@ -21,6 +21,8 @@ class CancelActivity : AppCompatActivity() {
 
     val dialogHelper = DialogHelper.newInstance()
 
+    val transactionHelper = TransactionHelper.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel)
@@ -29,11 +31,15 @@ class CancelActivity : AppCompatActivity() {
         supportActionBar!!.title = getString(R.string.cancel_toolbar_title)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        dateLast.text = transactionHelper.dateLast
+        typeLast.text = transactionHelper.typeLast
+        amountLast.text = transactionHelper.amountLast
+
         btn_cancelLast.setOnClickListener {
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
 
             //TODO change to get from activity
-            TransactionTask(mpsManager!!, TransactionHelper.newInstance().mountTransaction(
+            TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
                 "", MPSTransaction.TransactionType.CREDIT,"","",1
             )!!, Constants.TransactionState.cancel).execute()
         }

@@ -13,10 +13,11 @@
               android:layout_marginTop="50dp"
               android:inputType="number"
               android:textSize="16sp"
+              android:padding="15dp"
               android:textColor="@color/color_base"
               android:textColorHint="@color/color_base"
               android:background="@drawable/border_input"
-              android:hint="@string/default_value"/>
+              android:text="@string/default_value"/>
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
                   android:orientation="horizontal"
@@ -62,12 +63,12 @@
                           android:orientation="vertical">
 
                 <Button android:id="@+id/btn_credit"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:textColor="@color/color_base"
-                                android:backgroundTint="@color/color_btn_unpressed"
-                              android:text="@string/credit"
-                              />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_base"
+                        android:backgroundTint="@color/color_btn_unpressed"
+                        android:text="@string/credit"
+                />
             </LinearLayout>
 
             <LinearLayout android:layout_width="0dp"
@@ -96,7 +97,7 @@
                         android:backgroundTint="@color/color_btn_unpressed"
                         android:textColor="@color/color_base"
                         android:text="@string/voucher"
-                        />
+                />
             </LinearLayout>
 
         </LinearLayout>
