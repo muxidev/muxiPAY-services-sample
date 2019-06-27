@@ -1,18 +1,14 @@
 package muxi.sample.ui.present_card
 
-import android.content.ComponentName
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_payment.*
@@ -24,6 +20,7 @@ import muxi.sample.service.MPSManager
 import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
+import muxi.sample.utils.FormatUtils
 import java.lang.Double.parseDouble
 import java.text.NumberFormat
 
@@ -37,7 +34,8 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     private val bluetothDevice = "28:ED:E0:5A:EA:D9"
 
     private var mpsManager: MPSManager? = null
-    val dialogHelper = DialogHelper.newInstance()
+    val dialogHelper = DialogHelper.getInstance()
+    val transactionHelper = TransactionHelper.getInstance()
 
     var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT
 
@@ -45,18 +43,18 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     var installments = 0
     var list_of_items = arrayOf("installments","1","2","3","4","5","6",
         "7","8","9","10","11","12")
-    private var paymentType = ""
     private var currentValue = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
-
         supportActionBar!!.title = getString(R.string.payment_toolbar_title)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         spinner!!.onItemSelectedListener = this
+
+        et_value.setSelection(et_value.text.length)
 
         mpsManager?.currentBluetoothDevice = bluetothDevice
 
@@ -69,7 +67,13 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         btn_pay!!.setOnClickListener {
             mpsManager?.currentBluetoothDevice = bluetothDevice
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
-            TransactionTask(mpsManager!!,TransactionHelper.newInstance().mountTransaction(
+            val date = FormatUtils.getCurrentDate()
+            val time = FormatUtils.getCurrentTime(false)
+            val dateTime = "$date $time"
+            transactionHelper.dateLast = dateTime
+            transactionHelper.amountLast = currentValue
+            transactionHelper.typeLast = transactionType.name
+            TransactionTask(mpsManager!!,transactionHelper.mountTransaction(
                 currentValue, transactionType,"","",installments
             )!!, Constants.TransactionState.payment).execute()
         }
@@ -144,7 +148,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
         mpsManager!!.bindService(applicationContext)
 
-        val callbackManager = CallbackManager.newInstance(this, dialogHelper)
+        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
 
     }

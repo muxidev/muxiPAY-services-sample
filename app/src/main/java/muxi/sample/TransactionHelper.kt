@@ -3,10 +3,17 @@ package muxi.sample
 import muxi.sample.data.MPSTransaction
 
 class TransactionHelper {
+    var dateLast: String = ""
+    var amountLast: String = ""
+    var typeLast: String = ""
 
     companion object {
-        fun newInstance():TransactionHelper{
-            return TransactionHelper()
+        private var instance: TransactionHelper? = null
+
+        fun getInstance():TransactionHelper{
+            if(instance == null)
+                instance = TransactionHelper()
+            return instance!!
         }
     }
 

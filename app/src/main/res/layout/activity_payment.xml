@@ -5,31 +5,33 @@
               android:layout_height="match_parent">
 
     <EditText android:layout_width="match_parent"
-              android:layout_height="50dp"
-              android:layout_marginStart="16dp"
-              android:layout_marginEnd="16dp"
+              android:layout_height="@dimen/main_btn_height"
+              android:layout_marginStart="@dimen/main_margin_start_end"
+              android:layout_marginEnd="@dimen/main_margin_start_end"
               android:id="@+id/et_value"
               android:layout_gravity="center"
-              android:layout_marginTop="50dp"
+              android:layout_marginTop="@dimen/et_value_margin_top"
               android:inputType="number"
-              android:textSize="16sp"
+              android:textSize="@dimen/et_value_size"
+              android:padding="@dimen/et_value_padding"
               android:textColor="@color/color_base"
               android:textColorHint="@color/color_base"
               android:background="@drawable/border_input"
-              android:hint="@string/default_value"/>
+              android:text="@string/default_value"/>
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/main_btn_height"
                   android:orientation="horizontal"
-                  android:layout_marginTop="35dp"
-                  android:layout_marginStart="16dp"
-                  android:layout_marginEnd="16dp"
+                  android:layout_marginTop="@dimen/ll_margin_top"
+                  android:layout_marginStart="@dimen/main_margin_start_end"
+                  android:layout_marginEnd="@dimen/main_margin_start_end"
                   android:background="@drawable/border_input">
 
         <Spinner android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  android:backgroundTint="@color/color_base"
-                 android:layout_marginStart="10dp"
-                 android:layout_marginEnd="15dp"
+                 android:layout_marginStart="@dimen/spinner_margin_start"
+                 android:layout_marginEnd="@dimen/spinner_margin_end"
                  android:id="@+id/spinner"/>
     </LinearLayout>
 
@@ -37,7 +39,7 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
-                  android:layout_marginTop="25dp">
+                  android:layout_marginTop="@dimen/card_margin_top">
 
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content">
@@ -45,9 +47,9 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="@string/payment_type"
-                      android:textSize="12sp"
+                      android:textSize="@dimen/payment_type_size"
                       android:textStyle="bold"
-                      android:layout_marginStart="16dp"
+                      android:layout_marginStart="@dimen/main_margin_start_end"
                       android:textColor="@color/color_base"
             />
         </LinearLayout>
@@ -55,22 +57,22 @@
                       android:layout_height="wrap_content"
                       android:orientation="horizontal">
 
-            <LinearLayout android:layout_width="0dp"
+            <LinearLayout android:layout_width="@dimen/zero"
                           android:layout_height="wrap_content"
                           android:gravity="center_horizontal"
                           android:layout_weight="1"
                           android:orientation="vertical">
 
                 <Button android:id="@+id/btn_credit"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:textColor="@color/color_base"
-                                android:backgroundTint="@color/color_btn_unpressed"
-                              android:text="@string/credit"
-                              />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_base"
+                        android:backgroundTint="@color/color_btn_unpressed"
+                        android:text="@string/credit"
+                />
             </LinearLayout>
 
-            <LinearLayout android:layout_width="0dp"
+            <LinearLayout android:layout_width="@dimen/zero"
                           android:layout_height="wrap_content"
                           android:gravity="center_horizontal"
                           android:layout_weight="1"
@@ -84,7 +86,7 @@
                         android:text="@string/debit"/>
             </LinearLayout>
 
-            <LinearLayout android:layout_width="0dp"
+            <LinearLayout android:layout_width="@dimen/zero"
                           android:layout_height="wrap_content"
                           android:gravity="center_horizontal"
                           android:layout_weight="1"
@@ -96,7 +98,7 @@
                         android:backgroundTint="@color/color_btn_unpressed"
                         android:textColor="@color/color_base"
                         android:text="@string/voucher"
-                        />
+                />
             </LinearLayout>
 
         </LinearLayout>
@@ -104,11 +106,12 @@
     </LinearLayout>
 
 
-    <Button android:layout_width="match_parent" android:layout_height="50dp"
+    <Button android:layout_width="match_parent"
+            android:layout_height="@dimen/main_btn_height"
             android:id="@+id/btn_pay"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/main_btn_height"
+            android:layout_marginStart="@dimen/main_margin_start_end"
+            android:layout_marginEnd="@dimen/main_margin_start_end"
             android:backgroundTint="@color/color_base"
             android:textColor="@color/color_text_pressed"
             android:layout_gravity="center"

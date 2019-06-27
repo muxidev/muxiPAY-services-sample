@@ -9,15 +9,21 @@ import android.os.Looper
 import android.os.Handler
 import android.util.Log
 import muxi.sample.R
+import muxi.sample.TransactionHelper
 
 
 class CallbackManager(context: Context, dialogHelper: DialogHelper) {
 
+    val transactionHelper = TransactionHelper.getInstance()
+
     private val TAG = CallbackManager::class.java.simpleName
 
     companion object {
-        fun newInstance(context: Context, dialogHelper: DialogHelper): CallbackManager {
-            return CallbackManager(context, dialogHelper)
+        private var instance: CallbackManager? = null
+        fun getInstance(context: Context, dialogHelper: DialogHelper): CallbackManager {
+            if(instance == null)
+                instance = CallbackManager(context,dialogHelper)
+            return instance!!
         }
     }
 
@@ -35,6 +41,9 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
                         body = context.resources.getString(R.string.cancelSuccess)
                         result = mpsTransactionResult.clientReceipt
                         showReceipt = true
+                        transactionHelper.dateLast = ""
+                        transactionHelper.amountLast = ""
+                        transactionHelper.typeLast = ""
                     }
                     MPSTransactionResult.TransactionStatus.ERROR -> {
                         body = context.resources.getString(muxi.sample.R.string.cancelError)
@@ -109,6 +118,7 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
                         title = context.resources.getString(R.string.transactionSuccess)
                         receipt = mpsTransactionResult.clientReceipt
                         showReceipt = true
+
                     }
                     MPSTransactionResult.TransactionStatus.ERROR -> {
                         title = context.resources.getString(R.string.transactionError)

@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     private val ignorePendingTransaction = true
     private val cnpj = "1234"
 
-    val dialogHelper = DialogHelper.newInstance()
+    val dialogHelper = DialogHelper.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             mpsManager = MPSManager.getInstance(this)
 
         mpsManager!!.bindService(this)
-        mpsManager!!.setMpsManagerCallback(CallbackManager.newInstance(this, dialogHelper).mpsManagerCallback)
+        mpsManager!!.setMpsManagerCallback(CallbackManager.getInstance(this, dialogHelper).mpsManagerCallback)
     }
 
     override fun onDestroy() {

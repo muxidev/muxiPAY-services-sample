@@ -1,7 +1,6 @@
 package muxi.sample.ui.present_card
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -23,7 +22,7 @@ class CancelOtherActivity:AppCompatActivity() {
 
     var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT
 
-    val dialogHelper = DialogHelper.newInstance()
+    val dialogHelper = DialogHelper.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +48,7 @@ class CancelOtherActivity:AppCompatActivity() {
         btnCancelOther!!.setOnClickListener {
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
             //TODO change to get from activity
-            TransactionTask(mpsManager!!, TransactionHelper.newInstance().mountTransaction(
+            TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
                 "", transactionType,et_doc.text.toString(),
                 et_autCode.text.toString(),0
             )!!, Constants.TransactionState.cancel).execute()
@@ -78,7 +77,7 @@ class CancelOtherActivity:AppCompatActivity() {
         if(mpsManager == null)
             mpsManager = MPSManager.getInstance(this.applicationContext)
 
-        val callbackManager = CallbackManager.newInstance(this, dialogHelper)
+        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
     }
 
