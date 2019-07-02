@@ -7,64 +7,25 @@
         android:orientation="vertical"
         tools:context=".ui.present_card.MainActivity">
 
-    <Button android:layout_width="match_parent"
-            android:layout_height="@dimen/main_btn_height"
-            android:id="@+id/btnInit"
+    <Button android:id="@+id/btnInit"
             android:text="@string/initialize"
-            android:layout_marginTop="@dimen/main_btn_margin_top"
-            android:layout_marginStart="@dimen/main_margin_start_end"
-            android:layout_marginEnd="@dimen/main_margin_start_end"
-            android:backgroundTint="@color/color_base"
-            android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center"/>
+            style="@style/btnTheme"/>
 
-
-    <Button android:layout_width="match_parent"
-            android:layout_height="@dimen/main_btn_height"
-            android:id="@+id/btnTransact"
+    <Button android:id="@+id/btnTransact"
             android:text="@string/transact"
-            android:layout_marginTop="@dimen/main_btn_margin_top"
-            android:layout_marginStart="@dimen/main_margin_start_end"
-            android:layout_marginEnd="@dimen/main_margin_start_end"
-            android:backgroundTint="@color/color_base"
-            android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center"/>
+            style="@style/btnTheme"/>
 
-
-    <Button android:layout_width="match_parent"
-            android:layout_height="@dimen/main_btn_height"
-            android:id="@+id/btnCancel"
+    <Button android:id="@+id/btnCancel"
             android:text="@string/cancel"
-            android:layout_marginTop="@dimen/main_btn_margin_top"
-            android:layout_marginStart="@dimen/main_margin_start_end"
-            android:layout_marginEnd="@dimen/main_margin_start_end"
-            android:backgroundTint="@color/color_base"
-            android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center"/>
+            style="@style/btnTheme"/>
 
-
-    <Button android:layout_width="match_parent"
-            android:layout_height="@dimen/main_btn_height"
-            android:id="@+id/btnDeconfigure"
+    <Button android:id="@+id/btnDeconfigure"
             android:text="@string/deconfigure"
-            android:layout_marginTop="@dimen/main_btn_margin_top"
-            android:layout_marginStart="@dimen/main_margin_start_end"
-            android:layout_marginEnd="@dimen/main_margin_start_end"
-            android:backgroundTint="@color/color_base"
-            android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center"/>
+            style="@style/btnTheme"/>
 
-
-    <Button android:layout_width="match_parent"
-            android:layout_height="@dimen/main_btn_height"
-            android:id="@+id/btnHistory"
+    <Button android:id="@+id/btnHistory"
             android:text="@string/history"
-            android:layout_marginTop="@dimen/main_btn_margin_top"
-            android:layout_marginStart="@dimen/main_margin_start_end"
-            android:layout_marginEnd="@dimen/main_margin_start_end"
-            android:backgroundTint="@color/color_base"
-            android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center"/>
+            style="@style/btnTheme"/>
 
 
 
