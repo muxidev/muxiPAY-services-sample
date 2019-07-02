@@ -1,4 +1,4 @@
-package muxi.sample.ui
+package muxi.sample.ui.present_card
 
 import android.content.ComponentName
 import android.content.Context
@@ -14,6 +14,16 @@ import muxi.sample.TransactionHelper
 
 class CallbackManager(context: Context, dialogHelper: DialogHelper) {
 
+
+    interface ViewI {
+        fun onShowProgress()
+        fun onHideProgress()
+        fun onTransactionSucess(clientReceipt: String)
+        fun onTransactionError(descriptionError :String)
+        fun onShowDialog(message:String)
+    }
+
+    interface cancelAnser
     val transactionHelper = TransactionHelper.getInstance()
 
     private val TAG = CallbackManager::class.java.simpleName
@@ -22,39 +32,14 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
         private var instance: CallbackManager? = null
         fun getInstance(context: Context, dialogHelper: DialogHelper): CallbackManager {
             if(instance == null)
-                instance = CallbackManager(context,dialogHelper)
+                instance =
+                    CallbackManager(context, dialogHelper)
             return instance!!
         }
     }
 
     val mpsManagerCallback = object : MPSManager.MPSManagerCallback {
         override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
-
-            Handler(Looper.getMainLooper()).post {
-                dialogHelper.hideLoadingDialog()
-                var body = ""
-                var result = ""
-                var showReceipt = false
-                //TODO add treatment to !! , when cannot have null branch
-                when(mpsTransactionResult!!.transactionStatus) {
-                    MPSTransactionResult.TransactionStatus.SUCCESS -> {
-                        body = context.resources.getString(R.string.cancelSuccess)
-                        result = mpsTransactionResult.clientReceipt
-                        showReceipt = true
-                        transactionHelper.dateLast = ""
-                        transactionHelper.amountLast = ""
-                        transactionHelper.typeLast = ""
-                    }
-                    MPSTransactionResult.TransactionStatus.ERROR -> {
-                        body = context.resources.getString(muxi.sample.R.string.cancelError)
-                        result = mpsTransactionResult.descriptionError
-                    }
-                }
-                dialogHelper.showTransactionDialog(context,
-                    mpsTransactionResult.transactionStatus.name,
-                    body,result,showReceipt
-                )
-            }
 
         }
 
@@ -107,30 +92,7 @@ class CallbackManager(context: Context, dialogHelper: DialogHelper) {
         }
 
         override fun onTransactionAnswer(mpsTransactionResult: MPSTransactionResult?) {
-            Handler(Looper.getMainLooper()).post {
-                dialogHelper.hideLoadingDialog()
-                var title = ""
-                var receipt = ""
-                var body = ""
-                var showReceipt = false
-                when (mpsTransactionResult!!.transactionStatus) {
-                    MPSTransactionResult.TransactionStatus.SUCCESS -> {
-                        title = context.resources.getString(R.string.transactionSuccess)
-                        receipt = mpsTransactionResult.clientReceipt
-                        showReceipt = true
 
-                    }
-                    MPSTransactionResult.TransactionStatus.ERROR -> {
-                        title = context.resources.getString(R.string.transactionError)
-                        body = mpsTransactionResult.descriptionError
-                    }
-                }
-                dialogHelper.showTransactionDialog(
-                    context,
-                    title,
-                    body,receipt, showReceipt
-                )
-            }
         }
 
 

@@ -1,6 +1,8 @@
 package muxi.sample.ui.present_card
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -16,9 +18,10 @@ import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
 import muxi.sample.data.MPSTransaction
+import muxi.sample.data.MPSTransactionResult
 import muxi.sample.service.MPSManager
-import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
+import muxi.sample.ui.present_card.callbacks.DefaultCallback
 import muxi.sample.ui.present_card.tasks.TransactionTask
 import muxi.sample.utils.FormatUtils
 import java.lang.Double.parseDouble
@@ -31,7 +34,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     /**
      * TODO: change this variable to use MAC address from your pinpad
      */
-    private val bluetothDevice = "28:ED:E0:5A:EA:D9"
+    private val bluetothDevice = "00:07:80:62:3D:37"
 
     private var mpsManager: MPSManager? = null
     val dialogHelper = DialogHelper.getInstance()
@@ -148,8 +151,36 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
         mpsManager!!.bindService(applicationContext)
 
-        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
-        mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
+//        val callbackManager = CallbackManager.getInstance(applicationContext, dialogHelper)
+        mpsManager!!.setMpsManagerCallback(object : DefaultCallback() {
+            override fun onTransactionAnswer(mpsTransactionResult: MPSTransactionResult?) {
+                super.onTransactionAnswer(mpsTransactionResult)
+                runOnUiThread {
+                    dialogHelper.hideLoadingDialog()
+                    var title = ""
+                    var receipt = ""
+                    var body = ""
+                    var showReceipt = false
+                    when (mpsTransactionResult!!.transactionStatus) {
+                        MPSTransactionResult.TransactionStatus.SUCCESS -> {
+                            title = resources.getString(R.string.transactionSuccess)
+                            receipt = mpsTransactionResult.clientReceipt
+                            showReceipt = true
+
+                        }
+                        MPSTransactionResult.TransactionStatus.ERROR -> {
+                            title = resources.getString(R.string.transactionError)
+                            body = mpsTransactionResult.descriptionError
+                        }
+                    }
+                    dialogHelper.showTransactionDialog(
+                        this@PaymentActivity,
+                        title,
+                        body,receipt, showReceipt
+                    )
+                }
+            }
+        })
 
     }
 

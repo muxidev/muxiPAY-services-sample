@@ -12,7 +12,6 @@ import muxi.sample.R
 import muxi.sample.TransactionHelper
 import muxi.sample.data.MPSTransaction
 import muxi.sample.service.MPSManager
-import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
@@ -77,7 +76,7 @@ class CancelOtherActivity:AppCompatActivity() {
         if(mpsManager == null)
             mpsManager = MPSManager.getInstance(this.applicationContext)
 
-        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
+        val callbackManager = CallbackManager.getInstance(applicationContext, dialogHelper)
         mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
     }
 

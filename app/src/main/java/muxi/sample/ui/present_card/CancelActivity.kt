@@ -3,6 +3,8 @@ package muxi.sample.ui.present_card
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +13,10 @@ import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
 import muxi.sample.data.MPSTransaction
+import muxi.sample.data.MPSTransactionResult
 import muxi.sample.service.MPSManager
-import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
+import muxi.sample.ui.present_card.callbacks.DefaultCallback
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
 class CancelActivity : AppCompatActivity() {
@@ -59,8 +62,39 @@ class CancelActivity : AppCompatActivity() {
         if(mpsManager == null)
             mpsManager = MPSManager.getInstance(this.applicationContext)
 
-        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
-        mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
+//        val callbackManager = CallbackManager.getInstance(applicationContext, dialogHelper)
+
+        mpsManager!!.setMpsManagerCallback( object : DefaultCallback() {
+            override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
+                super.onCancelAnswer(mpsTransactionResult)
+                runOnUiThread {
+                    dialogHelper.hideLoadingDialog()
+                    var body = ""
+                    var result = ""
+                    var showReceipt = false
+                    //TODO add treatment to !! , when cannot have null branch
+                    when(mpsTransactionResult!!.transactionStatus) {
+                        MPSTransactionResult.TransactionStatus.SUCCESS -> {
+                            body = resources.getString(R.string.cancelSuccess)
+                            result = mpsTransactionResult.clientReceipt
+                            showReceipt = true
+                            transactionHelper.dateLast = ""
+                            transactionHelper.amountLast = ""
+                            transactionHelper.typeLast = ""
+                        }
+                        MPSTransactionResult.TransactionStatus.ERROR -> {
+                            body = resources.getString(muxi.sample.R.string.cancelError)
+                            result = mpsTransactionResult.descriptionError
+                        }
+                    }
+
+                    dialogHelper.showTransactionDialog(this@CancelActivity,
+                        mpsTransactionResult.transactionStatus.name,
+                        body,result,showReceipt
+                    )
+                }
+            }
+        })
     }
 
 

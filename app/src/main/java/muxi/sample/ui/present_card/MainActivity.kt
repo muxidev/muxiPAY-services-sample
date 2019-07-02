@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.sample.R
 import muxi.sample.service.MPSManager
-import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.DeconfigureTask
 import muxi.sample.ui.present_card.tasks.InitTask
@@ -77,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             mpsManager = MPSManager.getInstance(this)
 
         mpsManager!!.bindService(this)
-        mpsManager!!.setMpsManagerCallback(CallbackManager.getInstance(this, dialogHelper).mpsManagerCallback)
+        mpsManager!!.setMpsManagerCallback(CallbackManager.getInstance(applicationContext, dialogHelper).mpsManagerCallback)
     }
 
     override fun onDestroy() {
