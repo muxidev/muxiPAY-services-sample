@@ -3,6 +3,7 @@ package muxi.sample.ui.dialog
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat.startActivity
@@ -16,7 +17,7 @@ import muxi.sample.ui.present_card.ReceiptActivity
 class DialogHelper {
 
     var alertDialog: AlertDialog? = null
-    var textColor : Int = 0x000
+    var textColor : Int = Color.BLACK
 
 
     companion object {
