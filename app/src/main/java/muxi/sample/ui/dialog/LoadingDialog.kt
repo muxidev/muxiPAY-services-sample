@@ -3,6 +3,7 @@ package muxi.sample.ui.dialog
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat.startActivity
@@ -16,6 +17,9 @@ import muxi.sample.ui.present_card.ReceiptActivity
 class DialogHelper {
 
     var alertDialog: AlertDialog? = null
+    var textColor : Int = Color.BLACK
+
+
     companion object {
         private var instance: DialogHelper? = null
         fun getInstance():DialogHelper{
@@ -55,7 +59,7 @@ class DialogHelper {
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_answer,
             null,false)
-        view.tv_init.setTextColor(context.resources.getColor(R.color.color_base))
+        view.tv_init.setTextColor(textColor)
         view.tv_init.text = body
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)
