@@ -16,6 +16,9 @@ import muxi.sample.ui.present_card.ReceiptActivity
 class DialogHelper {
 
     var alertDialog: AlertDialog? = null
+    var textColor : Int = 0x000
+
+
     companion object {
         private var instance: DialogHelper? = null
         fun getInstance():DialogHelper{
@@ -55,7 +58,7 @@ class DialogHelper {
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_answer,
             null,false)
-        view.tv_init.setTextColor(context.resources.getColor(R.color.color_base))
+        view.tv_init.setTextColor(textColor)
         view.tv_init.text = body
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)

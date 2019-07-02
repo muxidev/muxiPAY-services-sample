@@ -1,6 +1,7 @@
 package muxi.sample.ui.present_card
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -27,6 +28,11 @@ class CancelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            dialogHelper.textColor = resources.getColor(R.color.color_base,theme)
+        }else {
+            dialogHelper.textColor = resources.getColor(R.color.color_base)
+        }
 
         supportActionBar!!.title = getString(R.string.cancel_toolbar_title)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
