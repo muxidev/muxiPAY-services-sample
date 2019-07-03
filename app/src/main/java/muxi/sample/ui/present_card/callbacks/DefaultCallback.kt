@@ -14,12 +14,12 @@ open class DefaultCallback : MPSManager.MPSManagerCallback {
         Log.d(TAG,"onCancelAnswer"+mpsTransactionResult.toString())
     }
 
-    override fun onDeconfigureAnswer(p0: MPSTransactionResult?) {
-        Log.d(TAG,"onDeconfigureAnswer"+p0.toString())
+    override fun onDeconfigureAnswer(mpsTransactionResult: MPSTransactionResult?) {
+        Log.d(TAG,"onDeconfigureAnswer"+mpsTransactionResult.toString())
     }
 
-    override fun onInitAnswer(p0: MPSTransactionResult?) {
-        Log.d(TAG,"onInitAnswer"+p0.toString())
+    override fun onInitAnswer(mpsTransactionResult: MPSTransactionResult?) {
+        Log.d(TAG,"onInitAnswer"+mpsTransactionResult.toString())
     }
 
     override fun onTransactionAnswer(mpsTransactionResult: MPSTransactionResult?) {

@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.dialog_answer.view.*
 import kotlinx.android.synthetic.main.dialog_loading.view.*
 import muxi.sample.Constants.RECEIPT_PARAM
 import muxi.sample.R
+import muxi.sample.TransactionHelper
+import muxi.sample.data.MPSTransactionResult
 import muxi.sample.ui.present_card.MainActivity
 import muxi.sample.ui.present_card.ReceiptActivity
 
@@ -98,5 +100,33 @@ class DialogHelper {
             alertDialog!!.getButton(AlertDialog.BUTTON_NEGATIVE).visibility = View.GONE
     }
 
+
+    fun handleCancelAnswer(context:Context, mpsTransactionResult: MPSTransactionResult?) {
+        hideLoadingDialog()
+        val transactionHelper = TransactionHelper.getInstance()
+        var body = ""
+        var result = ""
+        var showReceipt = false
+        //TODO add treatment to !! , when cannot have null branch
+        when (mpsTransactionResult!!.transactionStatus) {
+            MPSTransactionResult.TransactionStatus.SUCCESS -> {
+                body = context.getString(R.string.cancelSuccess)
+                result = mpsTransactionResult.clientReceipt
+                showReceipt = true
+                transactionHelper.dateLast = ""
+                transactionHelper.amountLast = ""
+                transactionHelper.typeLast = ""
+            }
+            MPSTransactionResult.TransactionStatus.ERROR -> {
+                body = context.getString(R.string.cancelError)
+                result = mpsTransactionResult.descriptionError
+            }
+        }
+
+        showTransactionDialog(context,
+            mpsTransactionResult.transactionStatus.name,
+            body, result, showReceipt
+        )
+    }
 
 }

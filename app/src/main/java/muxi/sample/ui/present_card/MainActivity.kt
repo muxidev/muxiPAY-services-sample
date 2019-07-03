@@ -2,13 +2,16 @@ package muxi.sample.ui.present_card
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.sample.R
+import muxi.sample.data.MPSTransactionResult
 import muxi.sample.service.MPSManager
 import muxi.sample.ui.dialog.DialogHelper
+import muxi.sample.ui.present_card.callbacks.DefaultCallback
 import muxi.sample.ui.present_card.tasks.DeconfigureTask
 import muxi.sample.ui.present_card.tasks.InitTask
 import org.jetbrains.anko.toast
@@ -76,7 +79,49 @@ class MainActivity : AppCompatActivity() {
             mpsManager = MPSManager.getInstance(this)
 
         mpsManager!!.bindService(this)
-        mpsManager!!.setMpsManagerCallback(CallbackManager.getInstance(applicationContext, dialogHelper).mpsManagerCallback)
+        mpsManager!!.setMpsManagerCallback(object : DefaultCallback() {
+            override fun onDeconfigureAnswer(mpsTransactionResult: MPSTransactionResult?) {
+                super.onDeconfigureAnswer(mpsTransactionResult)
+
+                runOnUiThread {
+                    dialogHelper.hideLoadingDialog()
+                    var title = ""
+                    var body = ""
+                    when(mpsTransactionResult!!.transactionStatus.name){
+                        MPSTransactionResult.TransactionStatus.SUCCESS.name ->{
+                            title = getString(R.string.deconfigureSuccess)
+                        }
+                        MPSTransactionResult.TransactionStatus.ERROR.name->{
+                            title = getString(R.string.deconfigureError)
+                            body = mpsTransactionResult.descriptionError
+                        }
+                    }
+
+                    dialogHelper.showInitDialog(this@MainActivity,title,body)
+                    Log.d(TAG,mpsTransactionResult.transactionStatus.name)
+                }
+            }
+
+            override fun onInitAnswer(mpsTransactionResult: MPSTransactionResult?) {
+                super.onInitAnswer(mpsTransactionResult)
+                runOnUiThread {
+                    dialogHelper.hideLoadingDialog()
+                    var title = ""
+                    var body = ""
+                    when(mpsTransactionResult!!.transactionStatus.name){
+                        MPSTransactionResult.TransactionStatus.SUCCESS.name -> {
+                            title = getString(R.string.initSuccess)
+                        }
+                        MPSTransactionResult.TransactionStatus.ERROR.name->{
+                            title = getString(R.string.initError)
+                            body = mpsTransactionResult.descriptionError
+                        }
+                    }
+                    dialogHelper.showInitDialog(this@MainActivity,title,body)
+                    Log.d(TAG,mpsTransactionResult.transactionStatus.name)
+                }
+            }
+        })
     }
 
     override fun onDestroy() {

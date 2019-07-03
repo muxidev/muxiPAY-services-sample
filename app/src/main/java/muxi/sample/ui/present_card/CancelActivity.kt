@@ -62,41 +62,15 @@ class CancelActivity : AppCompatActivity() {
         if(mpsManager == null)
             mpsManager = MPSManager.getInstance(this.applicationContext)
 
-//        val callbackManager = CallbackManager.getInstance(applicationContext, dialogHelper)
-
         mpsManager!!.setMpsManagerCallback( object : DefaultCallback() {
             override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
                 super.onCancelAnswer(mpsTransactionResult)
                 runOnUiThread {
-                    dialogHelper.hideLoadingDialog()
-                    var body = ""
-                    var result = ""
-                    var showReceipt = false
-                    //TODO add treatment to !! , when cannot have null branch
-                    when(mpsTransactionResult!!.transactionStatus) {
-                        MPSTransactionResult.TransactionStatus.SUCCESS -> {
-                            body = resources.getString(R.string.cancelSuccess)
-                            result = mpsTransactionResult.clientReceipt
-                            showReceipt = true
-                            transactionHelper.dateLast = ""
-                            transactionHelper.amountLast = ""
-                            transactionHelper.typeLast = ""
-                        }
-                        MPSTransactionResult.TransactionStatus.ERROR -> {
-                            body = resources.getString(muxi.sample.R.string.cancelError)
-                            result = mpsTransactionResult.descriptionError
-                        }
-                    }
-
-                    dialogHelper.showTransactionDialog(this@CancelActivity,
-                        mpsTransactionResult.transactionStatus.name,
-                        body,result,showReceipt
-                    )
+                    dialogHelper.handleCancelAnswer(this@CancelActivity, mpsTransactionResult)
                 }
             }
         })
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == android.R.id.home) {

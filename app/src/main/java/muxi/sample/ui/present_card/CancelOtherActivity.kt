@@ -11,8 +11,10 @@ import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
 import muxi.sample.data.MPSTransaction
+import muxi.sample.data.MPSTransactionResult
 import muxi.sample.service.MPSManager
 import muxi.sample.ui.dialog.DialogHelper
+import muxi.sample.ui.present_card.callbacks.DefaultCallback
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
 class CancelOtherActivity:AppCompatActivity() {
@@ -76,10 +78,13 @@ class CancelOtherActivity:AppCompatActivity() {
         if(mpsManager == null)
             mpsManager = MPSManager.getInstance(this.applicationContext)
 
-        val callbackManager = CallbackManager.getInstance(applicationContext, dialogHelper)
-        mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
+        mpsManager!!.setMpsManagerCallback( object : DefaultCallback(){
+            override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
+                super.onCancelAnswer(mpsTransactionResult)
+                dialogHelper.handleCancelAnswer(this@CancelOtherActivity,mpsTransactionResult)
+            }
+        })
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == android.R.id.home) {
@@ -87,5 +92,4 @@ class CancelOtherActivity:AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
