@@ -10,10 +10,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
 import kotlinx.android.synthetic.main.dialog_answer.view.*
 import kotlinx.android.synthetic.main.dialog_loading.view.*
+import muxi.payservices.sdk.data.MPSResult
 import muxi.sample.Constants.RECEIPT_PARAM
 import muxi.sample.R
 import muxi.sample.TransactionHelper
-import muxi.sample.data.MPSTransactionResult
 import muxi.sample.ui.present_card.MainActivity
 import muxi.sample.ui.present_card.ReceiptActivity
 
@@ -101,15 +101,15 @@ class DialogHelper {
     }
 
 
-    fun handleCancelAnswer(context:Context, mpsTransactionResult: MPSTransactionResult?) {
+    fun handleCancelAnswer(context:Context, mpsTransactionResult: MPSResult?) {
         hideLoadingDialog()
         val transactionHelper = TransactionHelper.getInstance()
         var body = ""
         var result = ""
         var showReceipt = false
         //TODO add treatment to !! , when cannot have null branch
-        when (mpsTransactionResult!!.transactionStatus) {
-            MPSTransactionResult.TransactionStatus.SUCCESS -> {
+        when (mpsTransactionResult!!.status) {
+            MPSResult.Status.SUCCESS -> {
                 body = context.getString(R.string.cancelSuccess)
                 result = mpsTransactionResult.clientReceipt
                 showReceipt = true
@@ -117,14 +117,14 @@ class DialogHelper {
                 transactionHelper.amountLast = ""
                 transactionHelper.typeLast = ""
             }
-            MPSTransactionResult.TransactionStatus.ERROR -> {
+            MPSResult.Status.ERROR -> {
                 body = context.getString(R.string.cancelError)
                 result = mpsTransactionResult.descriptionError
             }
         }
 
         showTransactionDialog(context,
-            mpsTransactionResult.transactionStatus.name,
+            mpsTransactionResult.status.name,
             body, result, showReceipt
         )
     }

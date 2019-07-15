@@ -1,9 +1,9 @@
 package muxi.sample.ui.present_card.tasks
 
 import android.os.AsyncTask
+import muxi.payservices.sdk.data.MPSTransaction
+import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.Constants
-import muxi.sample.data.MPSTransaction
-import muxi.sample.service.MPSManager
 
 class TransactionTask(val mpsManager: MPSManager,
                       val mpsTransaction: MPSTransaction,
@@ -12,7 +12,7 @@ class TransactionTask(val mpsManager: MPSManager,
     override fun doInBackground(vararg params: Void?): Void? {
         when(transactionState){
             Constants.TransactionState.payment->
-                mpsManager.makePaymentWithPinpad(mpsTransaction)
+                mpsManager.transaction(mpsTransaction)
             Constants.TransactionState.cancel->
                 mpsManager.cancelTransaction(mpsTransaction)
         }

@@ -1,37 +1,59 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
-              android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/chose_type_item_width"
+        android:layout_height="@dimen/chose_type_item_height"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:cardCornerRadius="8dp"
+        android:background="@color/adapter_color_bg"
 
-    <LinearLayout android:layout_width="@dimen/adapter_width"
-                  android:layout_height="@dimen/adapter_height"
-                  android:layout_margin="@dimen/adapter_margin"
-                  android:background="@color/adapter_color_bg">
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="@dimen/inner_adapter_height"
-                      android:id="@+id/ll_item_adapter"
-                      android:layout_gravity="bottom"
-                      android:background="@color/inner_adapter_color"
-                      android:orientation="vertical"
-                      android:focusable="true"
-                      android:clickable="true">
+    <TextView
+            android:id="@+id/tv_item_payment_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/line_spacing_tv"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            tools:text="Present Card"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toTopOf="@+id/tv_item_adapter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:paddingStart="@dimen/tv_adapter_margin_start"
+            android:paddingEnd="@dimen/tv_adapter_margin_end"
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:id="@+id/tv_item_adapter"
-                      android:lineSpacingExtra="@dimen/line_spacing_tv"
-                      android:textSize="@dimen/tv_adapter_size"
-                      android:fontFamily="sans-serif"
-                      android:textStyle="normal"
-                      android:layout_marginStart="@dimen/tv_adapter_margin_start"
-                      android:layout_marginTop="@dimen/tv_adapter_margin_top"
-                      android:textColor="@android:color/white"/>
+    />
+            <!--android:textSize="@dimen/tv_adapter_size"-->
 
+    <TextView
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_item_adapter"
+            android:lineSpacingExtra="@dimen/line_spacing_tv"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@android:color/white"
+            tools:text="For payment with Credit Card, using a mobile device Pinpad."
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="1.0"
 
-        </LinearLayout>
+            android:paddingStart="@dimen/tv_adapter_margin_start"
+            android:paddingEnd="@dimen/tv_adapter_margin_end"
+            android:paddingTop="@dimen/chose_type_adapter_margin_top"
+            android:paddingBottom="@dimen/chose_type__adapter_margin_bottom"
+    />
+            <!--android:textSize="@dimen/tv_adapter_size"-->
 
-    </LinearLayout>
-
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
+    <style name="AppTheme_no_action_bar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/sample_splash_init</item>
+        <item name="colorPrimaryDark">@color/sample_splash_end</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/sample_splash_init</item>
+        <item name="colorPrimaryDark">@color/sample_splash_end</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -18,6 +26,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textStyle">bold</item>
+    </style>
 
+
+    <style name="AppTheme_no_action_bar.Launcher">
+        <item name="android:windowBackground">@drawable/launcher_screen</item>
     </style>
 </resources>

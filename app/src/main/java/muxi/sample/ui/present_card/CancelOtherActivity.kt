@@ -7,21 +7,21 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_cancel_other.*
+import muxi.payservices.sdk.data.MPSResult
+import muxi.payservices.sdk.data.MPSTransaction
+import muxi.payservices.sdk.service.CallbackAnswer
+import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
-import muxi.sample.data.MPSTransaction
-import muxi.sample.data.MPSTransactionResult
-import muxi.sample.service.MPSManager
 import muxi.sample.ui.dialog.DialogHelper
-import muxi.sample.ui.present_card.callbacks.DefaultCallback
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
 class CancelOtherActivity:AppCompatActivity() {
 
     private var mpsManager: MPSManager? = null
 
-    var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT
+    var transactionMode: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
 
     val dialogHelper = DialogHelper.getInstance()
 
@@ -35,22 +35,22 @@ class CancelOtherActivity:AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         btn_creditOther!!.setOnClickListener{
-            buttonEffect(btn_creditOther, MPSTransaction.TransactionType.CREDIT,btn_debitOther,btn_voucherOther)
+            buttonEffect(btn_creditOther, MPSTransaction.TransactionMode.CREDIT,btn_debitOther,btn_voucherOther)
         }
 
         btn_debitOther!!.setOnClickListener{
-            buttonEffect(btn_debitOther, MPSTransaction.TransactionType.DEBIT,btn_creditOther,btn_voucherOther)
+            buttonEffect(btn_debitOther, MPSTransaction.TransactionMode.DEBIT,btn_creditOther,btn_voucherOther)
         }
 
         btn_voucherOther!!.setOnClickListener {
-            buttonEffect(btn_voucherOther, MPSTransaction.TransactionType.VOUCHER,btn_creditOther,btn_debitOther)
+            buttonEffect(btn_voucherOther, MPSTransaction.TransactionMode.VOUCHER,btn_creditOther,btn_debitOther)
         }
 
         btnCancelOther!!.setOnClickListener {
             dialogHelper.showLoadingDialog(this, View.VISIBLE)
             //TODO change to get from activity
             TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
-                "", transactionType,et_doc.text.toString(),
+                "", transactionMode,et_doc.text.toString(),
                 et_autCode.text.toString(),0
             )!!, Constants.TransactionState.cancel).execute()
         }
@@ -58,7 +58,7 @@ class CancelOtherActivity:AppCompatActivity() {
 
 
     //TODO trocar esta logica
-    private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionType, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
+    private fun buttonEffect(buttonPressed: Button, mode: MPSTransaction.TransactionMode, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
 
         buttonPressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_base)
         buttonPressed.setTextColor(ContextCompat.getColor(this,R.color.color_text_pressed))
@@ -69,19 +69,20 @@ class CancelOtherActivity:AppCompatActivity() {
         buttonUnpressedTwo.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_btn_unpressed)
         buttonUnpressedTwo.setTextColor(ContextCompat.getColor(this,R.color.color_base))
 
-        transactionType = type
+        transactionMode = mode
     }
 
 
     override fun onStart() {
         super.onStart()
-        if(mpsManager == null)
-            mpsManager = MPSManager.getInstance(this.applicationContext)
+        if(mpsManager == null){
+            mpsManager = MPSManager(this.applicationContext)
+        }
 
-        mpsManager!!.setMpsManagerCallback( object : DefaultCallback(){
-            override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
-                super.onCancelAnswer(mpsTransactionResult)
-                dialogHelper.handleCancelAnswer(this@CancelOtherActivity,mpsTransactionResult)
+        mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
+            override fun onCancelAnswer(mpsResult: MPSResult?) {
+                super.onCancelAnswer(mpsResult)
+                dialogHelper.handleCancelAnswer(this@CancelOtherActivity,mpsResult)
             }
         })
     }
@@ -93,3 +94,16 @@ class CancelOtherActivity:AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
+
+
+/*
+GIN000100
+PAX
+D150
+
+1.06               @
+1.08
+001.16 180619
+7D334404
+,D
+ */

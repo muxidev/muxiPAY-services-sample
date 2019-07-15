@@ -1,1 +1,2 @@
-include ':app', ':mpservices-sdk-release'
+include ':app'
+include ':mpservices-sdk-release'

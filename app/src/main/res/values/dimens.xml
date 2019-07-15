@@ -15,15 +15,20 @@
     <dimen name="adapter_width">200dp</dimen>
     <dimen name="adapter_height">180dp</dimen>
     <dimen name="adapter_margin">47dp</dimen>
-    <dimen name="inner_adapter_height">100dp</dimen>
     <dimen name="line_spacing_tv">4sp</dimen>
     <dimen name="tv_adapter_size">18sp</dimen>
-    <dimen name="tv_adapter_margin_start">12dp</dimen>
-    <dimen name="tv_adapter_margin_top">19dp</dimen>
     <dimen name="zero">0dp</dimen>
     <dimen name="img_width">40dp</dimen>
     <dimen name="img_height">40dp</dimen>
     <dimen name="tv_last_transaction_margin">10dp</dimen>
     <dimen name="last_transaction_height">190dp</dimen>
     <dimen name="card_height">340dp</dimen>
+
+    <dimen name="chose_type_item_width">250dp</dimen>
+    <dimen name="chose_type_item_height">160dp</dimen>
+    <dimen name="chose_type_item_ll_height">72dp</dimen>
+    <dimen name="tv_adapter_margin_start">16dp</dimen>
+    <dimen name="tv_adapter_margin_end">16dp</dimen>
+    <dimen name="chose_type_adapter_margin_top">8dp</dimen>
+    <dimen name="chose_type__adapter_margin_bottom">8dp</dimen>
 </resources>

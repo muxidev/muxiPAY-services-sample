@@ -3,20 +3,18 @@ package muxi.sample.ui.present_card
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_cancel.*
+import muxi.payservices.sdk.data.MPSResult
+import muxi.payservices.sdk.data.MPSTransaction
+import muxi.payservices.sdk.service.CallbackAnswer
+import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
-import muxi.sample.data.MPSTransaction
-import muxi.sample.data.MPSTransactionResult
-import muxi.sample.service.MPSManager
 import muxi.sample.ui.dialog.DialogHelper
-import muxi.sample.ui.present_card.callbacks.DefaultCallback
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
 class CancelActivity : AppCompatActivity() {
@@ -49,7 +47,7 @@ class CancelActivity : AppCompatActivity() {
 
             //TODO change to get from activity
             TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
-                "", MPSTransaction.TransactionType.CREDIT,"","",1
+                "", MPSTransaction.TransactionMode.CREDIT,"","",1
             )!!, Constants.TransactionState.cancel).execute()
         }
         btnOther.setOnClickListener {
@@ -60,17 +58,19 @@ class CancelActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if(mpsManager == null)
-            mpsManager = MPSManager.getInstance(this.applicationContext)
+            mpsManager = MPSManager(this.applicationContext)
 
-        mpsManager!!.setMpsManagerCallback( object : DefaultCallback() {
-            override fun onCancelAnswer(mpsTransactionResult: MPSTransactionResult?) {
-                super.onCancelAnswer(mpsTransactionResult)
+        mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
+            override fun onCancelAnswer(mpsResult: MPSResult?) {
+                super.onCancelAnswer(mpsResult)
                 runOnUiThread {
-                    dialogHelper.handleCancelAnswer(this@CancelActivity, mpsTransactionResult)
+                    dialogHelper.handleCancelAnswer(this@CancelActivity, mpsResult)
                 }
             }
         })
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == android.R.id.home) {

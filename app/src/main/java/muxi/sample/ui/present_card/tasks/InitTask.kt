@@ -1,7 +1,7 @@
 package muxi.sample.ui.present_card.tasks
 
 import android.os.AsyncTask
-import muxi.sample.service.MPSManager
+import muxi.payservices.sdk.service.MPSManager
 
 class InitTask(val mpsManager: MPSManager,
                val showMessage: Boolean,
