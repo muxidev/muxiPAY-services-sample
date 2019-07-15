@@ -16,8 +16,7 @@ class ReceiptActivity: AppCompatActivity() {
         val receiptText: String = intent.getStringExtra(RECEIPT_PARAM)
 
 
-        supportActionBar!!.title = getString(R.string.receipt_toolbar_title)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.receipt_toolbar_title)
 
         tv_receipt.text = receiptText
 

@@ -22,12 +22,12 @@
 
 
     <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/chose_type_background">
+                android:layout_height="match_parent">
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
 
             <androidx.cardview.widget.CardView
                     android:id="@+id/tv_item_payment_type_card"
@@ -36,13 +36,24 @@
                     card_view:cardBackgroundColor="#E6E6E6"
                     app:cardCornerRadius="8dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="36dp">
+                    >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="@dimen/chose_type_item_width"
                         android:layout_height="@dimen/chose_type_item_height"
                         android:background="@android:color/white">
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_present_card"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/tv_type_card"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="1.0"/>
                     <TextView
 
                             android:layout_width="wrap_content"
@@ -63,7 +74,7 @@
                             android:paddingStart="@dimen/tv_adapter_margin_start"
                             android:paddingEnd="@dimen/tv_adapter_margin_end"
 
-                    />
+                            android:id="@+id/textView"/>
 
                     <TextView
                             android:id="@+id/tv_type_card"
@@ -95,7 +106,7 @@
                     android:id="@+id/tv_item_payment_type_no_card"
                     android:layout_width="@dimen/chose_type_item_width"
                     android:layout_height="@dimen/chose_type_item_height"
-                    card_view:cardBackgroundColor="#E6E6E6"
+                    card_view:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="8dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="36dp">
@@ -104,8 +115,24 @@
                         android:layout_width="@dimen/chose_type_item_width"
                         android:layout_height="@dimen/chose_type_item_height"
                         android:background="@android:color/white">
-                    <TextView
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_no_preset_card"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintVertical_bias="0.228"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/tv_type_no_card"
+                    />
+
+                    <TextView
+                            android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="@dimen/line_spacing_tv"
@@ -115,12 +142,12 @@
                             android:text="Non Present Card"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"
                             app:layout_constraintBottom_toTopOf="@+id/tv_type_no_card"
+                            app:layout_constraintVertical_bias="1.0"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            android:layout_marginBottom="8dp"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintVertical_bias="1.0"
-                            app:layout_constraintHorizontal_bias="0.0"
                             android:paddingStart="@dimen/tv_adapter_margin_start"
                             android:paddingEnd="@dimen/tv_adapter_margin_end"
 

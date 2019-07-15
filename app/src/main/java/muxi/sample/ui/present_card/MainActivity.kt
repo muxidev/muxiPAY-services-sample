@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        supportActionBar!!.title = getString(R.string.present_card_toolbar_title)
-//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.present_card_toolbar_title)
 
         btnInit.setOnClickListener {

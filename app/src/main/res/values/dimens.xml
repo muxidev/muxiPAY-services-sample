@@ -27,8 +27,8 @@
     <dimen name="chose_type_item_width">250dp</dimen>
     <dimen name="chose_type_item_height">160dp</dimen>
     <dimen name="chose_type_item_ll_height">72dp</dimen>
-    <dimen name="tv_adapter_margin_start">16dp</dimen>
-    <dimen name="tv_adapter_margin_end">16dp</dimen>
+    <dimen name="tv_adapter_margin_start">8dp</dimen>
+    <dimen name="tv_adapter_margin_end">8dp</dimen>
     <dimen name="chose_type_adapter_margin_top">8dp</dimen>
     <dimen name="chose_type__adapter_margin_bottom">8dp</dimen>
 </resources>

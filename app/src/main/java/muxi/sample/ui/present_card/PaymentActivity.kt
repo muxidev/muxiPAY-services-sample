@@ -51,8 +51,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
-        supportActionBar!!.title = getString(R.string.payment_toolbar_title)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.payment_toolbar_title)
 
         spinner!!.onItemSelectedListener = this
 

@@ -30,9 +30,7 @@ class CancelOtherActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel_other)
 
-
-        supportActionBar!!.title = getString(R.string.cancel_toolbar_title)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.cancel_toolbar_title)
 
         btn_creditOther!!.setOnClickListener{
             buttonEffect(btn_creditOther, MPSTransaction.TransactionMode.CREDIT,btn_debitOther,btn_voucherOther)

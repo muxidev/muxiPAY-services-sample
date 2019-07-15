@@ -14,10 +14,6 @@ class ChooseTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choosetype)
         setSupportActionBar(my_toolbar)
-//        val recyclerView = id_rv
-//        recyclerView.adapter = ItemAdapter(this, this)
-//        val layoutManager = StaggeredGridLayoutManager(TYPES_SIZE,StaggeredGridLayoutManager.HORIZONTAL)
-//        recyclerView.layoutManager = layoutManager
 
         tv_item_payment_type_card.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))

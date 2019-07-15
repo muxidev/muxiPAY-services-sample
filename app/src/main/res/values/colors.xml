@@ -13,6 +13,6 @@
     <color name="sample_splash_init">#005B89</color>
     <color name="sample_splash_end">#002E45</color>
 
-    <color name="chose_type_background">#eeeeee</color>
+    <color name="background_default_color">#eeeeee</color>
 
 </resources>

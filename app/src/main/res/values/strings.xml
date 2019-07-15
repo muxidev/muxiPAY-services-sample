@@ -9,7 +9,7 @@
     <string name="present_card">Present card</string>
     <string name="ecommerce">Ecommerce</string>
     <string name="history">History</string>
-    <string name="initSuccess">Initialize succesfully</string>
+    <string name="initSuccess">Initialized successfully</string>
     <string name="initError">Error while initializing</string>
     <string name="transactionSuccess">Payment Succeded</string>
     <string name="transactionError">Payment Failed</string>

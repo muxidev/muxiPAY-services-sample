@@ -35,8 +35,7 @@ class CancelActivity : AppCompatActivity() {
             dialogHelper.textColor = resources.getColor(R.color.color_base)
         }
 
-        supportActionBar!!.title = getString(R.string.cancel_toolbar_title)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.cancel_toolbar_title)
 
         dateLast.text = transactionHelper.dateLast
         typeLast.text = transactionHelper.typeLast
