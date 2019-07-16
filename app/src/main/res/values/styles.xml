@@ -32,8 +32,4 @@
         <item name="android:radius">8dp</item>
     </style>
 
-    <style name="AppTheme_no_action_bar.Launcher">
-        <item name="android:windowBackground">@drawable/launcher_screen</item>
-    </style>
-
 </resources>

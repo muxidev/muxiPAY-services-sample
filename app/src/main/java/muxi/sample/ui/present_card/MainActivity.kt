@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.payservices.sdk.data.MPSResult
@@ -12,7 +11,6 @@ import muxi.payservices.sdk.service.CallbackAnswer
 import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.R
 import muxi.sample.ui.dialog.DialogHelper
-//import muxi.sample.ui.present_card.callbacks.DefaultCallback
 import muxi.sample.ui.present_card.tasks.DeconfigureTask
 import muxi.sample.ui.present_card.tasks.InitTask
 import org.jetbrains.anko.toast
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.present_card_toolbar_title)
 
         btnInit.setOnClickListener {
-            dialogHelper.showLoadingDialog(this, View.GONE)
+            dialogHelper.showLoadingDialog(this)
             InitTask(mpsManager!!,showMessage,cnpj).execute()
         }
         btnTransact.setOnClickListener {
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, CancelActivity::class.java))
         }
         btnDeconfigure.setOnClickListener {
-            dialogHelper.showLoadingDialog(this, View.GONE)
+            dialogHelper.showLoadingDialog(this)
             DeconfigureTask(mpsManager!!,ignorePendingTransaction).execute()
         }
         btnHistory.setOnClickListener {

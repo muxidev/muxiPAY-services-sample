@@ -67,7 +67,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
         btn_pay!!.setOnClickListener {
             mpsManager?.currentBluetoothDevice = bluetothDevice
-            dialogHelper.showLoadingDialog(this, View.VISIBLE)
+            dialogHelper.showLoadingDialog(this)
             val date = FormatUtils.getCurrentDate()
             val time = FormatUtils.getCurrentTime(false)
             val dateTime = "$date $time"

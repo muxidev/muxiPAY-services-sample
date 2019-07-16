@@ -34,7 +34,7 @@ class DialogHelper {
         }
     }
 
-    fun showLoadingDialog(context: Context, isWaitingPinpadIsVisible: Int ) {
+    fun showLoadingDialog(context: Context) {
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_loading,
             null,false)
 
@@ -73,20 +73,18 @@ class DialogHelper {
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)
             .setView(view)
-            .setPositiveButton(context.getString(R.string.ok),object: DialogInterface.OnClickListener {
-                override fun onClick(p0: DialogInterface?, p1: Int) {
-                    alertDialog!!.cancel()
-                    val intent = Intent(context, MainActivity::class.java)
-                    startActivity(context, intent, null)
-                }})
-            .setNegativeButton(context.getString(R.string.receipt),object: DialogInterface.OnClickListener {
-                override fun onClick(p0: DialogInterface?, p1: Int) {
-                    alertDialog!!.cancel()
-                    val intent = Intent(context, ReceiptActivity::class.java).apply {
-                        putExtra(RECEIPT_PARAM, receipt)
-                    }
-                    startActivity(context, intent, null)
-                }})
+            .setPositiveButton(context.getString(R.string.ok)) { _, _ ->
+                alertDialog!!.cancel()
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(context, intent, null)
+            }
+            .setNegativeButton(context.getString(R.string.receipt)) { _, _ ->
+                alertDialog!!.cancel()
+                val intent = Intent(context, ReceiptActivity::class.java).apply {
+                    putExtra(RECEIPT_PARAM, receipt)
+                }
+                startActivity(context, intent, null)
+            }
             .create()
 
         alertDialog!!.show()

@@ -6,7 +6,7 @@
     <string name="deconfigure">Deconfigure</string>
     <string name="built_screen">This screen is being built. Stay tuned</string>
     <string name="something_wrong">Something went wrong</string>
-    <string name="present_card">Present card</string>
+    <string name="present_card">Present Card</string>
     <string name="ecommerce">Ecommerce</string>
     <string name="history">History</string>
     <string name="initSuccess">Initialized successfully</string>
@@ -38,4 +38,10 @@
     <string name="amount">Amount</string>
     <string name="type">Type</string>
     <string name="last_transaction">LAST TRANSACTION</string>
+    <string name="for_payment_with_credit_card_using_a_mobile_device_pinpad">For payment with Credit Card, using a
+        mobile device Pinpad.
+    </string>
+    <string name="non_present_card">Non Present Card</string>
+    <string name="payments_for_ecommerce_or_any_online_transaction">Payments for ecommerce or any online transaction.
+    </string>
 </resources>

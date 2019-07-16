@@ -32,6 +32,7 @@ class CancelActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             dialogHelper.textColor = resources.getColor(R.color.color_base,theme)
         }else {
+            @Suppress("DEPRECATION")
             dialogHelper.textColor = resources.getColor(R.color.color_base)
         }
 
@@ -42,7 +43,7 @@ class CancelActivity : AppCompatActivity() {
         amountLast.text = transactionHelper.amountLast
 
         btn_cancelLast.setOnClickListener {
-            dialogHelper.showLoadingDialog(this, View.VISIBLE)
+            dialogHelper.showLoadingDialog(this)
 
             //TODO change to get from activity
             TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(

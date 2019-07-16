@@ -31,4 +31,12 @@
     <dimen name="tv_adapter_margin_end">8dp</dimen>
     <dimen name="chose_type_adapter_margin_top">8dp</dimen>
     <dimen name="chose_type__adapter_margin_bottom">8dp</dimen>
+
+    <dimen name="dial_answer_padding">24dp</dimen>
+    <dimen name="img_choose_payemnt_type_padding">16dp</dimen>
+    <dimen name="choose_payment_radius">8dp</dimen>
+    <dimen name="img_padding_top_bottom">8dp</dimen>
+    <dimen name="img_padding_end">16dp</dimen>
+    <dimen name="tv_margin_bottom">8dp</dimen>
+    <dimen name="choose_type_second_card_view_margin_top">36dp</dimen>
 </resources>

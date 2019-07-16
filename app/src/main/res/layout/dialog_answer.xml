@@ -4,14 +4,13 @@
               android:layout_gravity="center"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:padding="24dp">
+              android:padding="@dimen/dial_answer_padding">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_init"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/colorPrimary"
-        tools:text="Alert content"/>
+        android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>
