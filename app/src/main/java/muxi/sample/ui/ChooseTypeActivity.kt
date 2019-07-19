@@ -15,7 +15,7 @@ class ChooseTypeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_choosetype)
         setSupportActionBar(my_toolbar)
 
-        tv_item_payment_type_card.setOnClickListener{
+        cv_item_payment_type_card.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
         }
 

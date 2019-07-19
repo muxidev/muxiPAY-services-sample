@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_cancel.*
 import muxi.payservices.sdk.data.MPSResult
 import muxi.payservices.sdk.data.MPSTransaction
@@ -29,12 +30,7 @@ class CancelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dialogHelper.textColor = resources.getColor(R.color.color_base,theme)
-        }else {
-            @Suppress("DEPRECATION")
-            dialogHelper.textColor = resources.getColor(R.color.color_base)
-        }
+        dialogHelper.textColor = ContextCompat.getColor(this,R.color.color_base)
 
         title = getString(R.string.cancel_toolbar_title)
 

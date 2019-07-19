@@ -1,6 +1,5 @@
 package muxi.sample.ui.present_card
 
-//import muxi.payservices.sdk.data.MPSTransaction.TransactionMode.*
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -148,8 +147,6 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
             mpsManager = MPSManager(this.applicationContext)
 
         mpsManager!!.bindService(applicationContext)
-
-//        val callbackManager = CallbackManager.getInstance(applicationContext, dialogHelper)
 
         mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
             override fun onTransactionAnswer(mpsResult: MPSResult?) {

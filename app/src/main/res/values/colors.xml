@@ -14,5 +14,7 @@
     <color name="sample_splash_end">#002E45</color>
 
     <color name="background_default_color">#eeeeee</color>
+    <color name="card_view_backgroun">#eeeeee</color>
+
 
 </resources>

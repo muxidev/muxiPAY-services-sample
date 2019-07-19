@@ -88,18 +88,6 @@ class DialogHelper {
             .create()
 
         alertDialog!!.show()
-//            .setPositiveButton(context.getString(R.string.ok)) { alertDialog, _ ->
-//                alertDialog.cancel()
-//                val intent = Intent(context, MainActivity::class.java)
-//                startActivity(context, intent, null)
-//            }
-//            .setNegativeButton(context.getString(R.string.receipt)) { alertDialog, _ ->
-//                alertDialog.cancel()
-//                val intent = Intent(context, ReceiptActivity::class.java).apply {
-//                    putExtra(RECEIPT_PARAM, receipt)
-//                }
-//                startActivity(context, intent, null)
-//            }
 
         if(!showReceipt)
             alertDialog!!.getButton(AlertDialog.BUTTON_NEGATIVE).visibility = View.GONE

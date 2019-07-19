@@ -28,13 +28,12 @@
                 android:layout_gravity="center_vertical">
 
             <androidx.cardview.widget.CardView
-                    android:id="@+id/tv_item_payment_type_card"
+                    android:id="@+id/cv_item_payment_type_card"
                     android:layout_width="@dimen/chose_type_item_width"
                     android:layout_height="@dimen/chose_type_item_height"
-                    card_view:cardBackgroundColor="#E6E6E6"
+                    card_view:cardBackgroundColor="@color/card_view_backgroun"
                     app:cardCornerRadius="@dimen/choose_payment_radius"
-                    android:layout_gravity="center_horizontal"
-                    >
+                    android:layout_gravity="center_horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="@dimen/chose_type_item_width"
@@ -71,7 +70,6 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             android:paddingStart="@dimen/tv_adapter_margin_start"
                             android:paddingEnd="@dimen/tv_adapter_margin_end"
-
                             android:id="@+id/textView"/>
 
                     <TextView
@@ -91,7 +89,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintVertical_bias="1.0"
-
                             android:paddingStart="@dimen/tv_adapter_margin_start"
                             android:paddingEnd="@dimen/tv_adapter_margin_end"
                             android:paddingTop="@dimen/chose_type_adapter_margin_top"
@@ -129,7 +126,6 @@
                     />
 
                     <TextView
-                            android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="@dimen/line_spacing_tv"
@@ -167,7 +163,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintVertical_bias="1.0"
-
                             android:paddingStart="@dimen/tv_adapter_margin_start"
                             android:paddingEnd="@dimen/tv_adapter_margin_end"
                             android:paddingTop="@dimen/chose_type_adapter_margin_top"
