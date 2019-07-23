@@ -2,13 +2,14 @@ package muxi.sample.ui.present_card
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import muxi.payservices.sdk.data.MPSResult
+import muxi.payservices.sdk.service.CallbackAnswer
+import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.R
-import muxi.sample.service.MPSManager
-import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.DeconfigureTask
 import muxi.sample.ui.present_card.tasks.InitTask
@@ -40,11 +41,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportActionBar!!.title = getString(R.string.present_card_toolbar_title)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.present_card_toolbar_title)
 
         btnInit.setOnClickListener {
-            dialogHelper.showLoadingDialog(this, View.GONE)
+            dialogHelper.showLoadingDialog(this)
             InitTask(mpsManager!!,showMessage,cnpj).execute()
         }
         btnTransact.setOnClickListener {
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, CancelActivity::class.java))
         }
         btnDeconfigure.setOnClickListener {
-            dialogHelper.showLoadingDialog(this, View.GONE)
+            dialogHelper.showLoadingDialog(this)
             DeconfigureTask(mpsManager!!,ignorePendingTransaction).execute()
         }
         btnHistory.setOnClickListener {
@@ -73,11 +73,58 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if(mpsManager == null)
-            mpsManager = MPSManager.getInstance(this)
+        if(mpsManager == null){
+            mpsManager = MPSManager(this)
+        }
 
         mpsManager!!.bindService(this)
-        mpsManager!!.setMpsManagerCallback(CallbackManager.getInstance(this, dialogHelper).mpsManagerCallback)
+
+        mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
+            override fun onDeconfigureAnswer(mpsResult: MPSResult?) {
+                super.onDeconfigureAnswer(mpsResult)
+
+                runOnUiThread {
+                    dialogHelper.hideLoadingDialog()
+                    var title = ""
+                    var body = ""
+                    when(mpsResult!!.status){
+                        MPSResult.Status.SUCCESS->{
+                            title = getString(R.string.deconfigureSuccess)
+                        }
+                        MPSResult.Status.ERROR->{
+                            title = getString(R.string.deconfigureError)
+                            body = mpsResult.descriptionError
+                        }
+                    }
+
+                    dialogHelper.showInitDialog(this@MainActivity,title,body)
+                    Log.d(TAG,mpsResult.status.name)
+                }
+
+            }
+
+            override fun onInitAnswer(mpsResult: MPSResult?) {
+                super.onInitAnswer(mpsResult)
+
+                runOnUiThread {
+                    dialogHelper.hideLoadingDialog()
+                    var title = ""
+                    var body = ""
+                    when(mpsResult!!.status){
+                        MPSResult.Status.SUCCESS -> {
+                            title = getString(R.string.initSuccess)
+                        }
+                        MPSResult.Status.ERROR->{
+                            title = getString(R.string.initError)
+                            body = mpsResult.descriptionError
+                        }
+                    }
+                    dialogHelper.showInitDialog(this@MainActivity,title,body)
+                    Log.d(TAG,mpsResult.status.name)
+                }
+
+            }
+        })
     }
 
     override fun onDestroy() {

@@ -6,13 +6,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_cancel.*
+import muxi.payservices.sdk.data.MPSResult
+import muxi.payservices.sdk.data.MPSTransaction
+import muxi.payservices.sdk.service.CallbackAnswer
+import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
-import muxi.sample.data.MPSTransaction
-import muxi.sample.service.MPSManager
-import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
@@ -28,25 +30,20 @@ class CancelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dialogHelper.textColor = resources.getColor(R.color.color_base,theme)
-        }else {
-            dialogHelper.textColor = resources.getColor(R.color.color_base)
-        }
+        dialogHelper.textColor = ContextCompat.getColor(this,R.color.color_base)
 
-        supportActionBar!!.title = getString(R.string.cancel_toolbar_title)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.cancel_toolbar_title)
 
         dateLast.text = transactionHelper.dateLast
         typeLast.text = transactionHelper.typeLast
         amountLast.text = transactionHelper.amountLast
 
         btn_cancelLast.setOnClickListener {
-            dialogHelper.showLoadingDialog(this, View.VISIBLE)
+            dialogHelper.showLoadingDialog(this)
 
             //TODO change to get from activity
             TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
-                "", MPSTransaction.TransactionType.CREDIT,"","",1
+                "", MPSTransaction.TransactionMode.CREDIT,"","",1
             )!!, Constants.TransactionState.cancel).execute()
         }
         btnOther.setOnClickListener {
@@ -57,11 +54,18 @@ class CancelActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if(mpsManager == null)
-            mpsManager = MPSManager.getInstance(this.applicationContext)
+            mpsManager = MPSManager(this.applicationContext)
 
-        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
-        mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
+        mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
+            override fun onCancelAnswer(mpsResult: MPSResult?) {
+                super.onCancelAnswer(mpsResult)
+                runOnUiThread {
+                    dialogHelper.handleCancelAnswer(this@CancelActivity, mpsResult)
+                }
+            }
+        })
     }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

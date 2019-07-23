@@ -5,7 +5,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.present_card.MainActivity">
+        tools:context=".ui.present_card.MainActivity"
+        >
 
     <Button android:id="@+id/btnInit"
             android:text="@string/initialize"

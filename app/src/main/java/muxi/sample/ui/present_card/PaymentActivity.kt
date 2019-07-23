@@ -12,15 +12,16 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_payment.*
+import muxi.payservices.sdk.data.MPSResult
+import muxi.payservices.sdk.data.MPSTransaction
+import muxi.payservices.sdk.service.CallbackAnswer
+import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.Constants
+import muxi.sample.FormatUtils
 import muxi.sample.R
 import muxi.sample.TransactionHelper
-import muxi.sample.data.MPSTransaction
-import muxi.sample.service.MPSManager
-import muxi.sample.ui.CallbackManager
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
-import muxi.sample.utils.FormatUtils
 import java.lang.Double.parseDouble
 import java.text.NumberFormat
 
@@ -31,15 +32,15 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     /**
      * TODO: change this variable to use MAC address from your pinpad
      */
-    private val bluetothDevice = "28:ED:E0:5A:EA:D9"
+    private val bluetothDevice = "00:07:80:62:3D:37"
 
     private var mpsManager: MPSManager? = null
     val dialogHelper = DialogHelper.getInstance()
     val transactionHelper = TransactionHelper.getInstance()
 
-    var transactionType: MPSTransaction.TransactionType = MPSTransaction.TransactionType.CREDIT
+    var transactionType: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
 
-    val type = MPSTransaction.TransactionType.CREDIT
+    val type = MPSTransaction.TransactionMode.CREDIT
     var installments = 0
     var list_of_items = arrayOf("installments","1","2","3","4","5","6",
         "7","8","9","10","11","12")
@@ -49,8 +50,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
-        supportActionBar!!.title = getString(R.string.payment_toolbar_title)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.payment_toolbar_title)
 
         spinner!!.onItemSelectedListener = this
 
@@ -66,7 +66,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
         btn_pay!!.setOnClickListener {
             mpsManager?.currentBluetoothDevice = bluetothDevice
-            dialogHelper.showLoadingDialog(this, View.VISIBLE)
+            dialogHelper.showLoadingDialog(this)
             val date = FormatUtils.getCurrentDate()
             val time = FormatUtils.getCurrentTime(false)
             val dateTime = "$date $time"
@@ -79,15 +79,15 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         }
 
         btn_credit!!.setOnClickListener{
-            buttonEffect(btn_credit, MPSTransaction.TransactionType.CREDIT,btn_debit,btn_voucher)
+            buttonEffect(btn_credit, MPSTransaction.TransactionMode.CREDIT,btn_debit,btn_voucher)
         }
 
         btn_debit!!.setOnClickListener{
-            buttonEffect(btn_debit, MPSTransaction.TransactionType.DEBIT,btn_credit,btn_voucher)
+            buttonEffect(btn_debit, MPSTransaction.TransactionMode.DEBIT,btn_credit,btn_voucher)
         }
 
         btn_voucher!!.setOnClickListener {
-            buttonEffect(btn_voucher, MPSTransaction.TransactionType.VOUCHER,btn_credit,btn_debit)
+            buttonEffect(btn_voucher, MPSTransaction.TransactionMode.VOUCHER,btn_credit,btn_debit)
         }
 
         et_value.addTextChangedListener(object: TextWatcher {
@@ -144,16 +144,43 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         super.onStart()
 
         if(mpsManager == null)
-            mpsManager = MPSManager.getInstance(this.applicationContext)
+            mpsManager = MPSManager(this.applicationContext)
 
         mpsManager!!.bindService(applicationContext)
 
-        val callbackManager = CallbackManager.getInstance(this, dialogHelper)
-        mpsManager!!.setMpsManagerCallback(callbackManager.mpsManagerCallback)
+        mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
+            override fun onTransactionAnswer(mpsResult: MPSResult?) {
+                super.onTransactionAnswer(mpsResult)
 
+                runOnUiThread {
+                    dialogHelper.hideLoadingDialog()
+                    var title = ""
+                    var receipt = ""
+                    var body = ""
+                    var showReceipt = false
+
+                    if (mpsResult!!.status == MPSResult.Status.SUCCESS) {
+                        title = resources.getString(R.string.transactionSuccess)
+                        receipt = mpsResult.clientReceipt
+                        showReceipt = true
+
+                    }
+                    else if (mpsResult.status == MPSResult.Status.SUCCESS) {
+                        title = resources.getString(R.string.transactionError)
+                        body = mpsResult.descriptionError
+                    }
+                    dialogHelper.showTransactionDialog(
+                        this@PaymentActivity,
+                        title,
+                        body,receipt, showReceipt
+                    )
+                }
+
+            }
+        })
     }
 
-    private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionType, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
+    private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionMode, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
 
         buttonPressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_base)
         buttonPressed.setTextColor(ContextCompat.getColor(this,R.color.color_text_pressed))

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">@color/sample_splash_init</color>
+    <color name="colorPrimaryDark">@color/sample_splash_end</color>
     <color name="colorAccent">#D81B60</color>
     <color name="adpter_line_1_divider">#585858</color>
     <color name="color_base">#2699fb</color>
@@ -10,4 +10,11 @@
     <color name="color_pb">#707070</color>
     <color name="adapter_color_bg">#afafaf</color>
     <color name="inner_adapter_color">#424242</color>
+    <color name="sample_splash_init">#005B89</color>
+    <color name="sample_splash_end">#002E45</color>
+
+    <color name="background_default_color">#eeeeee</color>
+    <color name="card_view_backgroun">#eeeeee</color>
+
+
 </resources>

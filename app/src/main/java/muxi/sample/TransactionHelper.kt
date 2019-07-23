@@ -1,6 +1,7 @@
 package muxi.sample
 
-import muxi.sample.data.MPSTransaction
+import muxi.payservices.sdk.data.MPSTransaction
+
 
 class TransactionHelper {
     var dateLast: String = ""
@@ -18,14 +19,14 @@ class TransactionHelper {
     }
 
 
-    fun mountTransaction(value: String, type: MPSTransaction.TransactionType,
+    fun mountTransaction(value: String, mode: MPSTransaction.TransactionMode,
                          cv: String, authCode: String, installments: Int): MPSTransaction? {
         val transaction = MPSTransaction()
         transaction.amount = value
         transaction.currency = MPSTransaction.CurrencyType.BRL
         transaction.cv = cv
         transaction.auth = authCode
-        transaction.type = type
+        transaction.transactionMode = mode
         transaction.installments = installments
 
         return transaction
