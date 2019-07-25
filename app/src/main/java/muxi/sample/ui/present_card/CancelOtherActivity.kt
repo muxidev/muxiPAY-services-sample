@@ -45,7 +45,7 @@ class CancelOtherActivity:AppCompatActivity() {
         }
 
         btnCancelOther!!.setOnClickListener {
-            dialogHelper.showLoadingDialog(this)
+            dialogHelper.showLoadingDialog(this, true)
             //TODO change to get from activity
             TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
                 "", transactionMode,et_doc.text.toString(),
