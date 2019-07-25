@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.present_card_toolbar_title)
 
         btnInit.setOnClickListener {
-            dialogHelper.showLoadingDialog(this)
+            dialogHelper.showLoadingDialog(this, false)
             InitTask(mpsManager!!,showMessage,cnpj).execute()
         }
         btnTransact.setOnClickListener {
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, CancelActivity::class.java))
         }
         btnDeconfigure.setOnClickListener {
-            dialogHelper.showLoadingDialog(this)
+            dialogHelper.showLoadingDialog(this, false)
             DeconfigureTask(mpsManager!!,ignorePendingTransaction).execute()
         }
         btnHistory.setOnClickListener {
