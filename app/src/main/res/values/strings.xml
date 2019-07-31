@@ -21,7 +21,6 @@
     <string name="ok">OK</string>
     <string name="receipt">RECEIPT</string>
     <string name="default_value">R$0,00</string>
-    <string name="payment_type">PAYMENT TYPE</string>
     <string name="credit">CREDIT</string>
     <string name="debit">DEBIT</string>
     <string name="voucher">VOUCHER</string>
@@ -44,4 +43,7 @@
     <string name="non_present_card">Non Present Card</string>
     <string name="payments_for_ecommerce_or_any_online_transaction">Payments for ecommerce or any online transaction.
     </string>
+    <string name="value">Value</string>
+    <string name="payment_type">PAYMENT TYPE</string>
+    <string name="payment_info">PAYMENT INFO</string>
 </resources>
