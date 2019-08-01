@@ -32,12 +32,10 @@ dependencies {
             remoter.annotations,
             lottie.values(),
             anko.values(),
-            kotlin.values()
+            kotlin.values(),
+            materialDesign.values()
     )
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     implementation project (':mpservices-sdk-release')
 
