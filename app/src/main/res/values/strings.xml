@@ -17,11 +17,10 @@
     <string name="deconfigureError">Error while deconfiguring</string>
     <string name="cancelSuccess">PAYMENT CANCELED</string>
     <string name="cancelError">Error while canceling</string>
-    <string name="waiting_pinpad">Waiting pinpad</string>
+    <string name="waiting_pinpad">WAITING PINPAD</string>
     <string name="ok">OK</string>
     <string name="receipt">RECEIPT</string>
     <string name="default_value">R$0,00</string>
-    <string name="payment_type">PAYMENT TYPE</string>
     <string name="credit">CREDIT</string>
     <string name="debit">DEBIT</string>
     <string name="voucher">VOUCHER</string>
@@ -44,4 +43,7 @@
     <string name="non_present_card">Non Present Card</string>
     <string name="payments_for_ecommerce_or_any_online_transaction">Payments for ecommerce or any online transaction.
     </string>
+    <string name="value">Value</string>
+    <string name="payment_type">PAYMENT TYPE</string>
+    <string name="payment_info">PAYMENT INFO</string>
 </resources>

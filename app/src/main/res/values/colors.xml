@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">@color/sample_splash_init</color>
     <color name="colorPrimaryDark">@color/sample_splash_end</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#005B89</color>
     <color name="adpter_line_1_divider">#585858</color>
-    <color name="color_base">#2699fb</color>
+    <color name="color_base">#005B89</color>
     <color name="color_text_pressed">#FFF</color>
     <color name="color_btn_unpressed">#f1f9ff</color>
     <color name="color_pb">#707070</color>
@@ -15,6 +15,7 @@
 
     <color name="background_default_color">#eeeeee</color>
     <color name="card_view_backgroun">#eeeeee</color>
+    <color name="waiting_pinpad_color">#eeeeee</color>
 
 
 </resources>
