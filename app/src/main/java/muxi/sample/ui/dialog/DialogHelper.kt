@@ -1,17 +1,16 @@
 package muxi.sample.ui.dialog
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
-import kotlinx.android.synthetic.main.dialog_answer.view.*
+import com.airbnb.lottie.LottieAnimationView
+import kotlinx.android.synthetic.main.dialog_init_answer.view.*
+import kotlinx.android.synthetic.main.dialog_transaction_answer.view.*
 import muxi.payservices.sdk.data.MPSResult
 import muxi.sample.Constants.RECEIPT_PARAM
 import muxi.sample.R
@@ -70,9 +69,16 @@ class DialogHelper {
 
     fun showTransactionDialog(context: Context, title:String, body:String, receipt:String, showReceipt: Boolean){
 
-        val view = LayoutInflater.from(context).inflate(R.layout.dialog_answer,null,false)
-        view.tv_init.setTextColor(textColor)
-        view.tv_init.text = body
+        var pathToImage = "img_approved.json"
+
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_transaction_answer,null,false)
+        view.tv_transaction.setTextColor(textColor)
+        view.tv_transaction.text = body
+        val lottieAnimationView: LottieAnimationView = view.findViewById(R.id.animation)
+        if(!showReceipt)
+            pathToImage = "img_denied.json"
+        lottieAnimationView.setAnimation(pathToImage)
+        lottieAnimationView.playAnimation()
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)
             .setView(view)
