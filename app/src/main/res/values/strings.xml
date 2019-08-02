@@ -46,4 +46,7 @@
     <string name="value">Value</string>
     <string name="payment_type">PAYMENT TYPE</string>
     <string name="payment_info">PAYMENT INFO</string>
+    <string name="customer">CUSTOMER</string>
+    <string name="store">STORE</string>
+    <string name="share">SHARE</string>
 </resources>

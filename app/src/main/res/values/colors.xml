@@ -16,6 +16,8 @@
     <color name="background_default_color">#eeeeee</color>
     <color name="card_view_backgroun">#eeeeee</color>
     <color name="waiting_pinpad_color">#eeeeee</color>
+    <color name="receipt_text_color">#707070</color>
+    <color name="tab_selected_color">#00b7ff</color>
 
 
 </resources>

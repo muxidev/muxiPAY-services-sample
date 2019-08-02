@@ -1,22 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textAlignment="center"
-              android:layout_gravity="center"
-    android:id="@+id/tv_receipt"/>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_default_color">
 
-    <Button android:layout_width="match_parent" android:layout_height="50dp"
-            android:id="@+id/btnDone"
-            android:text="@string/done"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/color_base"
-            android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center"/>
+    <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@color/sample_splash_init"
+            app:tabTextColor="@android:color/white"
+            app:tabIndicatorColor="@color/tab_selected_color"
+            app:tabMode="fixed">
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/customer"/>
+
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/store"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:background="@color/background_default_color">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="340dp"
+                      android:layout_marginTop="40dp"
+
+                      android:textAlignment="center"
+                      android:layout_gravity="center"
+                      android:textColor="@color/receipt_text_color"
+                      android:id="@+id/tv_receipt"/>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="end"
+                          android:layout_marginTop="65dp"
+                          android:orientation="horizontal">
+
+                <Button android:layout_width="90dp"
+                        android:layout_height="36dp"
+                        android:id="@+id/btnDone"
+                        android:text="@string/done"
+                        android:background="@drawable/border_done_btn"
+                        android:textColor="@color/sample_splash_init"
+                        android:layout_gravity="center"/>
+
+                <Button android:layout_width="90dp"
+                        android:layout_height="36dp"
+                        android:id="@+id/btnShare"
+                        android:text="@string/share"
+                        android:textColor="@android:color/white"
+                        android:textAlignment="center"
+                        android:layout_margin="24dp"
+                        android:background="@color/sample_splash_init"
+                        android:layout_gravity="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
+
