@@ -55,7 +55,7 @@ class DialogHelper {
 
     fun showInitDialog(context: Context, title:String, body:String){
 
-        val view = LayoutInflater.from(context).inflate(R.layout.dialog_answer,null,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_init_answer,null,false)
         view.tv_init.text = body
         alertDialog = AlertDialog.Builder(context)
             .setTitle(title)
