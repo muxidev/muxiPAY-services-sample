@@ -49,4 +49,7 @@
     <string name="customer">CUSTOMER</string>
     <string name="store">STORE</string>
     <string name="share">SHARE</string>
+    <string name="client_receipt">Client receipt</string>
+    <string name="email_type" translatable="false">message/rfc822</string>
+
 </resources>

@@ -20,6 +20,13 @@ class ReceiptActivity: AppCompatActivity() {
 
         tv_receipt.text = receiptText
 
+        btnShare.setOnClickListener {
+
+            val i = Intent(Intent.ACTION_SEND)
+            i.type = getResources().getString(R.string.email_type)
+            i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.client_receipt))
+            i.putExtra(Intent.EXTRA_TEXT, receiptText)
+        }
         btnDone.setOnClickListener {
             startActivity(Intent(this,MainActivity::class.java))
         }
