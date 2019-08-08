@@ -159,13 +159,16 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                 runOnUiThread {
                     dialogHelper.hideLoadingDialog()
                     var title = ""
-                    var receipt = ""
+                    var clientReceipt = ""
+                    var establishmentReceipt = ""
                     var body = ""
                     var showReceipt = false
 
                     if (mpsResult!!.status == MPSResult.Status.SUCCESS) {
                         title = resources.getString(R.string.transactionSuccess)
-                        receipt = mpsResult.clientReceipt
+                        clientReceipt = mpsResult.clientReceipt
+                        establishmentReceipt = mpsResult.establishmentReceipt
+                        body = mountBodyMessage()
                         showReceipt = true
 
                     }
@@ -176,12 +179,19 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                     dialogHelper.showTransactionDialog(
                         this@PaymentActivity,
                         title,
-                        body,receipt, showReceipt
+                        body,establishmentReceipt,clientReceipt, showReceipt
                     )
                 }
 
             }
         })
+    }
+
+    private fun mountBodyMessage(): String {
+
+        return "R$ " + currentValue.substring(0,2)+","+currentValue.substring(2,4) + "\n" + transactionType +
+                " - " + installments + " installments"
+
     }
 
     private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionMode, buttonUnpressed: Button, buttonUnpressedTwo: Button) {

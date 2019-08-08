@@ -7,7 +7,8 @@ object Constants {
 
     const val TYPES_SIZE = 2
 
-    const val RECEIPT_PARAM = "RECEIPT_PARAM"
+    const val ESTABLISHMENT_RECEIPT = "ESTABLISHMENT_RECEIPT"
+    const val CLIENT_RECEIPT = "CLIENT_RECEIPT"
 
     enum class TransactionState {
         payment,

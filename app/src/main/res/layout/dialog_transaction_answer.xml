@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_gravity="center"
+
+<LinearLayout android:id="@+id/receiptLinearLayout"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:padding="@dimen/dial_answer_padding">
+              android:background="@android:color/white"
+              android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             app:lottie_autoPlay="false"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+
 
     />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_transaction"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:id="@+id/tv_title"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_body"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center"
             android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>

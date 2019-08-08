@@ -8,7 +8,7 @@
         android:background="@color/background_default_color">
 
     <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs_main"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabBackground="@color/sample_splash_init"
@@ -17,12 +17,14 @@
             app:tabMode="fixed">
 
         <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabCustomer"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/customer"/>
 
 
         <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabStore"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/store"/>
