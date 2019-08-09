@@ -3,15 +3,14 @@ package muxi.sample.ui.present_card
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_receipt.*
 import muxi.sample.Constants.CLIENT_RECEIPT
 import muxi.sample.Constants.ESTABLISHMENT_RECEIPT
 import muxi.sample.R
+import muxi.sample.ui.BaseActivity
 
-class ReceiptActivity: AppCompatActivity() {
+class ReceiptActivity: BaseActivity() {
 
 
     private val TAG = ReceiptActivity::class.java.simpleName
@@ -67,16 +66,8 @@ class ReceiptActivity: AppCompatActivity() {
         }
         btnDone.setOnClickListener {
             startActivity(Intent(this,MainActivity::class.java))
-        }
-    }
-
-
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == android.R.id.home) {
             finish()
         }
-        return super.onOptionsItemSelected(item)
     }
 
 }

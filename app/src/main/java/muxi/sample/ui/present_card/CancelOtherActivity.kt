@@ -1,10 +1,7 @@
 package muxi.sample.ui.present_card
 
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_cancel_other.*
 import muxi.payservices.sdk.data.MPSResult
@@ -14,10 +11,11 @@ import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
+import muxi.sample.ui.BaseActivity
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
-class CancelOtherActivity:AppCompatActivity() {
+class CancelOtherActivity:BaseActivity() {
 
     private var mpsManager: MPSManager? = null
 
@@ -85,23 +83,4 @@ class CancelOtherActivity:AppCompatActivity() {
         })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == android.R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
-
-
-/*
-GIN000100
-PAX
-D150
-
-1.06               @
-1.08
-001.16 180619
-7D334404
-,D
- */

@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_payment.*
 import muxi.payservices.sdk.data.MPSResult
@@ -26,9 +24,10 @@ import java.lang.Double.parseDouble
 import java.text.NumberFormat
 import android.app.Activity
 import android.view.inputmethod.InputMethodManager
+import muxi.sample.ui.BaseActivity
 
 
-class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     private val TAG = PaymentActivity::class.java.simpleName
 
@@ -125,13 +124,6 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
     }
 
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == android.R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
