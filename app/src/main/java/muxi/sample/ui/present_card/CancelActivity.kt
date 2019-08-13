@@ -45,7 +45,7 @@ class CancelActivity : BaseActivity() {
         }
         btnOther.setOnClickListener {
             startActivity(Intent(this,CancelOtherActivity::class.java))
-            finish()
+
         }
     }
 

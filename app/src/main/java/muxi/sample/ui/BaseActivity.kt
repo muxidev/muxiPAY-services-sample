@@ -18,7 +18,7 @@ abstract class BaseActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.home -> {
                 startActivity(Intent(this, ChooseTypeActivity::class.java))
-                finish()
+
                 true
             }
 

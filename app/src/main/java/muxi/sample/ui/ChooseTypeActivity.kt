@@ -17,12 +17,12 @@ class ChooseTypeActivity : BaseActivity() {
 
         cv_item_payment_type_card.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
-            finish()
+
         }
 
         tv_item_payment_type_no_card.setOnClickListener {
             startActivity(Intent(this, EcommerceActivity::class.java))
-            finish()
+
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
