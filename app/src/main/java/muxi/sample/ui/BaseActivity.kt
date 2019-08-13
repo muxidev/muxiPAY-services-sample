@@ -10,19 +10,19 @@ import muxi.sample.R
 abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(muxi.sample.R.menu.options, menu)
+        menuInflater.inflate(R.menu.options, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.home -> {
-            startActivity(Intent(this, ChooseTypeActivity::class.java))
+                startActivity(Intent(this, ChooseTypeActivity::class.java))
                 finish()
-                return true
+                true
             }
 
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

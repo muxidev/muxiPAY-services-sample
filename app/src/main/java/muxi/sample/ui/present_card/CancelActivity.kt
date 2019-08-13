@@ -21,7 +21,7 @@ class CancelActivity : BaseActivity() {
 
     val dialogHelper = DialogHelper.getInstance()
 
-    val transactionHelper = TransactionHelper.getInstance()
+    private val transactionHelper = TransactionHelper.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
