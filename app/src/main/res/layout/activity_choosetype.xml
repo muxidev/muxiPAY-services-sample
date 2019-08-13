@@ -43,7 +43,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_present_card"
+                            android:src="@drawable/ic_no_present_card"
                             android:layout_marginEnd="@dimen/img_padding_end"
                             android:layout_marginTop="@dimen/img_padding_top_bottom"
                             android:layout_marginStart="@dimen/img_padding_top_bottom"
@@ -114,7 +114,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_no_preset_card"
+                            android:src="@drawable/ic_present_card"
                             android:layout_marginTop="@dimen/img_padding_top_bottom"
                             android:layout_marginEnd="@dimen/img_padding_end"
                             android:layout_marginStart="@dimen/img_padding_top_bottom"
