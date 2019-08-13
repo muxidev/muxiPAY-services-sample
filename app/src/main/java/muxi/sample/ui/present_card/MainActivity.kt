@@ -49,11 +49,11 @@ class MainActivity : BaseActivity() {
         }
         btnTransact.setOnClickListener {
             startActivity(Intent(this, PaymentActivity::class.java))
-            finish()
+
         }
         btnCancel.setOnClickListener {
             startActivity(Intent(this, CancelActivity::class.java))
-            finish()
+
         }
         btnDeconfigure.setOnClickListener {
             dialogHelper.showLoadingDialog(this, false)

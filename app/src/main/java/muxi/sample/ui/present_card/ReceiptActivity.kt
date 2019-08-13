@@ -66,7 +66,7 @@ class ReceiptActivity: BaseActivity() {
         }
         btnDone.setOnClickListener {
             startActivity(Intent(this,MainActivity::class.java))
-            finish()
+
         }
     }
 
