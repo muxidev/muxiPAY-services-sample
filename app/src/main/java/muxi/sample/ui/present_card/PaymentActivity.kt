@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_payment.*
 import muxi.payservices.sdk.data.MPSResult
@@ -24,15 +22,19 @@ import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
 import java.lang.Double.parseDouble
 import java.text.NumberFormat
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
+import muxi.sample.ui.BaseActivity
 
-class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+
+class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     private val TAG = PaymentActivity::class.java.simpleName
 
     /**
      * TODO: change this variable to use MAC address from your pinpad
      */
-    private val bluetothDevice = "00:07:80:62:3D:37"
+    private val bluetothDevice = "28:ED:E0:5A:EA:D9"
 
     private var mpsManager: MPSManager? = null
     val dialogHelper = DialogHelper.getInstance()
@@ -40,9 +42,8 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
     var transactionType: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
 
-    val type = MPSTransaction.TransactionMode.CREDIT
     var installments = 0
-    var list_of_items = arrayOf("installments","1","2","3","4","5","6",
+    var list_of_items = arrayOf("Installments","1","2","3","4","5","6",
         "7","8","9","10","11","12")
     private var currentValue = ""
 
@@ -54,7 +55,6 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
 
         spinner!!.onItemSelectedListener = this
 
-        et_value.setSelection(et_value.text.length)
 
         mpsManager?.currentBluetoothDevice = bluetothDevice
 
@@ -65,6 +65,7 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         spinner!!.adapter = aa
 
         btn_pay!!.setOnClickListener {
+            removeFocus()
             mpsManager?.currentBluetoothDevice = bluetothDevice
             dialogHelper.showLoadingDialog(this, true)
             val date = FormatUtils.getCurrentDate()
@@ -102,13 +103,13 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                 if(s.toString() != currentValue){
                     et_value.removeTextChangedListener(this)
 
-                    var cleanString: String = s.toString().replace(Regex("[R$,.]"), "")
+                    val cleanString: String = s.toString().replace(Regex("[R$,.]"), "")
                     Log.d(TAG, "cleasnString:$cleanString")
 
-                    var parsed: Double = parseDouble(cleanString)
+                    val parsed: Double = parseDouble(cleanString)
                     Log.d(TAG, "parsed:$parsed")
 
-                    var formatted: String = NumberFormat.getCurrencyInstance().format((parsed/100))
+                    val formatted: String = NumberFormat.getCurrencyInstance().format((parsed/100))
                     Log.d(TAG, "formatted:$formatted")
 
                     currentValue = cleanString
@@ -123,18 +124,12 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == android.R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        removeFocus()
         if(position>0){
             installments = position
         }
@@ -155,24 +150,27 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                 runOnUiThread {
                     dialogHelper.hideLoadingDialog()
                     var title = ""
-                    var receipt = ""
+                    var clientReceipt = ""
+                    var establishmentReceipt = ""
                     var body = ""
                     var showReceipt = false
 
                     if (mpsResult!!.status == MPSResult.Status.SUCCESS) {
                         title = resources.getString(R.string.transactionSuccess)
-                        receipt = mpsResult.clientReceipt
+                        clientReceipt = mpsResult.clientReceipt
+                        establishmentReceipt = mpsResult.establishmentReceipt
+                        body = mountBodyMessage()
                         showReceipt = true
 
                     }
-                    else if (mpsResult.status == MPSResult.Status.SUCCESS) {
+                    else if (mpsResult.status == MPSResult.Status.ERROR) {
                         title = resources.getString(R.string.transactionError)
                         body = mpsResult.descriptionError
                     }
                     dialogHelper.showTransactionDialog(
                         this@PaymentActivity,
                         title,
-                        body,receipt, showReceipt
+                        body,establishmentReceipt,clientReceipt, showReceipt
                     )
                 }
 
@@ -180,19 +178,36 @@ class PaymentActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         })
     }
 
+    private fun mountBodyMessage(): String {
+
+        return "R$ " + currentValue.substring(0,2)+","+currentValue.substring(2,4) + "\n" + transactionType +
+                " - " + installments + " installments"
+
+    }
+
     private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionMode, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
 
+        removeFocus()
+
+        //TODO change to support API < 21
         buttonPressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_base)
         buttonPressed.setTextColor(ContextCompat.getColor(this,R.color.color_text_pressed))
 
-        buttonUnpressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_btn_unpressed)
+        buttonUnpressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_text_pressed)
         buttonUnpressed.setTextColor(ContextCompat.getColor(this,R.color.color_base))
 
-        buttonUnpressedTwo.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_btn_unpressed)
+        buttonUnpressedTwo.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_text_pressed)
         buttonUnpressedTwo.setTextColor(ContextCompat.getColor(this,R.color.color_base))
 
         Log.d(TAG, "Type Payment: ${type.name}")
         transactionType = type
+    }
+
+    private fun removeFocus() {
+        window.decorView.clearFocus()
+        et_value.clearFocus()
+        val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
 
 

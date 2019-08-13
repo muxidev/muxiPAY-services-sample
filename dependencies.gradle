@@ -10,7 +10,7 @@ ext {
     versions.remoter = "1.2.0"
     versions.lottie = "3.0.7"
     versions.anko = "0.8.3"
-    
+    versions.materialDesign = "1.0.0"
 
     supportLibraries = [
             appcompat : "androidx.appcompat:appcompat:$versions.app_compat",
@@ -18,23 +18,28 @@ ext {
             constraint : "androidx.constraintlayout:constraintlayout:$versions.constraint_layout",
             recyclerView:  "androidx.recyclerview:recyclerview:$versions.support",
             cardview     : "androidx.cardview:cardview:$versions.support",
+            legacy: "androidx.legacy:legacy-support-v4:$versions.legacy_support"
     ]
 
     remoter = [
-	annotations : "com.josesamuel:remoter-annotations:$versions.remoter",
-	remoter : "com.josesamuel:remoter:$versions.remoter"
+            annotations : "com.josesamuel:remoter-annotations:$versions.remoter",
+            remoter : "com.josesamuel:remoter:$versions.remoter"
     ]
 
     lottie = [
-	lottie : "com.airbnb.android:lottie:$versions.lottie"
+            lottie : "com.airbnb.android:lottie:$versions.lottie"
     ]
 
     anko = [
-	common : "org.jetbrains.anko:anko-common:$versions.anko"
+            common : "org.jetbrains.anko:anko-common:$versions.anko"
     ]
 
     kotlin = [
             stdlib_jdk7 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    ]
+
+    materialDesign = [
+            materialDesign : "com.google.android.material:material:$versions.materialDesign"
     ]
 
 }
