@@ -53,5 +53,6 @@
     <string name="email_type" translatable="false">message/rfc822</string>
     <string name="try_again">TRY AGAIN</string>
     <string name="send_email">Send email</string>
+    <string name="home">home</string>
 
 </resources>

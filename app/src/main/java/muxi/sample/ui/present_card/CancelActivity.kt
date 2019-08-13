@@ -1,11 +1,7 @@
 package muxi.sample.ui.present_card
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_cancel.*
 import muxi.payservices.sdk.data.MPSResult
@@ -15,16 +11,17 @@ import muxi.payservices.sdk.service.MPSManager
 import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.TransactionHelper
+import muxi.sample.ui.BaseActivity
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
 
-class CancelActivity : AppCompatActivity() {
+class CancelActivity : BaseActivity() {
 
     private var mpsManager: MPSManager? = null
 
     val dialogHelper = DialogHelper.getInstance()
 
-    val transactionHelper = TransactionHelper.getInstance()
+    private val transactionHelper = TransactionHelper.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +45,7 @@ class CancelActivity : AppCompatActivity() {
         }
         btnOther.setOnClickListener {
             startActivity(Intent(this,CancelOtherActivity::class.java))
+            finish()
         }
     }
 
@@ -64,15 +62,6 @@ class CancelActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == android.R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
 }

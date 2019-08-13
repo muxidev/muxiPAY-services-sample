@@ -3,8 +3,6 @@ package muxi.sample.ui.present_card
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.payservices.sdk.data.MPSResult
 import muxi.payservices.sdk.service.CallbackAnswer
@@ -14,8 +12,10 @@ import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.DeconfigureTask
 import muxi.sample.ui.present_card.tasks.InitTask
 import org.jetbrains.anko.toast
+import muxi.sample.ui.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : BaseActivity() {
 
     private var mpsManager: MPSManager? = null
 
@@ -49,9 +49,11 @@ class MainActivity : AppCompatActivity() {
         }
         btnTransact.setOnClickListener {
             startActivity(Intent(this, PaymentActivity::class.java))
+            finish()
         }
         btnCancel.setOnClickListener {
             startActivity(Intent(this, CancelActivity::class.java))
+            finish()
         }
         btnDeconfigure.setOnClickListener {
             dialogHelper.showLoadingDialog(this, false)
@@ -64,12 +66,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item!!.itemId == android.R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onStart() {
         super.onStart()

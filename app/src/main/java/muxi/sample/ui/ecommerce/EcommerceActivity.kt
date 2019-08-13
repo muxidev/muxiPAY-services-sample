@@ -1,10 +1,10 @@
 package muxi.sample.ui.ecommerce
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import muxi.sample.R
+import muxi.sample.ui.BaseActivity
 
-class EcommerceActivity : AppCompatActivity() {
+class EcommerceActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
