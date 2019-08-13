@@ -37,10 +37,10 @@ class ReceiptActivity: BaseActivity() {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d(TAG,"onTabSelected")
-                if(tab!!.position == 0){
-                    receipt = establishmentReceipt
+                receipt = if(tab!!.position == 0){
+                    establishmentReceipt
                 }else{
-                    receipt = clientReceipt
+                    clientReceipt
 
                 }
                 tv_receipt.text = receipt
@@ -54,7 +54,7 @@ class ReceiptActivity: BaseActivity() {
         btnShare.setOnClickListener {
 
             val i = Intent(Intent.ACTION_SEND)
-            i.type = getResources().getString(R.string.email_type)
+            i.type = resources.getString(R.string.email_type)
             i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.client_receipt))
             i.putExtra(Intent.EXTRA_TEXT, clientReceipt)
             try {

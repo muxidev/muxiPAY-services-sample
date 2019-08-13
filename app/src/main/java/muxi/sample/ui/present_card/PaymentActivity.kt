@@ -42,7 +42,6 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     var transactionType: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
 
-    val type = MPSTransaction.TransactionMode.CREDIT
     var installments = 0
     var list_of_items = arrayOf("Installments","1","2","3","4","5","6",
         "7","8","9","10","11","12")
@@ -104,13 +103,13 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                 if(s.toString() != currentValue){
                     et_value.removeTextChangedListener(this)
 
-                    var cleanString: String = s.toString().replace(Regex("[R$,.]"), "")
+                    val cleanString: String = s.toString().replace(Regex("[R$,.]"), "")
                     Log.d(TAG, "cleasnString:$cleanString")
 
-                    var parsed: Double = parseDouble(cleanString)
+                    val parsed: Double = parseDouble(cleanString)
                     Log.d(TAG, "parsed:$parsed")
 
-                    var formatted: String = NumberFormat.getCurrencyInstance().format((parsed/100))
+                    val formatted: String = NumberFormat.getCurrencyInstance().format((parsed/100))
                     Log.d(TAG, "formatted:$formatted")
 
                     currentValue = cleanString
@@ -190,6 +189,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
         removeFocus()
 
+        //TODO change to support API < 21
         buttonPressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_base)
         buttonPressed.setTextColor(ContextCompat.getColor(this,R.color.color_text_pressed))
 
@@ -207,7 +207,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         window.decorView.clearFocus()
         et_value.clearFocus()
         val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus!!.getWindowToken(), 0)
+        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
 
 
