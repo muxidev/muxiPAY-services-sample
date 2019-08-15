@@ -34,13 +34,19 @@ class CancelActivity : BaseActivity() {
         dateLast.text = transactionHelper.dateLast
         typeLast.text = transactionHelper.typeLast
         amountLast.text = transactionHelper.amountLast
+        lateinit var transactionType: MPSTransaction.TransactionMode
+        when (transactionHelper.typeLast) {
+            "CREDIT" -> transactionType = MPSTransaction.TransactionMode.CREDIT
+            "DEBIT" -> transactionType = MPSTransaction.TransactionMode.DEBIT
+            "VOUCHER" -> transactionType = MPSTransaction.TransactionMode.VOUCHER
+        }
 
         btn_cancelLast.setOnClickListener {
             dialogHelper.showLoadingDialog(this, true)
 
             //TODO change to get from activity
             TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
-                "", MPSTransaction.TransactionMode.CREDIT,"","",1
+                amountLast.text.toString(), transactionType,"","",1
             )!!, Constants.TransactionState.cancel).execute()
         }
         btnOther.setOnClickListener {
