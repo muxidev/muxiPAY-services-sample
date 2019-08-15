@@ -191,7 +191,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         decimal = ",$decimal"
         val reversedValue = value.reversed()
         val chunckedString = reversedValue.chunked(3)
-        Log.d("Teste",chunckedString.toString())
+        Log.d(TAG,"chunckedString: $chunckedString")
         var returnValue = ""
         for(part in chunckedString){
 
