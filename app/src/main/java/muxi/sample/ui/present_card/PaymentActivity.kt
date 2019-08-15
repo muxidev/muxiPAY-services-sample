@@ -68,18 +68,13 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             removeFocus()
             mpsManager?.currentBluetoothDevice = bluetothDevice
             dialogHelper.showLoadingDialog(this, true)
-            val date = FormatUtils.getCurrentDate()
-            val time = FormatUtils.getCurrentTime(false)
-            val dateTime = "$date $time"
-            transactionHelper.dateLast = dateTime
-            transactionHelper.amountLast = currentValue
-            transactionHelper.typeLast = transactionType.name
             TransactionTask(mpsManager!!,transactionHelper.mountTransaction(
                 currentValue, transactionType,"","",installments
             )!!, Constants.TransactionState.payment).execute()
         }
 
         btn_credit!!.setOnClickListener{
+
             buttonEffect(btn_credit, MPSTransaction.TransactionMode.CREDIT,btn_debit,btn_voucher)
         }
 
@@ -156,6 +151,12 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                     var showReceipt = false
 
                     if (mpsResult!!.status == MPSResult.Status.SUCCESS) {
+                        val date = FormatUtils.getCurrentDate()
+                        val time = FormatUtils.getCurrentTime(false)
+                        val dateTime = "$date $time"
+                        transactionHelper.dateLast = dateTime
+                        transactionHelper.amountLast = "R$ ${insertPointValue()}"
+                        transactionHelper.typeLast = transactionType.name
                         title = resources.getString(R.string.transactionSuccess)
                         clientReceipt = mpsResult.clientReceipt
                         establishmentReceipt = mpsResult.establishmentReceipt
