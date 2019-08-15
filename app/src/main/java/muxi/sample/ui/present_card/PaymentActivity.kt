@@ -180,10 +180,37 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     }
 
     private fun mountBodyMessage(): String {
+        val value = insertPointValue()
+        return "R$ $value\n$transactionType - $installments installments"
 
-        return "R$ " + currentValue.substring(0,2)+","+currentValue.substring(2,4) + "\n" + transactionType +
-                " - " + installments + " installments"
+    }
 
+    private fun insertPointValue(): String {
+        var decimal = currentValue.takeLast(2)
+        val value = currentValue.take(currentValue.length - decimal.length)
+        decimal = ",$decimal"
+        val reversedValue = value.reversed()
+        val chunckedString = reversedValue.chunked(3)
+        Log.d("Teste",chunckedString.toString())
+        var returnValue = ""
+        for(part in chunckedString){
+
+            returnValue += if(part.length == 3){
+                "$part."
+            } else {
+                part
+            }
+        }
+
+        return if(returnValue[returnValue.length - 1 ] == '.') {
+
+            "${returnValue.take(returnValue.length - 1).reversed()}$decimal"
+
+        } else {
+
+            "${returnValue.reversed()}$decimal"
+
+        }
     }
 
     private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionMode, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
