@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_cancel_other.*
 import muxi.payservices.sdk.data.MPSResult
@@ -24,7 +25,7 @@ class CancelOtherActivity:BaseActivity(), AdapterView.OnItemSelectedListener {
 
     private var mpsManager: MPSManager? = null
 
-    var transactionMode: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
+    var transactionMode: MPSTransaction.TransactionMode? = null
 
     val dialogHelper = DialogHelper.getInstance()
 
@@ -53,15 +54,22 @@ class CancelOtherActivity:BaseActivity(), AdapterView.OnItemSelectedListener {
                 "DEBIT" -> transactionMode = MPSTransaction.TransactionMode.DEBIT
                 "VOUCHER" -> transactionMode = MPSTransaction.TransactionMode.VOUCHER
             }
-            dialogHelper.showLoadingDialog(this, true)
-            Log.d(TAG,"Type: $transactionMode")
-            Log.d(TAG,"Doc: ${et_doc.text}")
-            Log.d(TAG,"Auth: ${et_autCode.text}")
-            //TODO change to get from activity
-            TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
-                "", transactionMode,et_doc.text.toString(),
-                et_autCode.text.toString(),0
-            )!!, Constants.TransactionState.cancel).execute()
+            if(et_doc.text.isEmpty() || et_autCode.text.isEmpty() || transactionMode == null) {
+
+                Toast.makeText(this,"Complete all fields to cancel any",Toast.LENGTH_SHORT).show()
+
+            } else {
+
+                dialogHelper.showLoadingDialog(this, true)
+                Log.d(TAG,"Type: $transactionMode")
+                Log.d(TAG,"Doc: ${et_doc.text}")
+                Log.d(TAG,"Auth: ${et_autCode.text}")
+                //TODO change to get from activity
+                TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
+                    "", transactionMode!!,et_doc.text.toString(),
+                    et_autCode.text.toString(),0
+                )!!, Constants.TransactionState.cancel).execute()
+            }
         }
     }
 
@@ -97,10 +105,14 @@ class CancelOtherActivity:BaseActivity(), AdapterView.OnItemSelectedListener {
             mpsManager = MPSManager(this.applicationContext)
         }
 
+        mpsManager!!.bindService(applicationContext)
+
         mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
             override fun onCancelAnswer(mpsResult: MPSResult?) {
                 super.onCancelAnswer(mpsResult)
-                dialogHelper.handleCancelAnswer(this@CancelOtherActivity,mpsResult)
+                runOnUiThread {
+                    dialogHelper.handleCancelAnswer(this@CancelOtherActivity,mpsResult)
+                }
             }
         })
     }
