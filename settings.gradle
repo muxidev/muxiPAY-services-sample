@@ -1,2 +1,1 @@
-include ':app'
-include ':mpservices-sdk-release'
+include ':app', ':pwpservices-sdk-debug'

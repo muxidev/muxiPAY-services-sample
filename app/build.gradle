@@ -37,6 +37,6 @@ dependencies {
     )
 
 
-    implementation project (':mpservices-sdk-release')
+    implementation project (':pwpservices-sdk-debug')
 
 }
