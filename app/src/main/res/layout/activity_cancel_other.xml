@@ -4,14 +4,24 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="40dp"
+              android:layout_marginStart="16dp"
+              android:layout_marginEnd="16dp"
+              android:textStyle="bold"
+              android:textColor="@color/sample_splash_init"
+              android:text="@string/payment_info"/>
+
     <EditText android:layout_width="match_parent"
               android:layout_height="@dimen/main_btn_height"
               android:layout_marginStart="@dimen/main_margin_start_end"
               android:layout_marginEnd="@dimen/main_margin_start_end"
               android:id="@+id/et_doc"
               android:layout_gravity="center"
-              android:layout_marginTop="@dimen/et_value_margin_top"
+              android:layout_marginTop="16dp"
               android:inputType="number"
+              android:paddingLeft="8dp"
               android:textSize="@dimen/et_cancel_size"
               android:textColor="@color/color_base"
               android:textColorHint="@color/color_base"
@@ -24,15 +34,16 @@
               android:layout_marginEnd="@dimen/main_margin_start_end"
               android:id="@+id/et_autCode"
               android:layout_gravity="center"
-              android:layout_marginTop="@dimen/et_value_margin_top"
+              android:layout_marginTop="16dp"
               android:inputType="number"
               android:textSize="@dimen/et_cancel_size"
+              android:paddingLeft="8dp"
               android:textColor="@color/color_base"
               android:textColorHint="@color/color_base"
               android:background="@drawable/border_input"
               android:hint="@string/autcode"/>
 
-    <LinearLayout android:layout_width="match_parent"
+    <!--<LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
                   android:layout_marginTop="@dimen/card_margin_top">
@@ -99,18 +110,42 @@
 
         </LinearLayout>
 
+    </LinearLayout>-->
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/border_spinner"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+        <Spinner
+                android:id="@+id/spinner_cancel_other"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
     </LinearLayout>
 
-
-    <Button android:layout_width="match_parent"
-            android:layout_height="@dimen/main_btn_height"
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        <Button
             android:id="@+id/btnCancelOther"
-            android:layout_marginTop="@dimen/main_btn_margin_top"
-            android:layout_marginStart="@dimen/main_margin_start_end"
-            android:layout_marginEnd="@dimen/main_margin_start_end"
-            android:backgroundTint="@color/color_base"
-            android:textColor="@color/color_text_pressed"
-            android:layout_gravity="center"
-            android:text="@string/cancel"/>
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/white"
+            android:text="Cancel payment"
+            android:layout_marginEnd="16dp" android:layout_marginTop="40dp"/>
+    </LinearLayout>
+
 
 </LinearLayout>

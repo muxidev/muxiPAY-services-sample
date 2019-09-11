@@ -20,6 +20,7 @@
                   android:layout_height="wrap_content"
                   android:layout_marginTop="40dp"
                   android:layout_marginStart="16dp"
+                  android:textStyle="bold"
                   android:layout_marginEnd="16dp"
                   android:textColor="@color/sample_splash_init"
                   android:text="@string/payment_type"/>
@@ -42,6 +43,7 @@
                   android:layout_marginTop="40dp"
                   android:layout_marginStart="16dp"
                   android:layout_marginEnd="16dp"
+                  android:textStyle="bold"
                   android:textColor="@color/sample_splash_init"
                   android:text="@string/payment_info"/>
 

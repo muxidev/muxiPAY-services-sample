@@ -68,18 +68,13 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             removeFocus()
             mpsManager?.currentBluetoothDevice = bluetothDevice
             dialogHelper.showLoadingDialog(this, true)
-            val date = FormatUtils.getCurrentDate()
-            val time = FormatUtils.getCurrentTime(false)
-            val dateTime = "$date $time"
-            transactionHelper.dateLast = dateTime
-            transactionHelper.amountLast = currentValue
-            transactionHelper.typeLast = transactionType.name
             TransactionTask(mpsManager!!,transactionHelper.mountTransaction(
                 currentValue, transactionType,"","",installments
             )!!, Constants.TransactionState.payment).execute()
         }
 
         btn_credit!!.setOnClickListener{
+
             buttonEffect(btn_credit, MPSTransaction.TransactionMode.CREDIT,btn_debit,btn_voucher)
         }
 
@@ -156,6 +151,12 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                     var showReceipt = false
 
                     if (mpsResult!!.status == MPSResult.Status.SUCCESS) {
+                        val date = FormatUtils.getCurrentDate()
+                        val time = FormatUtils.getCurrentTime(false)
+                        val dateTime = "$date $time"
+                        transactionHelper.dateLast = dateTime
+                        transactionHelper.amountLast = "R$ ${insertPointValue()}"
+                        transactionHelper.typeLast = transactionType.name
                         title = resources.getString(R.string.transactionSuccess)
                         clientReceipt = mpsResult.clientReceipt
                         establishmentReceipt = mpsResult.establishmentReceipt
@@ -179,10 +180,37 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     }
 
     private fun mountBodyMessage(): String {
+        val value = insertPointValue()
+        return "R$ $value\n$transactionType - $installments installments"
 
-        return "R$ " + currentValue.substring(0,2)+","+currentValue.substring(2,4) + "\n" + transactionType +
-                " - " + installments + " installments"
+    }
 
+    private fun insertPointValue(): String {
+        var decimal = currentValue.takeLast(2)
+        val value = currentValue.take(currentValue.length - decimal.length)
+        decimal = ",$decimal"
+        val reversedValue = value.reversed()
+        val chunkedString = reversedValue.chunked(3)
+        Log.d(TAG,"chunckedString: $chunkedString")
+        var returnValue = ""
+        for(part in chunkedString){
+
+            returnValue += if(part.length == 3){
+                "$part."
+            } else {
+                part
+            }
+        }
+
+        return if(returnValue[returnValue.length - 1 ] == '.') {
+
+            "${returnValue.take(returnValue.length - 1).reversed()}$decimal"
+
+        } else {
+
+            "${returnValue.reversed()}$decimal"
+
+        }
     }
 
     private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionMode, buttonUnpressed: Button, buttonUnpressedTwo: Button) {

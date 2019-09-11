@@ -54,5 +54,8 @@
     <string name="try_again">TRY AGAIN</string>
     <string name="send_email">Send email</string>
     <string name="home">home</string>
+    <string name="text_last_payment">LAST PAYMENT</string>
+    <string name="text_btn_cancel">cancel</string>
+    <string name="text_btn_other_payment">other payment</string>
 
 </resources>

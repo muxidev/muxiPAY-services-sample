@@ -39,4 +39,6 @@
     <dimen name="img_padding_end">16dp</dimen>
     <dimen name="tv_margin_bottom">8dp</dimen>
     <dimen name="choose_type_second_card_view_margin_top">36dp</dimen>
+    <dimen name="text_size_type_last">10sp</dimen>
+    <dimen name="text_size_date_last">10sp</dimen>
 </resources>

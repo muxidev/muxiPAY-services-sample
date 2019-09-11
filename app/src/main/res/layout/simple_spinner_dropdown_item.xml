@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
                  android:id="@android:id/text1"
-                 android:textColor="@color/color_base"
+                 android:textColor="@color/colorAccent"
                  style="?android:attr/spinnerDropDownItemStyle"
                  android:singleLine="true"
                  android:layout_width="match_parent"

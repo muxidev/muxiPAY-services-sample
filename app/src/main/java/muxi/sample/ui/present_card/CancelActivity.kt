@@ -2,6 +2,7 @@ package muxi.sample.ui.present_card
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_cancel.*
 import muxi.payservices.sdk.data.MPSResult
@@ -34,13 +35,21 @@ class CancelActivity : BaseActivity() {
         dateLast.text = transactionHelper.dateLast
         typeLast.text = transactionHelper.typeLast
         amountLast.text = transactionHelper.amountLast
+        var transactionType: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
+        when (transactionHelper.typeLast) {
+            "DEBIT" -> transactionType = MPSTransaction.TransactionMode.DEBIT
+            "VOUCHER" -> transactionType = MPSTransaction.TransactionMode.VOUCHER
+        }
 
         btn_cancelLast.setOnClickListener {
             dialogHelper.showLoadingDialog(this, true)
 
             //TODO change to get from activity
+            var cleanValue = transactionHelper.amountLast.replace("R$ ","")
+            cleanValue =  cleanValue.replace(",","")
+            Log.d("CancelActivity","Clean value: $cleanValue")
             TransactionTask(mpsManager!!, TransactionHelper.getInstance().mountTransaction(
-                "", MPSTransaction.TransactionMode.CREDIT,"","",1
+                cleanValue, transactionType,"","",1
             )!!, Constants.TransactionState.cancel).execute()
         }
         btnOther.setOnClickListener {
@@ -53,6 +62,8 @@ class CancelActivity : BaseActivity() {
         super.onStart()
         if(mpsManager == null)
             mpsManager = MPSManager(this.applicationContext)
+
+        mpsManager!!.bindService(applicationContext)
 
         mpsManager!!.setMpsManagerCallback(object : CallbackAnswer(){
             override fun onCancelAnswer(mpsResult: MPSResult?) {

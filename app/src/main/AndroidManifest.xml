@@ -40,9 +40,11 @@
                   android:theme="@style/AppTheme"/>
 
         <activity android:name=".ui.present_card.CancelActivity"
+                  android:theme="@style/AppTheme"
                   android:parentActivityName=".ui.present_card.MainActivity"/>
 
         <activity android:name=".ui.present_card.CancelOtherActivity"
+                  android:theme="@style/AppTheme"
                   android:parentActivityName=".ui.present_card.CancelActivity"/>
     </application>
 

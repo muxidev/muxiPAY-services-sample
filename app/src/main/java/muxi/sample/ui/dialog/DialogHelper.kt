@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
@@ -76,6 +77,7 @@ class DialogHelper {
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_transaction_answer,null,false)
         view.tv_body.setTextColor(Color.BLACK)
+        view.tv_body.gravity = Gravity.CENTER
         view.tv_body.text = body
         view.tv_title.text = title
         val lottieAnimationView: LottieAnimationView = view.findViewById(R.id.animation)
