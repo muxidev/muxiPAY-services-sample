@@ -9,6 +9,8 @@ class EcommerceActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ecommerce)
+        title = getString(R.string.ecommerce)
+
     }
 
 }
