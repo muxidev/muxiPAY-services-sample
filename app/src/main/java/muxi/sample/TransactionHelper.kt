@@ -27,8 +27,11 @@ class TransactionHelper {
         transaction.cv = cv
         transaction.auth = authCode
         transaction.transactionMode = mode
-        transaction.installments = installments
-
+        if(mode == MPSTransaction.TransactionMode.CREDIT ){
+            transaction.installments = installments
+        }else {
+            transaction.installments = 1
+        }
         return transaction
 
     }
