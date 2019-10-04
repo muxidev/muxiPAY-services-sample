@@ -4,4 +4,58 @@
     <string name="transact">Transact</string>
     <string name="cancel">Cancel</string>
     <string name="deconfigure">Deconfigure</string>
+    <string name="built_screen">This screen is being built. Stay tuned</string>
+    <string name="something_wrong">Something went wrong</string>
+    <string name="present_card">Present Card</string>
+    <string name="ecommerce">Ecommerce</string>
+    <string name="history">History</string>
+    <string name="initSuccess">Initialized successfully</string>
+    <string name="initError">Error while initializing</string>
+    <string name="transactionSuccess">Payment Succeded</string>
+    <string name="transactionError">Payment Failed</string>
+    <string name="deconfigureSuccess">Deconfigured succesfully</string>
+    <string name="deconfigureError">Error while deconfiguring</string>
+    <string name="cancelSuccess">PAYMENT CANCELED</string>
+    <string name="cancelError">Error while canceling</string>
+    <string name="waiting_pinpad">WAITING PINPAD</string>
+    <string name="ok">OK</string>
+    <string name="receipt">RECEIPT</string>
+    <string name="default_value">R$0,00</string>
+    <string name="credit">CREDIT</string>
+    <string name="debit">DEBIT</string>
+    <string name="voucher">VOUCHER</string>
+    <string name="pay">PAY</string>
+    <string name="other">OTHER</string>
+    <string name="doc">DOC</string>
+    <string name="autcode">Authorization code</string>
+    <string name="done">Done</string>
+    <string name="cancel_toolbar_title">Payment Cancellation</string>
+    <string name="present_card_toolbar_title">Present card</string>
+    <string name="payment_toolbar_title">Payment</string>
+    <string name="receipt_toolbar_title">Receipt</string>
+    <string name="date">Date</string>
+    <string name="amount">Amount</string>
+    <string name="type">Type</string>
+    <string name="last_transaction">LAST TRANSACTION</string>
+    <string name="for_payment_with_credit_card_using_a_mobile_device_pinpad">For payment with Credit Card, using a
+        mobile device Pinpad.
+    </string>
+    <string name="non_present_card">Non Present Card</string>
+    <string name="payments_for_ecommerce_or_any_online_transaction">Payments for ecommerce or any online transaction.
+    </string>
+    <string name="value">Value</string>
+    <string name="payment_type">PAYMENT TYPE</string>
+    <string name="payment_info">PAYMENT INFO</string>
+    <string name="customer">CUSTOMER</string>
+    <string name="store">STORE</string>
+    <string name="share">SHARE</string>
+    <string name="client_receipt">Client receipt</string>
+    <string name="email_type" translatable="false">message/rfc822</string>
+    <string name="try_again">TRY AGAIN</string>
+    <string name="send_email">Send email</string>
+    <string name="home">home</string>
+    <string name="text_last_payment">LAST PAYMENT</string>
+    <string name="text_btn_cancel">cancel</string>
+    <string name="text_btn_other_payment">other payment</string>
+
 </resources>

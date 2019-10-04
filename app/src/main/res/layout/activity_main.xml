@@ -5,36 +5,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".ui.present_card.MainActivity"
+        >
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnInit"
+    <Button android:id="@+id/btnInit"
             android:text="@string/initialize"
-            android:layout_gravity="center"
+            style="@style/btnTheme"/>
 
-    />
-
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnTransact"
+    <Button android:id="@+id/btnTransact"
             android:text="@string/transact"
-            android:layout_gravity="center"
-    />
+            style="@style/btnTheme"/>
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnCancel"
+    <Button android:id="@+id/btnCancel"
             android:text="@string/cancel"
-            android:layout_gravity="center"
-    />
+            style="@style/btnTheme"/>
 
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDeconfigure"
+    <Button android:id="@+id/btnDeconfigure"
             android:text="@string/deconfigure"
-            android:layout_gravity="center"
-    />
+            style="@style/btnTheme"/>
+
+    <Button android:id="@+id/btnHistory"
+            android:text="@string/history"
+            style="@style/btnTheme"/>
+
 
 
 </LinearLayout>

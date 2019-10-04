@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.present_card.MainActivity">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true"
+            tools:context=".ui.present_card.MainActivity">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp"
+                  android:layout_marginStart="16dp"
+                  android:textStyle="bold"
+                  android:layout_marginEnd="16dp"
+                  android:textColor="@color/sample_splash_init"
+                  android:text="@string/payment_type"/>
+
+        <Button android:id="@+id/btn_credit"
+                android:text="@string/credit"
+                style="@style/btnTheme"/>
+
+        <Button android:id="@+id/btn_debit"
+                android:text="@string/debit"
+                style="@style/btnTheme"/>
+
+        <Button android:id="@+id/btn_voucher"
+                android:text="@string/voucher"
+                style="@style/btnTheme"/>
+
+
+        <TextView
+                android:id="@+id/tv_payment_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/sample_splash_init"
+                android:text="@string/payment_info"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LoginTextInputLayoutStyle"
+                android:textColorHint="@color/sample_splash_init"
+                android:shadowColor="@color/sample_splash_init"
+                android:textColor="@color/sample_splash_init"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_value"
+                    android:inputType="number"
+                    android:hint="@string/amount"
+                    android:textColorHint="@color/sample_splash_init"
+                    android:background="@color/sample_splash_init"
+                    android:shadowColor="@color/sample_splash_init"
+                    android:textColor="@color/sample_splash_init"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+                android:id="@+id/ll_payment_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/border_spinner"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
+
+        <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_rg_rate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <RadioGroup
+                    android:id="@+id/radioGroupRate"
+                    android:layout_width="285dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                <RadioButton
+                        android:id="@+id/radioButton_loja"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:checked="true"
+                        android:layout_margin="1dp"
+                        android:text="Loja" />
+
+                <RadioButton
+                        android:id="@+id/radioButton_adm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1dp"
+                        android:text="Administrativo" />
+
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button android:id="@+id/btn_pay"
+                android:text="@string/pay"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="@dimen/main_margin_start_end"
+                android:layout_marginEnd="@dimen/main_margin_start_end"
+                android:layout_height="@dimen/main_btn_height"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@color/sample_splash_init"/>
+
+    </LinearLayout>
+
+</ScrollView>
