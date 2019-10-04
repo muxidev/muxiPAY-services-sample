@@ -1,6 +1,7 @@
 package muxi.sample
 
 import muxi.payservices.sdk.data.MPSTransaction
+import muxi.sample.Constants.DEFAULT_INSTALLMENTS
 
 
 class TransactionHelper {
@@ -27,11 +28,8 @@ class TransactionHelper {
         transaction.cv = cv
         transaction.auth = authCode
         transaction.transactionMode = mode
-        if(mode == MPSTransaction.TransactionMode.CREDIT ){
-            transaction.installments = installments
-        }else {
-            transaction.installments = 1
-        }
+        transaction.installments = if(mode == MPSTransaction.TransactionMode.CREDIT) installments else DEFAULT_INSTALLMENTS
+ 
         return transaction
 
     }
