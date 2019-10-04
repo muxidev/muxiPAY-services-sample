@@ -34,7 +34,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     /**
      * TODO: change this variable to use MAC address from your pinpad
      */
-    private val bluetothDevice = "28:ED:E0:5A:EA:D9"
+    private val bluetothDevice = "B0:F1:EC:E2:EA:78"
 
     private var mpsManager: MPSManager? = null
     val dialogHelper = DialogHelper.getInstance()
