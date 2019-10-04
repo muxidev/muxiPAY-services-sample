@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.startActivity
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.dialog_init_answer.view.*
@@ -21,6 +22,7 @@ import muxi.sample.ui.present_card.ReceiptActivity
 
 class DialogHelper {
 
+    var builder: AlertDialog.Builder? = null
     var alertDialog: AlertDialog? = null
     var textColor : Int = Color.BLACK
 
@@ -35,15 +37,15 @@ class DialogHelper {
     }
 
     fun showLoadingDialog(context: Context, isToShowWaitingPinpad: Boolean) {
+        builder = AlertDialog.Builder(context)
         var layoutId: Int = R.layout.dialog_loading
-        if(isToShowWaitingPinpad)
+        if(isToShowWaitingPinpad){
+            builder = AlertDialog.Builder(context,android.R.style.Theme_Black_NoTitleBar_Fullscreen)
             layoutId = R.layout.dialog_waiting_pinpad
+        }
         val view = LayoutInflater.from(context).inflate(layoutId,
             null,false)
-
-        alertDialog = AlertDialog.Builder(context)
-            .setView(view)
-            .create()
+        alertDialog = builder!!.setView(view).create()
 
         alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alertDialog?.show()

@@ -34,7 +34,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     /**
      * TODO: change this variable to use MAC address from your pinpad
      */
-    private val bluetothDevice = "28:ED:E0:5A:EA:D9"
+    private val bluetothDevice = "B0:F1:EC:E2:EA:78"
 
     private var mpsManager: MPSManager? = null
     val dialogHelper = DialogHelper.getInstance()
@@ -43,8 +43,8 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     var transactionType: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
 
     var installments = 0
-    var list_of_items = arrayOf("Installments","1","2","3","4","5","6",
-        "7","8","9","10","11","12")
+    var list_of_items = arrayOf("A vista","2x ","3x","4x","5x","6x",
+        "7x","8x","9x","10x","11x","12x")
     private var currentValue = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,15 +74,23 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         }
 
         btn_credit!!.setOnClickListener{
-
+            ll_payment_info.visibility = View.VISIBLE
             buttonEffect(btn_credit, MPSTransaction.TransactionMode.CREDIT,btn_debit,btn_voucher)
         }
 
         btn_debit!!.setOnClickListener{
+            ll_payment_info.visibility = View.INVISIBLE
+            ll_rg_rate.visibility = View.GONE
+            installments = 1
+            spinner.setSelection(0)
             buttonEffect(btn_debit, MPSTransaction.TransactionMode.DEBIT,btn_credit,btn_voucher)
         }
 
         btn_voucher!!.setOnClickListener {
+            ll_payment_info.visibility = View.INVISIBLE
+            ll_rg_rate.visibility = View.GONE
+            installments = 1
+            spinner.setSelection(0)
             buttonEffect(btn_voucher, MPSTransaction.TransactionMode.VOUCHER,btn_credit,btn_debit)
         }
 
@@ -99,7 +107,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                     et_value.removeTextChangedListener(this)
 
                     val cleanString: String = s.toString().replace(Regex("[R$,.]"), "")
-                    Log.d(TAG, "cleasnString:$cleanString")
+                    Log.d(TAG, "cleanString:$cleanString")
 
                     val parsed: Double = parseDouble(cleanString)
                     Log.d(TAG, "parsed:$parsed")
@@ -125,9 +133,11 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         removeFocus()
-        if(position>0){
-            installments = position
-        }
+        if(position > 0)
+            ll_rg_rate.visibility = View.VISIBLE
+        else
+            ll_rg_rate.visibility = View.GONE
+        installments = (position + 1)
     }
 
     override fun onStart() {
@@ -235,7 +245,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         window.decorView.clearFocus()
         et_value.clearFocus()
         val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 
 

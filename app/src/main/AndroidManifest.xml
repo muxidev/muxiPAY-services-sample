@@ -29,7 +29,9 @@
                   android:theme="@style/AppTheme_no_action_bar">
         </activity>
 
-        <activity android:name=".ui.ecommerce.EcommerceActivity"/>
+        <activity android:name=".ui.ecommerce.EcommerceActivity"
+                  android:parentActivityName=".ui.ChooseTypeActivity"
+                  android:theme="@style/AppTheme"/>
 
         <activity android:name=".ui.present_card.PaymentActivity"
             android:parentActivityName=".ui.present_card.MainActivity"
