@@ -7,6 +7,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import muxi.payservices.sdk.data.MPSResult
 import muxi.payservices.sdk.service.CallbackAnswer
 import muxi.payservices.sdk.service.MPSManager
+import muxi.sample.BuildConfig
+import muxi.sample.Constants
 import muxi.sample.R
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.DeconfigureTask
@@ -21,19 +23,13 @@ class MainActivity : BaseActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
 
-
     /**
      * TODO: change this variable to decide if messages will be shown in pinpad or not
      * For example: "Remove card or insert card" messages
      */
-
     private val showMessage = true
-    /**
-     * TODO: change this variable to use your CNPJ
-     */
 
     private val ignorePendingTransaction = true
-    private val cnpj = "1234"
 
     val dialogHelper = DialogHelper.getInstance()
 
@@ -45,15 +41,13 @@ class MainActivity : BaseActivity() {
 
         btnInit.setOnClickListener {
             dialogHelper.showLoadingDialog(this, false)
-            InitTask(mpsManager!!,showMessage,cnpj).execute()
+            InitTask(mpsManager!!, showMessage, Constants.DESENV_MERCHANT_ID, BuildConfig.API_KEY).execute()
         }
         btnTransact.setOnClickListener {
             startActivity(Intent(this, PaymentActivity::class.java))
-
         }
         btnCancel.setOnClickListener {
             startActivity(Intent(this, CancelActivity::class.java))
-
         }
         btnDeconfigure.setOnClickListener {
             dialogHelper.showLoadingDialog(this, false)
@@ -62,10 +56,7 @@ class MainActivity : BaseActivity() {
         btnHistory.setOnClickListener {
             toast(getString(R.string.built_screen))
         }
-
-
     }
-
 
     override fun onStart() {
         super.onStart()
