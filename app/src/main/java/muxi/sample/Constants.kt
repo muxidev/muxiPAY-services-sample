@@ -15,4 +15,11 @@ object Constants {
         payment,
         cancel
     }
+
+
+    /**
+     * TODO: change this variable to use your Merchant Id
+     */
+    const val DESENV_MERCHANT_ID = "1234"
+    const val HMG_MERCHANT_ID = "9876"
 }

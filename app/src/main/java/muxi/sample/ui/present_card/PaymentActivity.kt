@@ -20,7 +20,6 @@ import muxi.sample.R
 import muxi.sample.TransactionHelper
 import muxi.sample.ui.dialog.DialogHelper
 import muxi.sample.ui.present_card.tasks.TransactionTask
-import java.lang.Double.parseDouble
 import java.text.NumberFormat
 import android.app.Activity
 import android.view.inputmethod.InputMethodManager
@@ -56,7 +55,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         spinner!!.onItemSelectedListener = this
 
 
-        mpsManager?.currentBluetoothDevice = bluetothDevice
+        mpsManager?.currentBluetoothDevice = bluetoothDevice
 
         val aa = ArrayAdapter(this, R.layout.simple_spinner_item, list_of_items)
 
@@ -66,7 +65,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
         btn_pay!!.setOnClickListener {
             removeFocus()
-            mpsManager?.currentBluetoothDevice = bluetothDevice
+            mpsManager?.currentBluetoothDevice = bluetoothDevice
             dialogHelper.showLoadingDialog(this, true)
             TransactionTask(mpsManager!!,transactionHelper.mountTransaction(
                 currentValue, transactionType,"","",installments
@@ -106,14 +105,16 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                 if(s.toString() != currentValue){
                     et_value.removeTextChangedListener(this)
 
-                    val cleanString: String = s.toString().replace(Regex("[R$,.]"), "")
-                    Log.d(TAG, "cleanString:$cleanString")
+                    val cleanString: String = s.toString()
+                        .replace(Regex("[R$,.]"), "")
+                        .trim()
+                    Log.d(TAG, "cleanString: $cleanString")
 
-                    val parsed: Double = parseDouble(cleanString)
-                    Log.d(TAG, "parsed:$parsed")
+                    val parsed: Double = cleanString.toDouble()
+                    Log.d(TAG, "parsed: $parsed")
 
-                    val formatted: String = NumberFormat.getCurrencyInstance().format((parsed/100))
-                    Log.d(TAG, "formatted:$formatted")
+                    val formatted: String = NumberFormat.getCurrencyInstance().format(parsed/100)
+                    Log.d(TAG, "formatted: $formatted")
 
                     currentValue = cleanString
                     et_value.setText(formatted)
