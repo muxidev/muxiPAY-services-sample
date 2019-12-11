@@ -1,1 +1,1 @@
-include ':app', ':pwpservices-sdk-debug'
+include ':app', ':pwpservices-sdk-release'

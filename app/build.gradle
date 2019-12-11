@@ -6,6 +6,17 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: rootProject.file("dependencies.gradle")
 
+def getProps(String propName) {
+    def propsFile = rootProject.file('local.properties')
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        return props[propName]
+    } else {
+        return ""
+    }
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -22,6 +33,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        def TYPE_STRING = "String"
+        def API_KEY = "API_KEY"
+        it.buildConfigField TYPE_STRING, API_KEY, "\""+getProps(API_KEY)+"\""
+    }
 }
 
 dependencies {
@@ -37,6 +53,6 @@ dependencies {
     )
 
 
-    implementation project (':pwpservices-sdk-debug')
+    implementation project (':pwpservices-sdk-release')
 
 }
