@@ -34,7 +34,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     /**
      * TODO: change this variable to use MAC address from your pinpad
      */
-    private val bluetothDevice = "B0:F1:EC:E2:EA:78"
+    private val bluetoothDevice = "B0:F1:EC:E2:EA:78"
 
     private var mpsManager: IMPSManager? = null
     val dialogHelper = DialogHelper.getInstance()
@@ -56,7 +56,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         spinner!!.onItemSelectedListener = this
 
 
-        mpsManager?.currentBluetoothDevice = bluetothDevice
+        mpsManager?.currentBluetoothDevice = bluetoothDevice
 
         val aa = ArrayAdapter(this, R.layout.simple_spinner_item, list_of_items)
 
@@ -66,7 +66,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
         btn_pay!!.setOnClickListener {
             removeFocus()
-            mpsManager?.currentBluetoothDevice = bluetothDevice
+            mpsManager?.currentBluetoothDevice = bluetoothDevice
             dialogHelper.showLoadingDialog(this, true)
             TransactionTask(mpsManager!!, transactionHelper.mountTransaction(
                     currentValue, transactionType, "", "", installments
