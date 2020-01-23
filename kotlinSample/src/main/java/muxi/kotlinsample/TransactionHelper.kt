@@ -30,7 +30,7 @@ class TransactionHelper {
         transaction.auth = authCode
         transaction.transactionMode = mode
         transaction.installments = if(mode == MPSTransaction.TransactionMode.CREDIT) installments else DEFAULT_INSTALLMENTS
-        transaction.merchantId = Constants.HMG_MERCHANT_ID
+        transaction.merchantId = Constants.MERCHANT_ID
  
         return transaction
 

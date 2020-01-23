@@ -45,7 +45,7 @@ class MainActivity : BaseActivity() {
             InitTask(
                 mpsManager!!,
                 showMessage,
-                Constants.DESENV_MERCHANT_ID,
+                Constants.MERCHANT_ID,
                 BuildConfig.API_KEY
             ).execute()
         }
