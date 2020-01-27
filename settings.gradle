@@ -1,1 +1,31 @@
+loadLocalProperties()
+
+def loadLocalProperties() {
+    def localProperties = new File(rootDir, "local.properties")
+    if (!localProperties.exists()) {
+        throw new GradleException("local.properties is missing!")
+    }
+    Properties properties = new Properties()
+    localProperties.withInputStream { instr ->
+        properties.load(instr)
+    }
+
+    def localVariables = [
+            'NEXUS_URL_RELEASE' : 'nexus release url',
+            'NEXUS_USERNAME' : 'username',
+            'NEXUS_PASSWORD' : 'password'
+
+    ]
+
+    String var
+    for (e in localVariables) {
+        var = properties.get(e.key)
+        if (var == null) {
+            throw new GradleException(e.key + " not configured. Add " + e.key + " to local.properties. " + e.value)
+        } else {
+            System.setProperty(e.key, var)
+        }
+    }
+}
+
 include ':kotlinSample', ':mpservices-sdk', ':javaSample'

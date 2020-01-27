@@ -27,6 +27,13 @@ allprojects {
             url 'https://maven.google.com'
         }
 
+        maven {
+            url System.getProperty('NEXUS_URL_RELEASE')
+            credentials {
+                username System.getProperty('NEXUS_USERNAME')
+                password System.getProperty('NEXUS_PASSWORD')
+            }
+        }
     }
 }
 

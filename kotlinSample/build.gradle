@@ -45,13 +45,14 @@ dependencies {
 
     implementation(
             supportLibraries.values(),
-            remoter.annotations,
             lottie.values(),
             anko.values(),
             kotlin.values(),
             materialDesign.values()
     )
 
-    implementation project(':mpservices-sdk')
+
+//    implementation project (':pwpservices-sdk-release')
+    implementation 'com.muxi.pwps:pwpservices-sdk:1.0.0'
 
 }
