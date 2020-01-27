@@ -32,9 +32,6 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     private val TAG = PaymentActivity::class.java.simpleName
 
-    /**
-     * TODO: change this variable to use MAC address from your pinpad
-     */
     private var bluetoothDevice: String? = null
 
     private var mpsManager: IMPSManager? = null
@@ -76,25 +73,41 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         }
 
         btn_credit.setOnClickListener{
-            ll_payment_info.visibility = View.VISIBLE
+            showPaymentInfo()
             buttonEffect(btn_credit, MPSTransaction.TransactionMode.CREDIT,btn_debit,btn_voucher)
         }
 
         btn_debit.setOnClickListener{
-            ll_payment_info.visibility = View.INVISIBLE
-            ll_rg_rate.visibility = View.GONE
+            hidePaymentInfo()
+            hideRate()
             installments = 1
             spinner.setSelection(0)
             buttonEffect(btn_debit, MPSTransaction.TransactionMode.DEBIT,btn_credit,btn_voucher)
         }
 
         btn_voucher.setOnClickListener {
-            ll_payment_info.visibility = View.INVISIBLE
-            ll_rg_rate.visibility = View.GONE
+            hidePaymentInfo()
+            hideRate()
             installments = 1
             spinner.setSelection(0)
             buttonEffect(btn_voucher, MPSTransaction.TransactionMode.VOUCHER,btn_credit,btn_debit)
         }
+    }
+
+    private fun hidePaymentInfo() {
+        ll_payment_info.visibility = View.INVISIBLE
+    }
+
+    private fun showPaymentInfo() {
+        ll_payment_info.visibility = View.VISIBLE
+    }
+
+    private fun hideRate() {
+        ll_rg_rate.visibility = View.INVISIBLE
+    }
+
+    private fun showRate() {
+        ll_rg_rate.visibility = View.VISIBLE
     }
 
     private fun setupTextWatcher() {
@@ -154,9 +167,9 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         removeFocus()
         if(position > 0)
-            ll_rg_rate.visibility = View.VISIBLE
+            showRate()
         else
-            ll_rg_rate.visibility = View.GONE
+            hideRate()
         installments = (position + 1)
     }
 
