@@ -44,8 +44,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     var transactionType: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
 
     var installments = 0
-    var listOfItems = arrayOf("A vista","2x ","3x","4x","5x","6x",
-        "7x","8x","9x","10x","11x","12x")
+    private lateinit var listOfItems: Array<String>
 
     private var currentValue = ""
 
@@ -54,6 +53,8 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_payment)
 
         title = getString(R.string.payment_toolbar_title)
+
+        listOfItems = resources.getStringArray(R.array.list_of_installments)
 
         if (getPaxPINPADAddress()) {
             mpsManager?.currentBluetoothDevice = bluetoothDevice
