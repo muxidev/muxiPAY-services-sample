@@ -43,8 +43,9 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     var transactionType: MPSTransaction.TransactionMode = MPSTransaction.TransactionMode.CREDIT
 
     var installments = 0
-    var list_of_items = arrayOf("A vista","2x ","3x","4x","5x","6x",
+    var listOfItems = arrayOf("A vista","2x ","3x","4x","5x","6x",
         "7x","8x","9x","10x","11x","12x")
+
     private var currentValue = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,32 +54,27 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
         title = getString(R.string.payment_toolbar_title)
 
-        spinner!!.onItemSelectedListener = this
+        setupButtons()
+        setupTextWatcher()
+        setupSpinner()
+    }
 
-
-        mpsManager?.currentBluetoothDevice = bluetoothDevice
-
-        val aa = ArrayAdapter(this, R.layout.simple_spinner_item, list_of_items)
-
-        aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
-
-        spinner!!.adapter = aa
-
-        btn_pay!!.setOnClickListener {
+    private fun setupButtons() {
+        btn_pay.setOnClickListener {
             removeFocus()
             mpsManager?.currentBluetoothDevice = bluetoothDevice
             dialogHelper.showLoadingDialog(this, true)
             TransactionTask(mpsManager!!, transactionHelper.mountTransaction(
-                    currentValue, transactionType, "", "", installments
+                currentValue, transactionType, "", "", installments
             )!!, Constants.TransactionState.payment).execute()
         }
 
-        btn_credit!!.setOnClickListener{
+        btn_credit.setOnClickListener{
             ll_payment_info.visibility = View.VISIBLE
             buttonEffect(btn_credit, MPSTransaction.TransactionMode.CREDIT,btn_debit,btn_voucher)
         }
 
-        btn_debit!!.setOnClickListener{
+        btn_debit.setOnClickListener{
             ll_payment_info.visibility = View.INVISIBLE
             ll_rg_rate.visibility = View.GONE
             installments = 1
@@ -86,14 +82,16 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             buttonEffect(btn_debit, MPSTransaction.TransactionMode.DEBIT,btn_credit,btn_voucher)
         }
 
-        btn_voucher!!.setOnClickListener {
+        btn_voucher.setOnClickListener {
             ll_payment_info.visibility = View.INVISIBLE
             ll_rg_rate.visibility = View.GONE
             installments = 1
             spinner.setSelection(0)
             buttonEffect(btn_voucher, MPSTransaction.TransactionMode.VOUCHER,btn_credit,btn_debit)
         }
+    }
 
+    private fun setupTextWatcher() {
         et_value.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
@@ -125,12 +123,18 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             }
 
         })
+    }
 
+    private fun setupSpinner() {
+        spinner.onItemSelectedListener = this
+        val aa = ArrayAdapter(this, R.layout.simple_spinner_item, listOfItems)
+        aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = aa
     }
 
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /* do nothing */
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

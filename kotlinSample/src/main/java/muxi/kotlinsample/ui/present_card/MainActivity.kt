@@ -40,6 +40,10 @@ class MainActivity : BaseActivity() {
 
         title = getString(R.string.present_card_toolbar_title)
 
+        setupButtons()
+    }
+
+    private fun setupButtons() {
         btnInit.setOnClickListener {
             dialogHelper.showLoadingDialog(this, false)
             InitTask(
@@ -49,12 +53,15 @@ class MainActivity : BaseActivity() {
                 BuildConfig.API_KEY
             ).execute()
         }
+
         btnTransact.setOnClickListener {
             startActivity(Intent(this, PaymentActivity::class.java))
         }
+
         btnCancel.setOnClickListener {
             startActivity(Intent(this, CancelActivity::class.java))
         }
+
         btnDeconfigure.setOnClickListener {
             dialogHelper.showLoadingDialog(this, false)
             DeconfigureTask(
@@ -62,6 +69,7 @@ class MainActivity : BaseActivity() {
                 ignorePendingTransaction
             ).execute()
         }
+
         btnHistory.setOnClickListener {
             toast(getString(R.string.built_screen))
         }
