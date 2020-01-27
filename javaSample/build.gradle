@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+apply plugin: 'com.jakewharton.butterknife'
+
+apply from: rootProject.file("dependencies.gradle")
+
+android {
+    compileSdkVersion rootProject.ext.compileVersion
+
+    signingConfigs {
+        muxiKey {
+            storeFile file('../keys/keystore.jks')
+            keyAlias 'muxipaybitcoin'
+            keyPassword 'muxi12345'
+            storePassword 'appiagoraemuxi'
+        }
+    }
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVer
+        targetSdkVersion rootProject.ext.targetSdkVer
+        applicationId "muxi.javasample"
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+
+
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.muxiKey
+
+        }
+    }
+
+    buildTypes.each {
+        def TYPE_STRING = "String"
+        def API_KEY = "API_KEY"
+        it.buildConfigField TYPE_STRING, API_KEY, "\""+getProps(API_KEY)+"\""
+    }
+
+    // Butterknife requires Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def getProps(String propName) {
+    def propsFile = rootProject.file('local.properties')
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        return props[propName]
+    } else {
+        return ""
+    }
+}
+
+task checkstyle(type: Checkstyle){
+    configFile = rootProject.file('checkstyle/muxi_checkstyle.xml')
+
+    source 'src/main/java'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    // empty classpath
+    classpath = files()
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompatVersion"
+    implementation "androidx.cardview:cardview:$rootProject.ext.androidxLibVersion"
+    implementation "com.google.android.material:material:$rootProject.ext.materialVersion"
+
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
+
+
+    api "com.josesamuel:remoter-annotations:$rootProject.ext.remoterServiceVersion"
+    annotationProcessor "com.josesamuel:remoter:$rootProject.ext.remoterServiceVersion"
+
+    implementation project(':mpservices-sdk')
+
+}

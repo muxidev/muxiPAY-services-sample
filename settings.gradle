@@ -1,1 +1,1 @@
-include ':app', ':pwpservices-sdk-release'
+include ':kotlinSample', ':mpservices-sdk', ':javaSample'
