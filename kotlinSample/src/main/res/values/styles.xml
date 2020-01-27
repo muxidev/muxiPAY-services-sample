@@ -21,8 +21,8 @@
     </style>
 
     <style name="btnTheme">
-        <item name="android:background">@android:color/white</item>
-        <item name="android:textColor">@color/sample_splash_init</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@drawable/button_text</item>
         <item name="android:layout_marginTop">@dimen/main_margin_start_end</item>
         <item name="android:layout_marginStart">@dimen/main_margin_start_end</item>
         <item name="android:layout_marginEnd">@dimen/main_margin_start_end</item>

@@ -229,19 +229,10 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     }
 
     private fun buttonEffect(buttonPressed: Button, type: MPSTransaction.TransactionMode, buttonUnpressed: Button, buttonUnpressedTwo: Button) {
-
         removeFocus()
-
-        //TODO change to support API < 21
-        buttonPressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_base)
-        buttonPressed.setTextColor(ContextCompat.getColor(this,R.color.color_text_pressed))
-
-        buttonUnpressed.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_text_pressed)
-        buttonUnpressed.setTextColor(ContextCompat.getColor(this,R.color.color_base))
-
-        buttonUnpressedTwo.backgroundTintList = ContextCompat.getColorStateList(this,R.color.color_text_pressed)
-        buttonUnpressedTwo.setTextColor(ContextCompat.getColor(this,R.color.color_base))
-
+        buttonPressed.isSelected = true
+        buttonUnpressed.isSelected = false
+        buttonUnpressedTwo.isSelected = false
         Log.d(TAG, "Type Payment: ${type.name}")
         transactionType = type
     }
