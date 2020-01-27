@@ -21,6 +21,7 @@ import muxi.kotlinsample.ui.dialog.DialogHelper
 import muxi.kotlinsample.ui.present_card.tasks.TransactionTask
 import java.text.NumberFormat
 import android.app.Activity
+import android.bluetooth.BluetoothAdapter
 import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.activity_payment.*
 import muxi.kotlinsample.ui.BaseActivity
@@ -34,7 +35,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     /**
      * TODO: change this variable to use MAC address from your pinpad
      */
-    private val bluetoothDevice = "B0:F1:EC:E2:EA:78"
+    private var bluetoothDevice: String? = null
 
     private var mpsManager: IMPSManager? = null
     val dialogHelper = DialogHelper.getInstance()
@@ -53,6 +54,10 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_payment)
 
         title = getString(R.string.payment_toolbar_title)
+
+        if (getPaxPINPADAddress()) {
+            mpsManager?.currentBluetoothDevice = bluetoothDevice
+        }
 
         setupButtons()
         setupTextWatcher()
@@ -132,9 +137,17 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         spinner.adapter = aa
     }
 
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
         /* do nothing */
+    }
+
+    private fun getPaxPINPADAddress(): Boolean {
+        BluetoothAdapter.getDefaultAdapter().bondedDevices.forEach {
+            if (it.name.contains("PAX")) {
+                bluetoothDevice = it.address
+            }
+        }
+        return bluetoothDevice != null
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
