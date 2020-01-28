@@ -81,7 +81,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             hidePaymentInfo()
             hideRate()
             installments = 1
-            spinner.setSelection(0)
+            resetSpinnerValue()
             buttonEffect(btn_debit, MPSTransaction.TransactionMode.DEBIT,btn_credit,btn_voucher)
         }
 
@@ -89,7 +89,7 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
             hidePaymentInfo()
             hideRate()
             installments = 1
-            spinner.setSelection(0)
+            resetSpinnerValue()
             buttonEffect(btn_voucher, MPSTransaction.TransactionMode.VOUCHER,btn_credit,btn_debit)
         }
     }
@@ -149,6 +149,10 @@ class PaymentActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         val aa = ArrayAdapter(this, R.layout.simple_spinner_item, listOfItems)
         aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         spinner.adapter = aa
+    }
+
+    private fun resetSpinnerValue() {
+        spinner.setSelection(0)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
