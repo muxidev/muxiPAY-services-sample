@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -16,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,6 +34,8 @@ import static muxi.javasample.AppConstants.RADIO_GROUP_CREDIT;
 import static muxi.javasample.AppConstants.RADIO_GROUP_DEBIT;
 import static muxi.javasample.AppConstants.RADIO_GROUP_VOUCHER;
 
+import muxi.javasample.bluetooth.BluetoothList;
+import muxi.javasample.bluetooth.SimpleBluetoothDevice;
 import muxi.payservices.sdk.data.MPSTransaction;
 import muxi.payservices.sdk.data.MPSResult;
 import muxi.payservices.sdk.data.ReceiptType;
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothList.BtC
     String establishmentReceipt = "";
 
     boolean rate = false;
+
     @Override
     public void updateStatusBt() {
         updateStatus(this);
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothList.BtC
     private int defaultInstalments = 0;
 
 
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<SimpleBluetoothDevice> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,48 +199,45 @@ public class MainActivity extends AppCompatActivity implements BluetoothList.BtC
 
     private void setupNavMenu(){
         mNavigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-                        switch (item.getItemId()) {
-                            case R.id.action_start:
-                                if(!isBounded){
-                                    currentCommand = COMMAND.INIT;
-                                    isBounded = mpsManager.bindService(getApplicationContext());
+                item -> {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                    switch (item.getItemId()) {
+                        case R.id.action_start:
+                            if(!isBounded){
+                                currentCommand = COMMAND.INIT;
+                                isBounded = mpsManager.bindService(getApplicationContext());
 
-                                }else{
-                                    callInit();
-                                }
-                                return true;
-                            case R.id.action_deconfigure:
-                                if(!isBounded){
-                                    currentCommand = COMMAND.DECONFIGURE;
-                                    isBounded = mpsManager.bindService(getApplicationContext());
-                                }else{
-                                    mpsManager.deconfigure(true);
-                                }
-                                return true;
-                            case R.id.action_establishment:
-                                dialogHelper.showEstablishmentDialog(sharedPreferences);
-                                return true;
-                            case R.id.action_cancelTransaction:
-                                dialogHelper.showVoidAnyDialog();
-                                return true;
-                            case R.id.action_getVersion:
-                                if(!isBounded){
-                                    currentCommand = COMMAND.GENERIC;
-                                    isBounded = mpsManager.bindService(getApplicationContext());
-                                }else{
-                                    callGeneric();
-                                }
-                                return true;
-                            case R.id.action_stopService:
-                                mpsManager.stopService(getApplicationContext());
-                                return true;
-                            default:
-                                return false;
-                        }
+                            }else{
+                                callInit();
+                            }
+                            return true;
+                        case R.id.action_deconfigure:
+                            if(!isBounded){
+                                currentCommand = COMMAND.DECONFIGURE;
+                                isBounded = mpsManager.bindService(getApplicationContext());
+                            }else{
+                                mpsManager.deconfigure(true);
+                            }
+                            return true;
+                        case R.id.action_establishment:
+                            dialogHelper.showEstablishmentDialog(sharedPreferences);
+                            return true;
+                        case R.id.action_cancelTransaction:
+                            dialogHelper.showVoidAnyDialog();
+                            return true;
+                        case R.id.action_getVersion:
+                            if(!isBounded){
+                                currentCommand = COMMAND.GENERIC;
+                                isBounded = mpsManager.bindService(getApplicationContext());
+                            }else{
+                                callGeneric();
+                            }
+                            return true;
+                        case R.id.action_stopService:
+                            mpsManager.stopService(getApplicationContext());
+                            return true;
+                        default:
+                            return false;
                     }
                 });
     }
@@ -280,18 +278,16 @@ public class MainActivity extends AppCompatActivity implements BluetoothList.BtC
                                         String clientReceipt, String establishmentReceipt) {
         if(typePayment.equals(MPSTransaction.TransactionMode.CREDIT.name())){
             typePayment = getResources().getString(R.string.credit)+" | ";
-        }
-        else{
+        } else {
             if(typePayment.equals(MPSTransaction.TransactionMode.DEBIT.name())){
-
                 typePayment = getResources().getString(R.string.debit)+" | ";
-            }
-            else{
+            } else {
                 if(typePayment.equals(MPSTransaction.TransactionMode.VOUCHER.name())) {
                     typePayment = getResources().getString(R.string.voucher) + " | ";
                 }
             }
         }
+
         mLastTransaction.setText(titleLastTransaction);
         mValueLastTransaction.setText(valueLastTransaction);
         String dateTimeandType = typePayment+dateTimeLastTransaction;
@@ -305,10 +301,10 @@ public class MainActivity extends AppCompatActivity implements BluetoothList.BtC
 
     MPSTransaction currentMpsTransaction = null;
     @OnClick(R.id.btn_cancel)
-    public void onBtnCancel()
-    {
+    public void onBtnCancel() {
         //TODO add a protection for sending null in transactionMode for cancel last transaction.
         //Actually this field is ignored, but still necessary to avoid crash
+        //Transaction mode must be sent in order to avoid crash
         currentMpsTransaction = createTransaction("", MPSTransaction.TransactionMode.CREDIT,"","", 0,false);
 
         if(isBounded){
