@@ -3,6 +3,8 @@ package muxi.kotlinsample.ui.present_card
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import muxi.payservices.sdk.data.MPSResult
 import muxi.payservices.sdk.service.CallbackAnswer
@@ -32,6 +34,8 @@ class MainActivity : BaseActivity() {
 
     private val ignorePendingTransaction = true
 
+    private val adapter by lazy { ItemAdapter() }
+
     val dialogHelper = DialogHelper.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,11 +44,10 @@ class MainActivity : BaseActivity() {
 
         title = getString(R.string.present_card_toolbar_title)
 
-        setupButtons()
-    }
+        rv_button_list.adapter = adapter
+        rv_button_list.layoutManager =LinearLayoutManager(this)
 
-    private fun setupButtons() {
-        btnInit.setOnClickListener {
+        adapter.addItem(ItemAdapter.Item("Initialize", View.OnClickListener {
             dialogHelper.showLoadingDialog(this, false)
             InitTask(
                 mpsManager!!,
@@ -52,27 +55,27 @@ class MainActivity : BaseActivity() {
                 Constants.MERCHANT_ID,
                 BuildConfig.API_KEY
             ).execute()
-        }
+        }))
 
-        btnTransact.setOnClickListener {
+        adapter.addItem(ItemAdapter.Item("Transact", View.OnClickListener {
             startActivity(Intent(this, PaymentActivity::class.java))
-        }
+        }))
 
-        btnCancel.setOnClickListener {
+        adapter.addItem(ItemAdapter.Item("Cancel", View.OnClickListener {
             startActivity(Intent(this, CancelActivity::class.java))
-        }
+        }))
 
-        btnDeconfigure.setOnClickListener {
+        adapter.addItem(ItemAdapter.Item("Deconfigure", View.OnClickListener {
             dialogHelper.showLoadingDialog(this, false)
             DeconfigureTask(
                 mpsManager!!,
                 ignorePendingTransaction
             ).execute()
-        }
+        }))
 
-        btnHistory.setOnClickListener {
+        adapter.addItem(ItemAdapter.Item("History", View.OnClickListener {
             toast(getString(R.string.built_screen))
-        }
+        }))
     }
 
     override fun onStart() {
@@ -91,7 +94,7 @@ class MainActivity : BaseActivity() {
                     dialogHelper.hideLoadingDialog()
                     var title = ""
                     var body = ""
-                    when(mpsResult!!.status){
+                    when(mpsResult?.status){
                         MPSResult.Status.SUCCESS->{
                             title = getString(R.string.deconfigureSuccess)
                         }
@@ -102,7 +105,7 @@ class MainActivity : BaseActivity() {
                     }
 
                     dialogHelper.showInitDialog(this@MainActivity,title,body)
-                    Log.d(TAG,mpsResult.status.name)
+                    Log.d(TAG,mpsResult?.status?.name)
                 }
 
             }
@@ -114,7 +117,7 @@ class MainActivity : BaseActivity() {
                     dialogHelper.hideLoadingDialog()
                     var title = ""
                     var body = ""
-                    when(mpsResult!!.status){
+                    when(mpsResult?.status){
                         MPSResult.Status.SUCCESS -> {
                             title = getString(R.string.initSuccess)
                         }
@@ -124,7 +127,7 @@ class MainActivity : BaseActivity() {
                         }
                     }
                     dialogHelper.showInitDialog(this@MainActivity,title,body)
-                    Log.d(TAG,mpsResult.status.name)
+                    Log.d(TAG,mpsResult?.status?.name)
                 }
 
             }
