@@ -25,19 +25,22 @@ import muxi.payservices.sdk.service.IMPSManager;
 
 
 public class BluetoothList {
+
+    private String TAG = BluetoothList.class.getSimpleName();
+
     private Context context;
     private Spinner spnBluetoothDevice;
     private List<SimpleBluetoothDevice> listPairedDevices;
     private IMPSManager mpsManager;
     private BtComunication btComunication;
     private static SimpleBluetoothDevice mCurresntSelectedDevice = new SimpleBluetoothDevice();
-
-    private String TAG = BluetoothList.class.getSimpleName();
+    private ArrayAdapter<SimpleBluetoothDevice> adapter;
 
     public BluetoothList(Context context,Spinner spnBluetoothDevice){
         this.context = context;
         this.spnBluetoothDevice = spnBluetoothDevice;
         listPairedDevices = new ArrayList<>();
+        adapter = createAdapter(listPairedDevices);
     }
 
     public void setMpsManager(IMPSManager mpsManager) {
@@ -48,26 +51,29 @@ public class BluetoothList {
         this.btComunication = btComunication;
     }
 
+    public void setupDeviceList() {
+        listPairedDevices.clear();
+
+        Set<BluetoothDevice> deviceList = getPairedDevices();
+
+        if (mCurresntSelectedDevice.isEmpty()) {
+            listPairedDevices.add(new SimpleBluetoothDevice(context.getResources()
+                    .getString(R.string.no_pinpad_selected)," "));
+        } else {
+            listPairedDevices.add(mCurresntSelectedDevice);
+        }
+
+        if (!deviceList.isEmpty()) {
+            for (BluetoothDevice bd: deviceList) {
+                listPairedDevices.add(new SimpleBluetoothDevice(bd.getName(),bd.getAddress()));
+            }
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    public void updateItemsOnSpinner(final ArrayAdapter<SimpleBluetoothDevice> adapter) {
+    public void updateItemsOnSpinner() {
         if(isBluetoothOn()){
-            listPairedDevices.clear();
-
-            Set<BluetoothDevice> deviceList = getPairedDevices();
-
-            if (mCurresntSelectedDevice.getName().equals(" ") &&
-                mCurresntSelectedDevice.getAddress().equals(" ")) {
-                listPairedDevices.add(new SimpleBluetoothDevice(context.getResources()
-                        .getString(R.string.no_pinpad_selected)," "));
-            } else {
-                listPairedDevices.add(mCurresntSelectedDevice);
-            }
-
-            if (!deviceList.isEmpty()) {
-                for (BluetoothDevice bd: deviceList) {
-                    listPairedDevices.add(new SimpleBluetoothDevice(bd.getName(),bd.getAddress()));
-                }
-            }
+            setupDeviceList();
 
             adapter.setDropDownViewResource(R.layout.simple_dropdown_item);
             spnBluetoothDevice.setAdapter(adapter);
@@ -78,7 +84,7 @@ public class BluetoothList {
                         if (getPairedDevices().isEmpty()) {
                             openBluetoothOptions(context.getApplicationContext());
                         } else {
-                            updateItemsOnSpinner(adapter);
+                            updateItemsOnSpinner();
                         }
                     }
                     else{
@@ -110,11 +116,11 @@ public class BluetoothList {
             });
         } else {
             enableBluetooth();
-            updateItemsOnSpinner(adapter);
+            updateItemsOnSpinner();
         }
     }
 
-    public ArrayAdapter<SimpleBluetoothDevice> createAdapter(){
+    public ArrayAdapter<SimpleBluetoothDevice> createAdapter(List<SimpleBluetoothDevice> listPairedDevices){
         return new ArrayAdapter<SimpleBluetoothDevice>(context,R.layout.simple_list_item,
                 R.id.tv_spinner,listPairedDevices){
             @Override
@@ -144,7 +150,6 @@ public class BluetoothList {
     public void setWhenDeconfigure(){
         mCurresntSelectedDevice.updateDevice(" "," ");
     }
-
 
     private boolean isBluetoothOn(){
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

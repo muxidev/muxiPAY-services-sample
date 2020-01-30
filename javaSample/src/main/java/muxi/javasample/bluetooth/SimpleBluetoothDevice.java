@@ -43,6 +43,10 @@ public class SimpleBluetoothDevice {
         this.address = sbd.getAddress();
     }
 
+    boolean isEmpty() {
+        return (this.getName().equals(" ") && this.getAddress().equals(" "));
+    }
+
     @NonNull
     @Override
     public String toString() {
